@@ -25,3 +25,9 @@ user/pass: admin/admin
 Changelog
 ###################
 9/19 - Update modul akuntansi
+
+###################
+Kontak
+###################
+
+Discord: Iris#1941
