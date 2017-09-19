@@ -1,3 +1,0 @@
-[19-Jul-2017 19:43:47 UTC] PHP Fatal error:  Call to a member function utama() on null in /home/smaccid/public_html/application/controllers/Home.php on line 22
-[19-Jul-2017 19:45:15 UTC] PHP Fatal error:  Call to a member function utama() on null in /home/smaccid/public_html/application/controllers/Home.php on line 22
-[20-Jul-2017 06:55:44 UTC] PHP Parse error:  syntax error, unexpected '>', expecting variable (T_VARIABLE) or '$' in /home/smaccid/public_html/application/views/tempelate/ghancool.php on line 72
