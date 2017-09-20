@@ -78,6 +78,7 @@ class m_proses_jurnal extends CI_Model {
 		$penjualan=$this->db
 			->select("tkwitansi")
 			->select("t.idkwitansi")
+			->select("t.dp")
 			->select("subtotal as total",false)
 			->from("kwitansi t")
 			->where("tkwitansi >=",$dari)
@@ -91,6 +92,8 @@ class m_proses_jurnal extends CI_Model {
 			$sref="penagihan";
 			$kref=$p->idkwitansi;
 			$total=$p->total;
+			$piutang=$total-$p->dp;
+			$cash=$p->$dp;
 
 			$data=array(
 				"njurnalm"=>$nama,
@@ -105,11 +108,23 @@ class m_proses_jurnal extends CI_Model {
 			$data=array(
 				"kjurnalm"=>$id,
 				"noakun"=>10400,
-				"debit"=>$total,
+				"debit"=>$piutang,
 				"kredit"=>0
 			);
 
 			$this->db->insert("djurnalm",$data);
+
+			if($cash != 0){			
+				$data=array(
+				"kjurnalm"=>$id,
+				"noakun"=>10100,
+				"debit"=>$cash,
+				"kredit"=>0
+			);
+
+			$this->db->insert("djurnalm",$data);
+
+			}
 
 			$data=array(
 				"kjurnalm"=>$id,

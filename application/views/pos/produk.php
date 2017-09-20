@@ -95,6 +95,7 @@ foreach($barang as $b){
 			<th>Harga</th>
 			<th>Diskon</th>
 			<th>Status</th>
+			<th>Conf</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -104,6 +105,7 @@ foreach($barang as $b){
 						<td>$u->idbarang</td>
 						<td>$u->nbarang</td>
 						<td>$u->hbarangkasir</td>
+						<td>$u->disbarangkasir</td>
 					";
 				echo ($u->sbarangkasir==1) ? "<td>Aktif</td>" : "<td>Tidak Aktif</td>";
 				echo "<td>

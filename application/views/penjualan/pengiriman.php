@@ -199,10 +199,9 @@
 					echo "<td>Sudah Diproses</td>";
 				break;
 			}
-			echo "<td>
-							<a href='#' data-id='$p->idpengiriman' data-toggle='modal' data-target='#editPengiriman' class='editButton btn btn-default glyphicon glyphicon-pencil'>
-							</a>
-							<a href='".base_url()."penjualan/pengiriman/?tipe=delete&id=$p->idpengiriman' onclick=\"return confirm('Anda yakin?')\" class='btn btn-default glyphicon glyphicon-trash'>
+			echo "<td>";
+			//echo "<a href='#' data-id='$p->idpengiriman' data-toggle='modal' data-target='#editPengiriman' class='editButton btn btn-default glyphicon glyphicon-pencil'></a>";
+			echo "<a href='".base_url()."penjualan/pengiriman/?tipe=delete&id=$p->idpengiriman' onclick=\"return confirm('Anda yakin?')\" class='btn btn-default glyphicon glyphicon-trash'>
 							</a>
 				</td>";
 			echo "</tr>";

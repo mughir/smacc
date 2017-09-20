@@ -89,6 +89,7 @@ class m_Kasir extends CI_Model {
 				);
 
 			$this->db->insert("keranjangpos",$data);
+			$this->db->where("idbarang",$barang[$i])->set("jumlah","jumlah-".$jumlah[$i],false);
 		}
 
 		redirect(base_url()."pos/kasir_print/".$id);

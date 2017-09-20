@@ -51,12 +51,14 @@ class m_pengiriman extends CI_Model {
 				$tanggal=$this->input->post("tanggal");
 				$term=$this->input->post("term");
 				$biaya=$this->input->post("biaya");
-
-				//if($this->ms->cek_ada("pesanan","idpesanan",$pesanan)==FALSE) return "gagal";
-				$pesanan=empty($pesanan) ? null:$pesanan;
-
 				$barang=$this->input->post("namabarang");
 				$jumlah=$this->input->post("jumlah");
+
+				if(empty($pesanan)){
+					$pesanan=null;
+				} else {
+					if($this->ms->cek_ada("pesanan","idpesanan",$pesanan)==FALSE) return "gagal";
+				}
 
 				if($this->ms->cek_ada("pengiriman","idpengiriman",$id)==TRUE) return "gagal";
 
@@ -96,9 +98,13 @@ class m_pengiriman extends CI_Model {
 							"jumlah"=>$jumlah[$i]
 						);
 
+					$this->db->where("idbarang",$barang[$i])->set("jumlah","jumlah-".$jumlah[$i],false);
+
 					$this->db->insert("isipengiriman",$data);
 				}
 
+				//Update status pesanan
+				$this->db->set("stpesanan",1)->where("idpesanan",$pesanan)->update("pesanan");
 				return "berhasil";
 			}
 		}

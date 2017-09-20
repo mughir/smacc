@@ -92,6 +92,8 @@ class m_terimabarang extends CI_Model {
 						);
 
 					$this->db->insert("barangditerima",$data);
+					$this->db->where("idbarang",$barang[$i])->set("jumlah","jumlah+".$jumlah[$i],false);
+
 				}
 
 				return "berhasil";

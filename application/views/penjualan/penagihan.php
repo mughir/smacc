@@ -20,6 +20,10 @@
 	<tr>
 			<td>ID</td>
 			<td><input type="text" name="id" required pattern="[a-zA-Z0-9]+"></td>
+		</tr>	
+		<tr>
+			<td>No Pengiriman</td>
+			<td><input type="text" name="pengirim" pattern="[a-zA-Z0-9]+"></td>
 		</tr>
 		<tr>
 			<td>Pemesan</td>
@@ -34,7 +38,7 @@
 			<td><select name="term"><option value='fob_shipping_point'>FOB Shipping Point</option><option value='fob_destination_point'>FOB Destination Point</option></select></td>
 		</tr>		
 		<tr>
-			<td>DP</td>
+			<td>Cash</td>
 			<td><input type="number" name="dp" min=0 value=0></select></td>
 		</tr>		
 		<tr>
@@ -96,6 +100,10 @@
 	<tr>
 			<td>ID</td>
 			<td><input type="text" name="id" required pattern="[a-zA-Z0-9]+"></td>
+		</tr>
+		<tr>
+			<td>No Pengiriman</td>
+			<td><input type="text" name="pengirim" pattern="[a-zA-Z0-9]+"></td>
 		</tr>
 		<tr>
 			<td>Pemesan</td>
@@ -209,10 +217,9 @@
 					echo "<td>Sudah Diproses</td>";
 				break;
 			}
-			echo "<td>
-							<a href='#' data-id='$p->idkwitansi' data-toggle='modal' data-target='#editKwitansi' class='editButton btn btn-default glyphicon glyphicon-pencil'>
-							</a>
-							<a href='".base_url()."penjualan/penagihan/?tipe=delete&id=$p->idkwitansi' onclick=\"return confirm('Anda yakin?')\" class='btn btn-default glyphicon glyphicon-trash'>
+			echo "<td>";
+			//echo "<a href='#' data-id='$p->idkwitansi' data-toggle='modal' data-target='#editKwitansi' class='editButton btn btn-default glyphicon glyphicon-pencil'></a>";
+			echo "<a href='".base_url()."penjualan/penagihan/?tipe=delete&id=$p->idkwitansi' onclick=\"return confirm('Anda yakin?')\" class='btn btn-default glyphicon glyphicon-trash'>
 							</a>
 				</td>";
 			echo "</tr>";

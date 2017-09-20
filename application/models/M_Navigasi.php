@@ -107,7 +107,7 @@ class M_Navigasi extends CI_Model {
 
 								$this->nav.="<li><a href=\"".base_url()."penjualan/pesanan\" class=\"halonav\">Pesanan</a></li>";
 
-								$this->nav.="<li><a href=\"".base_url()."penjualan/pengiriman\" class=\"halonav\">Pengiman</a></li>";
+								$this->nav.="<li><a href=\"".base_url()."penjualan/pengiriman\" class=\"halonav\">Pengiriman</a></li>";
 
 								$this->nav.="<li><a href=\"".base_url()."penjualan/penagihan\" class=\"halonav\">Penagihan</a></li>";
 
@@ -187,7 +187,7 @@ class M_Navigasi extends CI_Model {
 
 								$this->nav.="<li><a href=\"".base_url()."sdm/jabatan\" class=\"halonav\">jabatan</a></li>";
 
-								$this->nav.="<li><a href=\"".base_url()."sdm/absensi\" class=\"halonav\">Absensi</a></li>";
+								//$this->nav.="<li><a href=\"".base_url()."sdm/absensi\" class=\"halonav\">Absensi</a></li>";
 
 								$this->nav.="<li><a href=\"".base_url()."sdm/proses_gaji\" class=\"halonav\">Proses Gaji</a></li>";
 								$this->nav.="<li><a href=\"".base_url()."sdm/laporan\" class=\"halonav\">Laporan</a></li>";

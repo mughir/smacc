@@ -51,6 +51,7 @@ class m_Penagihan extends CI_Model {
 		else{
 			//gabung mang
 			$id=$this->input->post("id");
+			$pengirim=$this->input->post("pengirim");
 			$pemesan=$this->input->post("pemesan");
 			$tanggal=$this->input->post("tanggal");
 			$term=$this->input->post("term");
@@ -59,6 +60,12 @@ class m_Penagihan extends CI_Model {
 
 			$barang=$this->input->post("namabarang");
 			$jumlah=$this->input->post("jumlah");
+
+			if(empty($pengirim)){
+				$pengirim=null;
+			} else {
+				if($this->ms->cek_ada("pengiriman","idpengiriman",$pengirim)==FALSE) return "gagal";
+			}
 
 			if($this->ms->cek_ada("kwitansi","idkwitansi",$id)==TRUE) return "gagal";
 
@@ -72,6 +79,7 @@ class m_Penagihan extends CI_Model {
 
 			$data=array(
 				"idkwitansi"=>$id,
+				"idpengiriman"=>$pengirim,
 				"tkwitansi"=>$tanggal,
 				"idkontak"=>$pemesan,
 				"stkwitansi"=>0,
@@ -99,6 +107,8 @@ class m_Penagihan extends CI_Model {
 						"subtotal"=>$jumlah[$i]*$dbarang->hjualbarang
 					);
 
+				//Update status pengiriman
+				$this->db->set("stpengiriman",1)->where("idpengiriman",$pengirim)->update("pengiriman");
 				$this->db->insert("isikwitansi",$data);
 			}
 

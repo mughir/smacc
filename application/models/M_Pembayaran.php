@@ -29,7 +29,8 @@ class m_pembayaran extends CI_Model {
 	
 	public function tambah_pembayaran()
     {
-		//validasi
+		$this->load->database();
+		$this->load->model('m_Serbaguna','ms');
         $this->load->library('form_validation');
 
         $this->form_validation->set_rules('id', 'ID', 'trim|required|max_length[20]');
@@ -38,6 +39,15 @@ class m_pembayaran extends CI_Model {
 			return "gagal";
 		}
 		else{
+
+			$kwitansi=$this->input->post("kwitansi",true);
+
+			if(empty($kwitansi)){
+				$kwitansi=null;
+			} else {
+				if($this->ms->cek_ada("kwitansi","idkwitansi",$kwitansi)==FALSE) return "gagal";
+				$this->db->set("stkwitansi",1)->where("idkwitansi",$kwitansi)->update("kwitansi");
+			}
 			
 			$data=array(
 			"idpembayaran"=>$this->input->post("id",true),
@@ -45,11 +55,10 @@ class m_pembayaran extends CI_Model {
 			"jmbayar"=>$this->input->post("bayar",true),
 			"via"=>$this->input->post("via",true),
 			"ket"=>$this->input->post("ket",true),
-			"idkwitansi"=>$this->input->post("kwitansi",true)
+			"idkwitansi"=>$kwitansi
 			);
-		
-			$this->load->database();
-			$this->load->model('m_Serbaguna','ms');
+
+
 			if($this->ms->cek_ganda("pembayaran","idpembayaran",$data["idpembayaran"])==TRUE){
 				if($this->db->insert("pembayaran",$data)){
 					return "berhasil";

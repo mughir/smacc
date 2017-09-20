@@ -94,15 +94,14 @@
 		foreach($bayar as $b){
 			echo "<tr>";
 				echo "<td>$b->idpembayaran</td>";
-				echo "<td>$b->idkwitansi</td>";
 				echo "<td>$b->tglbayar</td>";
+				echo "<td>$b->idkwitansi</td>";
 				echo "<td>$b->jmbayar</td>";
 				echo "<td>$b->via</td>";
 				echo "<td>$b->ket</td>";
-				echo "<td>
-							<a href='#' data-id='$b->idpembayaran' data-toggle='modal' data-target='#editPembayaran' class='editButton btn btn-default glyphicon glyphicon-pencil'>
-							</a>
-							<a href='".base_url()."penjualan/pembayaran/?tipe=delete&id=$b->idpembayaran' onclick=\"return confirm('Anda yakin?')\" class='btn btn-default glyphicon glyphicon-trash'>
+				echo "<td>";
+				//echo  "<a href='#' data-id='$b->idpembayaran' data-toggle='modal' data-target='#editPembayaran' class='editButton btn btn-default glyphicon glyphicon-pencil'></a>";
+				echo "<a href='".base_url()."penjualan/pembayaran/?tipe=delete&id=$b->idpembayaran' onclick=\"return confirm('Anda yakin?')\" class='btn btn-default glyphicon glyphicon-trash'>
 							</a>
 					</td>";
 			echo "</tr>";
