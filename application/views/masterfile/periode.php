@@ -11,8 +11,8 @@
 		<table class="form">
 		  <tr><td>Kode Periode: </td><td><input required type="text" name="kode"></td></tr>
 		  <tr><td>Nama Periode: </td><td><input required type="text" name="nama"></td></tr>
-		  <tr><td>Dari : </td><td><input type="date" name="dari"></td></tr>
-		   <tr><td>Sampai : </td><td><input type="date" name="sampai"></td></tr>
+		  <tr><td>Dari : </td><td><input class="tglo" type="text" name="dari"></td></tr>
+		   <tr><td>Sampai : </td><td><input  class="tglo" type="text" name="sampai"></td></tr>
 		 </table>
       </div>
 	  <br>
@@ -38,8 +38,8 @@
 		<table class="form">
 			<tr><td>Kode Periode: </td><td><input readonly required type="text" name="kode"></td></tr>
 		  <tr><td>Nama Periode: </td><td><input required type="text" name="nama"></td></tr>
-		  <tr><td>Dari : </td><td><input type="date" name="dari"></td></tr>
-		   <tr><td>Sampai : </td><td><input type="date" name="sampai"></td></tr>
+		  <tr><td>Dari : </td><td><input class="tglo" type="text" name="dari"></td></tr>
+		   <tr><td>Sampai : </td><td><input class="tglo" type="text" name="sampai"></td></tr>
 		   <tr><td>Status : </td><td><select name="status"><option value=1>Aktif</option><option value=0>Tidak Aktif</option></select></tr>		
 		  </table>
 	 </div>
@@ -107,6 +107,7 @@
 </div>
 <script>
 $(document).ready(function() {
+
     $('.editButton').on('click', function() {
         // tarik record
         var id = $(this).attr('data-id');

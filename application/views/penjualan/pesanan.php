@@ -27,7 +27,7 @@
 		</tr>
 		<tr>
 			<td>Tanggal</td>
-			<td><input type="date" name="tanggal" required max="<?php echo $this->session->userdata("periode_sampai") ?>" min="<?php echo $this->session->userdata("periode_dari") ?>" value="<?php echo date('Y-m-d'); ?>"></td>
+			<td><input class="tgl" type="text" name="tanggal" required max="<?php echo $this->session->userdata("periode_sampai") ?>" min="<?php echo $this->session->userdata("periode_dari") ?>" value="<?php echo date('Y-m-d'); ?>"></td>
 		</tr>	
 		<tr>
 			<td>Term</td>
@@ -99,7 +99,7 @@
 		</tr>
 		<tr>
 			<td>Tanggal</td>
-			<td><input type="date" name="tanggal" required max="<?php echo $this->session->userdata("periode_sampai") ?>" min="<?php echo $this->session->userdata("periode_dari") ?>" value="<?php echo date('Y-m-d'); ?>"></td>
+			<td><input class="tgl" type="text" name="tanggal" required max="<?php echo $this->session->userdata("periode_sampai") ?>" min="<?php echo $this->session->userdata("periode_dari") ?>" value="<?php echo date('Y-m-d'); ?>"></td>
 		</tr>	
 		<tr>
 			<td>Term</td>

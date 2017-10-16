@@ -11,7 +11,7 @@
 		<div class="modal-body ">
 		<table class="form">	  
 		  <tr><td>Nama Jurnal</td><td><input type="text" name="nama" placeholder="wajib" value="" required></td></tr>	  
-		 <tr><td>Tanggal: </td><td colspan=2 ><input type="date" name="tanggal" value="<?php echo date('Y-m-d') ?>"></td><td></td></tr>
+		 <tr><td>Tanggal: </td><td colspan=2 ><input class="tgl" type="text" name="tanggal" value="<?php echo date('Y-m-d') ?>"></td><td></td></tr>
 		 <tr><td>Sumber Ref</td><td><input type="text" name="sumber" placeholder="" value=""></td></tr>	  
 		  <tr><td>Kode Ref</td><td><input type="text" name="ref" placeholder="" value="" ></td></tr>	  
 		</table><br><br>
@@ -48,7 +48,7 @@
 		<table class="form">
 		<input name="id" type="hidden">
 		  <tr><td>Nama Jurnal</td><td><input type="text" name="nama" placeholder="wajib" value="" required></td></tr>	  
-		 <tr><td>Tanggal: </td><td colspan=2 ><input type="date" name="tanggal" value="<?php echo date('Y-m-d') ?>"></td><td></td></tr>
+		 <tr><td>Tanggal: </td><td colspan=2 ><input class="tgl" type="text" name="tanggal" value="<?php echo date('Y-m-d') ?>"></td><td></td></tr>
 		 <tr><td>Sumber Ref</td><td><input type="text" name="sumber" placeholder="" value=""></td></tr>	  
 		  <tr><td>Kode Ref</td><td><input type="text" name="ref" placeholder="" value="" ></td></tr>	
 			</table>		

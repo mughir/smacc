@@ -11,7 +11,7 @@
 		<table class="form">
 			<thead>
 			<tr><td>ID</td><td><input type="text"  name="id" required pattern="[a-zA-Z0-9]+"></td></tr>
-			<tr><td>Tanggal</td><td><input type="date" name="tanggal"></td></tr>
+			<tr><td>Tanggal</td><td><input class="tgl" type="text" name="tanggal"></td></tr>
 			<tr><td>No Kwitansi</td><td><input type="text" name="kwitansi"></td></tr>
 			<tr><td>Jumlah Bayar</td><td><input type="number" name="bayar"></td></tr>
 			<tr><td>Via</td><td><input type="text" name="via"></td></tr>
@@ -43,7 +43,7 @@
 		<table class="form">
 			<thead>
 			<tr><td>ID</td><td><input type="text"  name="id" required pattern="[a-zA-Z0-9]+"></td></tr>
-			<tr><td>Tanggal</td><td><input type="date" name="tanggal"></td></tr>
+			<tr><td>Tanggal</td><td><input class="tgl" type="text" name="tanggal"></td></tr>
 			<tr><td>No Kwitansi</td><td><input type="text" name="kwitansi"></td></tr>
 			<tr><td>Jumlah Bayar</td><td><input type="number" name="bayar"></td></tr>
 			<tr><td>Via</td><td><input type="text" name="via"></td></tr>

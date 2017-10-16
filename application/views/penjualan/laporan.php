@@ -17,7 +17,7 @@ if($this->session->flashdata('hasil')=="gagal"){
 						Dari
 					</td>
 					<td>
-						<input name="dari"  required  type="date" max="<?php echo $this->session->userdata("periode_sampai") ?>" min="<?php echo $this->session->userdata("periode_dari") ?>">
+						<input name="dari"  required  class="tgl" type="text" max="<?php echo $this->session->userdata("periode_sampai") ?>" min="<?php echo $this->session->userdata("periode_dari") ?>">
 					</td>
 				</tr>				
 				<tr>
@@ -25,7 +25,7 @@ if($this->session->flashdata('hasil')=="gagal"){
 						Hingga
 					</td>
 					<td>
-						<input name="sampai" required type="date" max="<?php echo $this->session->userdata("periode_sampai") ?>" min="<?php echo $this->session->userdata("periode_dari") ?>">
+						<input name="sampai" required class="tgl" type="text" max="<?php echo $this->session->userdata("periode_sampai") ?>" min="<?php echo $this->session->userdata("periode_dari") ?>">
 					</td>
 				</tr>
 				<tr>

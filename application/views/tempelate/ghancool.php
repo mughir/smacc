@@ -28,7 +28,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	<script src="<?php echo base_url(); ?>asset/js/jquery-3.2.1.min.js"></script>
 	<script src="<?php echo base_url(); ?>asset/js/BootSideMenu.js"></script>
+	<script src="<?php echo base_url(); ?>asset/js/jquery.datetimepicker.js"></script>
+	<script>
+	$(document).ready(function() {
+		$(".tgl").datetimepicker({
+			timepicker:false,
+			format:"Y-m-d",
+		    minDate: "<?php echo $this->session->userdata("periode_dari") ?>",
+		    maxDate: "<?php echo $this->session->userdata("periode_sampai") ?>",
+		});
 
+		$(".tglo").datetimepicker({
+			timepicker:false,
+			format:"Y-m-d"
+		});
+	});
+	</script>
 
 
     <!-- Bootstrap core CSS -->
@@ -45,6 +60,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <!-- Custom styles for this template -->
 
+    <link href="<?php echo base_url(); ?>asset/css/jquery.datetimepicker.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>asset/css/smacc.css" rel="stylesheet">
      <link href="<?php echo base_url(); ?>asset/css/BootSideMenu.css" rel="stylesheet">
 
