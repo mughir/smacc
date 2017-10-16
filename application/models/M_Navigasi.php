@@ -159,10 +159,12 @@ class M_Navigasi extends CI_Model {
 							$this->nav.="<ul class='dropdown-menu'>";
 
 								$this->nav.="<li><a href=\"".base_url()."produksi/rnd\" class=\"halonav\">Pengembangan produk</a></li>";
+								$this->nav.="<li><a href=\"".base_url()."produksi/perintah\" class=\"halonav\">Perintah Produksi</a></li>";
 
 								$this->nav.="<li><a href=\"".base_url()."produksi/penjadwalan\" class=\"halonav\">Penjadwalan</a></li>";
 
 								$this->nav.="<li><a href=\"".base_url()."produksi/operasi\" class=\"halonav\">Operasi</a></li>";
+								$this->nav.="<li><a href=\"".base_url()."produksi/pengambilan\" class=\"halonav\">Pengambilan Material</a></li>";
 
 								$this->nav.="<li><a href=\"".base_url()."produksi/penyesuaian\" class=\"halonav\">Penyesuaian</a></li>";
 								$this->nav.="<li><a href=\"".base_url()."produksi/laporan\" class=\"halonav\">Laporan</a></li>";

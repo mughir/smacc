@@ -12,6 +12,12 @@
 		  <tr><td>Id kontak: </td><td><input required type="text" name="id"></td></tr>
 		  <tr><td>Jenis: </td><td><select required name="jenis"><option value="1">Vendor</option><option value="2">Pelanggan</option><option value="3">Vendor & Pelanggan</option><option value="4">Lainnya</option></select></td></tr>
 		  <tr><td>Nama kontak : </td><td><input required type="text" name="nama"></td></tr>
+		  <tr><td>NPWP : </td><td><input required type="text" name="npwp"></td></tr>
+		  <tr><td>Email : </td><td><input required type="text" name="email"></td></tr>
+		  <tr><td>Kode Pos : </td><td><input required type="text" name="kodepos"></td></tr>
+		  <tr><td>Provinsi : </td><td><input required type="text" name="provinsi"></td></tr>
+		  <tr><td>Kota : </td><td><input required type="text" name="kota"></td></tr>
+		  <tr><td>kecamatan : </td><td><input required type="text" name="kecamatan"></td></tr>
 		  <tr><td>Alamat : </td><td><input required type="text" name="alamat"></td></tr>
 		  <tr><td>Telepon : </td><td><input required type="text" name="telepon"></td></tr>
 		 </table>
@@ -40,8 +46,14 @@
 		  <tr><td>Id kontak: </td><td><input required type="text" name="id"></td></tr>
 		  <tr><td>Jenis: </td><td><select required name="jenis"><option value="1">Vendor</option><option value="2">Pelanggan</option><option value="3">Vendor & Pelanggan</option><option value="4">Lainnya</option></select></td></tr>
 		  <tr><td>Nama kontak : </td><td><input required type="text" name="nama"></td></tr>
-		  <tr><td>Alamat : </td><td><input required type="text" name="alamat"></td></tr>
-		  <tr><td>Telepon : </td><td><input required type="text" name="telepon"></td></tr>
+		  <tr><td>NPWP : </td><td><input  type="text" name="npwp"></td></tr>
+		  <tr><td>Email : </td><td><input  type="text" name="email"></td></tr>
+		  <tr><td>Kode Pos : </td><td><input  type="text" name="kodepos"></td></tr>
+		  <tr><td>Provinsi : </td><td><input  type="text" name="provinsi"></td></tr>
+		  <tr><td>Kota : </td><td><input  type="text" name="kota"></td></tr>
+		  <tr><td>kecamatan : </td><td><input  type="text" name="kecamatan"></td></tr>
+		  <tr><td>Alamat : </td><td><input  type="text" name="alamat"></td></tr>
+		  <tr><td>Telepon : </td><td><input  type="text" name="telepon"></td></tr>
 		
 		   <tr><td>Status kontak: </td><td><select name="status"><option value="aktif">Aktif</option><option value="tidak">Tidak Aktif</option></select></td></tr>
 		 </table>
@@ -145,6 +157,12 @@ $(document).ready(function() {
                 .find('[name="id"]').val(response.idkontak).end()
                 .find('[name="jenis"]').val(response.jkontak).end()
                 .find('[name="nama"]').val(response.nkontak).end()
+				  .find('[name="npwp"]').val(response.npwp).end()
+				 .find('[name="email"]').val(response.email).end()
+				  .find('[name="kodepos"]').val(response.kodepos).end()
+				  .find('[name="provinsi"]').val(response.provinsi).end()
+				 .find('[name="kota"]').val(response.kota).end()
+				 .find('[name="kecamatan"]').val(response.kecamatan).end()
                 .find('[name="alamat"]').val(response.alkontak).end()
                 .find('[name="telepon"]').val(response.telkontak).end()
                 .find('[name="status"]').val(response.stkontak).end();

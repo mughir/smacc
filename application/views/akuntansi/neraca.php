@@ -4,7 +4,7 @@
 <table class='table' id="ajaxtable">
 	<thead>
 		<tr>
-			<th>akun</th>
+			<th>Uraian</th>
 			<th>Debit</th>
 			<th>Kredit</th>
 		</tr>

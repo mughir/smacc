@@ -52,6 +52,12 @@ class m_kontak extends CI_Model {
 			"idkontak"=>$this->input->post("id",true),
 			"jkontak"=>$this->input->post("jenis"),
 			"nkontak"=>$this->input->post("nama"),
+			"npwp"=>$this->input->post("npwp"),
+			"email"=>$this->input->post("email"),
+			"provinsi"=>$this->input->post("provinsi"),
+			"kota"=>$this->input->post("kota"),
+			"kecamatan"=>$this->input->post("kecamatan"),
+			"kodepos"=>$this->input->post("kodepos"),
 			"alkontak"=>$this->input->post("alamat"),
 			"telkontak"=>$this->input->post("telepon"),
 			"stkontak"=>"aktif"
@@ -93,6 +99,12 @@ class m_kontak extends CI_Model {
 			"jkontak"=>$this->input->post("jenis"),
 			"nkontak"=>$this->input->post("nama"),
 			"alkontak"=>$this->input->post("alamat"),
+			"npwp"=>$this->input->post("npwp"),
+			"email"=>$this->input->post("email"),
+			"provinsi"=>$this->input->post("provinsi"),
+			"kota"=>$this->input->post("kota"),
+			"kecamatan"=>$this->input->post("kecamatan"),
+			"kodepos"=>$this->input->post("kodepos"),
 			"telkontak"=>$this->input->post("telepon"),
 			"stkontak"=>$this->input->post("status")
 			);

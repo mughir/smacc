@@ -1,6 +1,6 @@
 <div class="dokumen">
 <h2 class="text-center">Laporan Penjualan</h2><br><br>
-<table class="table">
+<table class="table" class="areaprint">
 	<thead>
 		<tr>			
 			<th>

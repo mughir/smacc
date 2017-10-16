@@ -23,7 +23,7 @@
 		</tr>		
 		<tr>
 			<td>ID Pesanan</td>
-			<td><input type="text" name="pesanan" pattern="[a-zA-Z0-9]+"> <button class="btn btn-default get-pesanan">Get</button></td>
+			<td><input type="text" name="pesanan" pattern="[a-zA-Z0-9]+"> <!-- <button class="btn btn-default get-pesanan">Get</button></td> -->
 		</tr>
 		<tr>
 			<td>Pemesan</td>
@@ -76,13 +76,13 @@
 </div>
 
 
-<div id="editPengiriman" class="modal fade" role="dialog">
+<div id="editPengiriman" class="modal fade areaprint" role="dialog">
  	<div class="modal-dialog fjurnal">
     <!-- Modal content-->
     <div class="modal-content fjurnal">
       <div class="modal-header fjurnal">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Edit Pengiriman</h4>
+        <h4 class="modal-title">Dokumen Pengiriman</h4>
       </div>
 	  <form method="post" action="?tipe=tambah">
 		<div class="modal-body">
@@ -130,19 +130,11 @@
 					 		<input  class='short jumlah' type="number" min=1 max=1000 value=1 name='jumlah[]'>
 					 	</td>
 					 </tr>
-					 <tr>
-					 	<td colspan="2">
-							<a href="#" class="addkeranjang btn btn-default">+</a> 
-					 	</td>
-					 </tr>
 				</tbody>
 		</table>
 		
       </div>
 	  <br>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Submit</button> <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-      </div>
 	  </form>
     </div>
 
@@ -200,7 +192,7 @@
 				break;
 			}
 			echo "<td>";
-			//echo "<a href='#' data-id='$p->idpengiriman' data-toggle='modal' data-target='#editPengiriman' class='editButton btn btn-default glyphicon glyphicon-pencil'></a>";
+			echo "<a href='#' data-id='$p->idpengiriman' data-toggle='modal' data-target='#editPengiriman' class='editButton btn btn-default glyphicon glyphicon-eye-open'></a>";
 			echo "<a href='".base_url()."penjualan/pengiriman/?tipe=delete&id=$p->idpengiriman' onclick=\"return confirm('Anda yakin?')\" class='btn btn-default glyphicon glyphicon-trash'>
 							</a>
 				</td>";
@@ -225,7 +217,7 @@ $(document).ready(function() {
 			dataType: 'JSON',
 			success: function(response) {
             // Populate the form fields with the data returned from server
-            $('#editPesanan')
+            $('#editPengiriman')
                 .find('[name="id"]').val(response.idpengiriman).end()
                 .find('[name="pesanan"]').val(response.idpesanan).end()
                 .find('[name="pemesan"]').val(response.idkontak).end()
@@ -265,7 +257,7 @@ $(document).ready(function() {
 
 				$(".editdetail").append(akun);
 		      }) // each
-		      $(".editdetail").append("<tr><td colspan=4><a href=\"#\" class=\"addkeranjang btn btn-default\">+</a> </td></tr>");
+		     // $(".editdetail").append("<tr><td colspan=4><a href=\"#\" class=\"addkeranjang btn btn-default\">+</a> </td></tr>");
 			}
 		});//end ajax detail
 

@@ -1,6 +1,8 @@
 ###################
 SMACC
 ###################
+Proyek Opensource PUPT Unpad ![alt text](http://www.smacc.id/asset/img/logo.gif)
+###################
 
 SMACC - Small and Medium Enterprise Accounting Software merupakan aplikasi sistem informasi open source yang didesain untuk kalangan UKMM.
 Dari segi teknologi aplikasi ini menggunakan:

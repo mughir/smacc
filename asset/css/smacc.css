@@ -1,4 +1,10 @@
 /* start css buat all */
+
+.hiddenprint{
+	 visibility: hidden;
+	 position:fixed;
+}
+
 @media print {
   body * {
     visibility: hidden;
@@ -7,15 +13,41 @@
     visibility: visible;
   }
   #areaprint {
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     width:100%;
   }
+
+  .areaprint, .areaprint * {
+    visibility: visible;
+	max-width:1000px;
+  }
+  .areaprint {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width:100%;
+  }
+
+  .areaprint input{
+    -moz-appearance: textfield;
+  	border-style:none;
+    border:none;
+    background-image:none;
+    box-shadow:none;
+  }
+
+  .areaprint select{
+  	border-style:none;
+    border:none;
+    background-image:none;
+    box-shadow:none;
+  }
 }
 
 body {
-
+  min-width:600px !important;
   background-color: rgb(250,250,250);
 }
 

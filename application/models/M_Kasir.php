@@ -12,9 +12,19 @@ class m_Kasir extends CI_Model {
 		public function get_detail($kode)
 		{
 			$this->load->database();
-			$datauser=$this->db->where("idpesanan",$kode)->get("pesanan");
+			$datauser=$this->db->where("idtranspos",$kode)->get("transpos");
 			return $datauser->row_array();
-		}		
+		}	
+
+		public function get_isi_detail($kode){
+			$this->load->database();
+			$this->db
+				->select("k.jumlah")
+				->select("subtotal")
+				->select("nbarang");
+			$datauser=$this->db->where("idtranspos",$kode)->from("keranjangpos k")->join("barang b","b.idbarang=k.idbarang")->get();
+			return $datauser->result();
+		}
 
 		public function get_baris($kode)
 		{
@@ -110,122 +120,6 @@ class m_Kasir extends CI_Model {
 		$summary['tax']=$this->db->select_sum("tax","total")->from("transpos t")->join("keranjangpos k","k.idtranspos=t.idtranspos")->where("t.idtranspos",$kode)->get()->row("total");
 
 		return $summary;
-	}
-	
-	public function edit_jurnal($kode)
-    {
-		//validasi
-        $this->load->library('form_validation');
-
-        $this->form_validation->set_rules('id', 'ID Jurnal', 'trim|required|max_length[20]');
-        $this->form_validation->set_rules('jenis', 'jenis', 'trim|required|max_length[20]');
-		
-		 if($this->form_validation->run() == FALSE){
-			return "gagal";
-		}
-		else{
-			
-			//load data
-			$id=$this->input->post("id");
-			$data=array(
-			"JURNAL_TRANSAKSI_DES"=>$this->input->post("des"),
-			"JENIS_JURNAL_KODE"=>$this->input->post("jenis"),
-			"JURNAL_TRANSAKSI_GN"=>$this->input->post("gen")
-			);
-		
-			$this->load->database();
-			$this->load->model('m_Serbaguna','ms');
-			if($this->ms->cek_ada("BSPL_DATA_JURNAL_TRANSAKSI","JURNAL_TRANSAKSI_ID",$id)==TRUE){
-				if($this->db->where("JURNAL_TRANSAKSI_ID",$id)->update("BSPL_DATA_JURNAL_TRANSAKSI",$data)){
-					return "berhasil";
-				}
-				else{
-					return "gagal";
-				}
-			}
-			else{
-				return "gagal";
-			}
-		}
-	}
-	
-	public function delete_pesanan($kode){
-		$id=$kode;
-		$this->load->database();
-		$this->load->model('m_Serbaguna','ms');
-		if($this->ms->cek_ada("pesanan","idpesanan",$id)==TRUE){
-			if($this->db->where("idpesanan",$id)->delete("pesanan")){
-				return "berhasil";
-			}
-		else{
-				return "gagal";
-			}
-		}
-		else{
-			return "gagal";
-		}
-	}
-	
-	public function post_jurnal($kode)
-	{
-		//validasi
-        $this->load->library('form_validation');
-		$this->load->database();
-
-        $this->form_validation->set_rules('no', 'No Transaksi', 'trim|required|max_length[20]');
-        $this->form_validation->set_rules('periode', 'jenis', 'trim|required|max_length[20]');
-        $this->form_validation->set_rules('tahun', 'jenis', 'trim|required|max_length[4]');
-		
-		 if($this->form_validation->run() == FALSE){
-			return "gagal";
-		}
-		else{
-			$no=$this->input->post("no",true);
-			$tahun=$this->input->post("tahun");
-			$periode=$this->input->post("periode");
-			$user=$this->session->userdata("username");
-			$tgl=date('Y-m-d');
-			
-			$jurnal=$this->db->where("t.TRANSAKSI_NO",$no)->from("BSPL_DATA_TRANSAKSI t")->join("BSPL_DATA_JURNAL_TRANSAKSI jt","jt.TRANSAKSI_NO=t.TRANSAKSI_NO")->get()->result();
-			foreach($jurnal as $j)
-			{
-				if($j->JURNAL_TRANSAKSI_GN==1){
-					$data=array(
-						'JENIS_JURNAL_KODE'=>$j->JENIS_JURNAL_KODE,
-						'JURNAL_TAHUN'=>$tahun,
-						'PERIODE_KODE'=>$periode,
-						'TRANSAKSI_NO'=>$no,
-						'JURNAL_DES'=>$j->JURNAL_TRANSAKSI_DES,
-						'USER_USERNAME'=>$user
-						);
-						
-					$this->db->set('JURNAL_TANGGAL',"to_date('$tgl','yyyy-mm-dd')",false);
-					$this->db->insert('BSPL_DATA_JURNAL',$data);
-					
-					//isi
-					$isi=$this->db->where("JURNAL_TRANSAKSI_ID",$j->JURNAL_TRANSAKSI_ID)->get("BSPL_DATA_JURNAL_TRANSAKSID")->result();
-					foreach($isi as $i){
-						//get last id
-						$id=$this->db->limit(1)->order_by("JURNAL_ID","DESC")->get("BSPL_DATA_JURNAL");
-						if($id->num_rows()<1){
-							$id=1;
-						}else{
-							$id=$id->row()->JURNAL_ID;
-						}
-						$data=array(
-							'JURNAL_ID'=>$id,
-							'COA_KODE'=>$i->COA_KODE,
-							'JURNALD_DEBIT'=>$i->JURNAL_TRANSAKSID_DEBIT,
-							'JURNALD_KREDIT'=>$i->JURNAL_TRANSAKSID_KREDIT
-							);
-						$this->db->insert("BSPL_DATA_JURNALD",$data);
-					}
-					
-				}	
-			}
-
-			return "berhasil";
-		}
 	}
 }
 ?>

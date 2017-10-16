@@ -1,5 +1,5 @@
 
-<div class="dokumen">
+<div class="dokumen areaprint">
 <table class='table' id="ajaxtable">
 	<thead>
 		<tr>

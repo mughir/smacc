@@ -64,13 +64,13 @@
 </div>
 
 
-<div id="editPengajuan" class="modal fade" role="dialog">
+<div id="editPengajuan" class="modal fade areaprint" role="dialog">
  	<div class="modal-dialog fjurnal">
     <!-- Modal content-->
     <div class="modal-content fjurnal">
       <div class="modal-header fjurnal">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Edit Pengajuan</h4>
+        <h4 class="modal-title">Dokumen Pengajuan</h4>
       </div>
 	  <form method="post" action="?tipe=tambah">
 		<div class="modal-body">
@@ -101,19 +101,11 @@
 					 		<input  class='short jumlah' type="number" min=1 max=1000 value=1 name='jumlah[]'>
 					 	</td>
 					 </tr>
-					 <tr>
-					 	<td colspan="4">
-							<a href="#" class="addkeranjang btn btn-default">+</a> 
-					 	</td>
-					 </tr>
 				</tbody>
 		</table>
 		
       </div>
 	  <br>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Submit</button> <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-      </div>
 	  </form>
     </div>
 
@@ -167,7 +159,7 @@
 				break;
 			}
 			echo "<td>
-							<a href='#' data-id='$p->idpengajuan' data-toggle='modal' data-target='#editPengajuan' class='editButton btn btn-default glyphicon glyphicon-pencil'>
+							<a href='#' data-id='$p->idpengajuan' data-toggle='modal' data-target='#editPengajuan' class='editButton btn btn-default glyphicon glyphicon-eye-open'>
 							</a>
 							<a href='".base_url()."pembelian/permintaan/?tipe=delete&id=$p->idpengajuan' onclick=\"return confirm('Anda yakin?')\" class='btn btn-default glyphicon glyphicon-trash'>
 							</a>
@@ -230,7 +222,7 @@ $(document).ready(function() {
 
 				$(".editdetail").append(akun);
 		      }) // each
-		      $(".editdetail").append("<tr><td colspan=4><a href=\"#\" class=\"addkeranjang btn btn-default\">+</a> </td></tr>");
+		     // $(".editdetail").append("<tr><td colspan=4><a href=\"#\" class=\"addkeranjang btn btn-default\">+</a> </td></tr>");
 			}
 		});//end ajax detail
 

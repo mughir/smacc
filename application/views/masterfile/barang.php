@@ -11,6 +11,9 @@
 		<table class="form">
 		  <tr><td>ID barang: </td><td><input required type="text" name="id"></td></tr>
 		  <tr><td>Kategori : </td><td><select required name="kategori"><option value="Barang Dagang">Barang Dagang</option><option value="Material">Material</option></select></td></tr>
+		  <tr><td>Segment 1 : </td><td><input type="text" name="segment1"></td></tr>
+		  <tr><td>Segment 2 : </td><td><input type="text" name="segment2"></td></tr>
+		  <tr><td>Segment 3 : </td><td><input type="text" name="segment3"></td></tr>
 		  <tr><td>Nama : </td><td><input type="text" name="nama"></td></tr>
 		  <tr><td>Satuan : </td><td><input type="text" name="satuan"></td></tr>
 		  <tr><td>Jumlah : </td><td><input type="number" name="jumlah"></td></tr>
@@ -40,7 +43,10 @@
 		<div class="modal-body">
 		<table class="form">
 		  <tr><td>ID barang: </td><td><input required type="text" name="id"></td></tr>
-		  <tr><td>Kategori : </td><td><input required type="text" name="kategori"></td></tr>
+		  <tr><td>Kategori : </td><td><input required type="text" name="kategori"></td></tr>		  
+		  <tr><td>Segment 1 : </td><td><input type="text" name="segment1"></td></tr>
+		  <tr><td>Segment 2 : </td><td><input type="text" name="segment2"></td></tr>
+		  <tr><td>Segment 3 : </td><td><input type="text" name="segment3"></td></tr>
 		  <tr><td>Nama : </td><td><input type="text" name="nama"></td></tr>
 		  <tr><td>Satuan : </td><td><input type="text" name="satuan"></td></tr>
 		  <tr><td>Jumlah : </td><td><input type="number" name="jumlah"></td></tr>
@@ -137,6 +143,9 @@ $(document).ready(function() {
             $('#editbarang')
                 .find('[name="id"]').val(response.idbarang).end()
                 .find('[name="kategori"]').val(response.katbarang).end()
+                .find('[name="segment1"]').val(response.segment1).end()
+                .find('[name="segment2"]').val(response.segment2).end()
+                .find('[name="segment3"]').val(response.segment3).end()
                 .find('[name="nama"]').val(response.nbarang).end()
                 .find('[name="satuan"]').val(response.satbarang).end()
                 .find('[name="jumlah"]').val(response.jumlah).end()

@@ -4,9 +4,8 @@
 <table class='table' id="ajaxtable">
 	<thead>
 		<tr>
-			<th>akun</th>
-			<th>Debit</th>
-			<th>Kredit</th>
+			<th>Uraian</th>
+			<th>Balance</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -44,9 +43,9 @@
 				$net+=$total;
 
 				if($balance<0){
-					$kredit+=$balance*-1;
+					$balance=$balance*-1;
 				}else{
-					$debit+=$balance;
+					$balance=$balance;
 				}
 
 				echo "<tr><td>";
@@ -62,7 +61,7 @@
 					break;
 				}
 				echo $u->noakun ."- ". $u->nakun;
-				if($u->lakun>1) echo "<td>$debit</td><td>$kredit</td>";
+				if($u->lakun>1) echo "<td>$balance</td>";
 				if($u->lakun<2) echo "<td></td><td></td>";
 			}
 				if($total<0){
@@ -72,10 +71,10 @@
 				}
 
 
-			echo "<tr><td colspan=1><b>Total $t->nakun<br><br></b></td><td><b>$tdebit</b></td><td><b>$tkredit</b></td></tr>";
+			echo "<tr><td colspan=1><b>Total $t->nakun<br><br></b><td><b>$balance</b></td></tr>";
 		}
 		$net=$net*-1;
-		echo "<tr><td colspan=1><b>Net Profit<br><br></b></td><td><b></b></td><td><b>$net</b></td></tr>";
+		echo "<tr><td colspan=1><b>Net Profit<br><br></b></td><td><b>$net</b></td></tr>";
 		?>
 	</tbody>
 </table>

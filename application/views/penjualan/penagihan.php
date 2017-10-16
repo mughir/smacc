@@ -86,13 +86,13 @@
 </div>
 
 
-<div id="editKwitansi" class="modal fade" role="dialog">
+<div id="editKwitansi" class="modal fade areaprint" role="dialog">
  	<div class="modal-dialog fjurnal">
     <!-- Modal content-->
     <div class="modal-content fjurnal">
       <div class="modal-header fjurnal">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Edit Kwitansi</h4>
+        <h4 class="modal-title">Kwitansi</h4>
       </div>
 	  <form method="post" action="?tipe=tambah">
 		<div class="modal-body">
@@ -146,19 +146,11 @@
 					 		<input  class='subtotal' type="number" min=0 disabled value=0>
 					 	</td>
 					 </tr>
-					 <tr>
-					 	<td colspan="4">
-							<a href="#" class="addkeranjang btn btn-default">+</a> 
-					 	</td>
-					 </tr>
 				</tbody>
 		</table>
 		
       </div>
 	  <br>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Submit</button> <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-      </div>
 	  </form>
     </div>
 
@@ -218,7 +210,7 @@
 				break;
 			}
 			echo "<td>";
-			//echo "<a href='#' data-id='$p->idkwitansi' data-toggle='modal' data-target='#editKwitansi' class='editButton btn btn-default glyphicon glyphicon-pencil'></a>";
+			echo "<a href='#' data-id='$p->idkwitansi' data-toggle='modal' data-target='#editKwitansi' class='editButton btn btn-default glyphicon glyphicon-eye-open></a>";
 			echo "<a href='".base_url()."penjualan/penagihan/?tipe=delete&id=$p->idkwitansi' onclick=\"return confirm('Anda yakin?')\" class='btn btn-default glyphicon glyphicon-trash'>
 							</a>
 				</td>";
@@ -287,7 +279,7 @@ $(document).ready(function() {
 
 				$(".editdetail").append(akun);
 		      }) // each
-		      $(".editdetail").append("<tr><td colspan=4><a href=\"#\" class=\"addkeranjang btn btn-default\">+</a> </td></tr>");
+		     // $(".editdetail").append("<tr><td colspan=4><a href=\"#\" class=\"addkeranjang btn btn-default\">+</a> </td></tr>");
 			}
 		});//end ajax detail
 

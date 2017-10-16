@@ -64,13 +64,13 @@
 </div>
 
 
-<div id="editPenerimaan" class="modal fade" role="dialog">
+<div id="editPenerimaan" class="modal fade areaprint" role="dialog">
  	<div class="modal-dialog fjurnal">
     <!-- Modal content-->
     <div class="modal-content fjurnal">
       <div class="modal-header fjurnal">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Edit Penerimaan</h4>
+        <h4 class="modal-title">Dokumen Penerimaan Barang</h4>
       </div>
 	  <form method="post" action="?tipe=update">
 		<div class="modal-body">
@@ -163,7 +163,7 @@
 			echo "<td>$p->tglterimabarang</td>";
 			echo "<td>$p->term</td>";
 			echo "<td>
-							<a href='#' data-id='$p->idterimabarang' data-toggle='modal' data-target='#editPenerimaan' class='editButton btn btn-default glyphicon glyphicon-pencil'>
+							<a href='#' data-id='$p->idterimabarang' data-toggle='modal' data-target='#editPenerimaan' class='editButton btn btn-default glyphicon glyphicon-eye-open'>
 							</a>
 							<a href='".base_url()."pembelian/penerimaan/?tipe=delete&id=$p->idterimabarang' onclick=\"return confirm('Anda yakin?')\" class='btn btn-default glyphicon glyphicon-trash'>
 							</a>
@@ -226,7 +226,7 @@ $(document).ready(function() {
 
 				$(".editdetail").append(akun);
 		      }) // each
-		      $(".editdetail").append("<tr><td colspan=4><a href=\"#\" class=\"addkeranjang btn btn-default\">+</a> </td></tr>");
+		    //  $(".editdetail").append("<tr><td colspan=4><a href=\"#\" class=\"addkeranjang btn btn-default\">+</a> </td></tr>");
 			}
 		});//end ajax detail
 

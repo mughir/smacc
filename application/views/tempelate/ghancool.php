@@ -45,7 +45,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <!-- Custom styles for this template -->
 
-    <link href="<?php echo base_url(); ?>asset/css/bspl.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>asset/css/smacc.css" rel="stylesheet">
      <link href="<?php echo base_url(); ?>asset/css/BootSideMenu.css" rel="stylesheet">
 
 	

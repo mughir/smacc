@@ -20,7 +20,7 @@ class m_proses_jurnal extends CI_Model {
 		$this->proses_pos($dari,$sampai);
 		$this->proses_penjualan($dari,$sampai);
 		$this->proses_pembelian($dari,$sampai);
-		$this->proses_pembelian($dari,$sampai);
+		$this->proses_gaji($dari,$sampai);
 
 		return "berhasil";
 	}
@@ -75,6 +75,7 @@ class m_proses_jurnal extends CI_Model {
 	}
 
 	public function proses_penjualan($dari,$sampai){
+		//sales
 		$penjualan=$this->db
 			->select("tkwitansi")
 			->select("t.idkwitansi")
@@ -93,7 +94,7 @@ class m_proses_jurnal extends CI_Model {
 			$kref=$p->idkwitansi;
 			$total=$p->total;
 			$piutang=$total-$p->dp;
-			$cash=$p->$dp;
+			$cash=$p->dp;
 
 			$data=array(
 				"njurnalm"=>$nama,
@@ -129,6 +130,54 @@ class m_proses_jurnal extends CI_Model {
 			$data=array(
 				"kjurnalm"=>$id,
 				"noakun"=>41000,
+				"debit"=>0,
+				"kredit"=>$total
+			);
+
+			$this->db->insert("djurnalm",$data);
+		}
+
+		//cogs
+		$cogs=$this->db
+			->select("tpengiriman")
+			->select("t.idpengiriman")
+			->select("tcost as total",false)
+			->from("pengiriman t")
+			->where("tpengiriman >=",$dari)
+			->where("tpengiriman <=",$sampai)
+			->join("isipengiriman k","k.idpengiriman=t.idpengiriman")
+			->get()->result();
+
+		foreach($cogs as $p){
+			$nama="Jurnal Pengakuan Beban Pokok Penjualan";
+			$tanggal=$p->tpengiriman;
+			$sref="pengiriman";
+			$kref=$p->idpengiriman;
+			$total=$p->total;
+
+			$data=array(
+				"njurnalm"=>$nama,
+				"tjurnalm"=>$tanggal,
+				"sref"=>$sref,
+				"kref"=>$kref
+			);
+
+			$this->db->insert("jurnalm",$data);
+			$id=$this->db->insert_id(); 
+
+			$data=array(
+				"kjurnalm"=>$id,
+				"noakun"=>51000,
+				"debit"=>$total,
+				"kredit"=>0
+			);
+
+			$this->db->insert("djurnalm",$data);
+
+
+			$data=array(
+				"kjurnalm"=>$id,
+				"noakun"=>10500,
 				"debit"=>0,
 				"kredit"=>$total
 			);
@@ -258,6 +307,53 @@ class m_proses_jurnal extends CI_Model {
 			$data=array(
 				"kjurnalm"=>$id,
 				"noakun"=>20100,
+				"debit"=>$total,
+				"kredit"=>0
+			);
+
+			$this->db->insert("djurnalm",$data);
+
+			$data=array(
+				"kjurnalm"=>$id,
+				"noakun"=>10100,
+				"debit"=>0,
+				"kredit"=>$total
+			);
+
+			$this->db->insert("djurnalm",$data);
+		}
+	}
+
+	public function proses_gaji($dari,$sampai){
+		$gaji=$this->db
+			->select("tanggal")
+			->select("idgaji")
+			->select("gaji")
+			->from("gaji")
+			->where("tanggal >=",$dari)
+			->where("tanggal <=",$sampai)
+			->get()->result();
+
+		foreach($gaji as $p){
+			$nama="Jurnal Pembayaran Gaji";
+			$tanggal=$p->tanggal;
+			$sref="gaji";
+			$kref=$p->idgaji;
+			$total=$p->gaji;
+
+			$data=array(
+				"njurnalm"=>$nama,
+				"tjurnalm"=>$tanggal,
+				"sref"=>$sref,
+				"kref"=>$kref
+			);
+
+			$this->db->insert("jurnalm",$data);
+			$id=$this->db->insert_id(); 
+
+			$data=array(
+				"kjurnalm"=>$id,
+				"noakun"=>52000,
 				"debit"=>$total,
 				"kredit"=>0
 			);

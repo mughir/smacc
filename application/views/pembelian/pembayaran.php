@@ -30,7 +30,7 @@
 </div>
 
 
-<div id="editPembayaran" class="modal fade" role="dialog">
+<div id="editPembayaran" class="modal fade areaprint" role="dialog">
   <div class="modal-dialog fjurnal">
     <!-- Modal content-->
     <div class="modal-content fjurnal">
@@ -51,9 +51,6 @@
 		</table>
       </div>
 	  <br>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Submit</button> <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-      </div>
 	  </form>
     </div>
 
@@ -100,7 +97,7 @@
 				echo "<td>$b->via</td>";
 				echo "<td>$b->ket</td>";
 				echo "<td>
-							<a href='#' data-id='$b->idpembayaran' data-toggle='modal' data-target='#editPembayaran' class='editButton btn btn-default glyphicon glyphicon-pencil'>
+							<a href='#' data-id='$b->idpembayaran' data-toggle='modal' data-target='#editPembayaran' class='editButton btn btn-default glyphicon glyphicon-eye-open'>
 							</a>
 							<a href='".base_url()."pembelian/pembayaran/?tipe=delete&id=$b->idpembayaran' onclick=\"return confirm('Anda yakin?')\" class='btn btn-default glyphicon glyphicon-trash'>
 							</a>

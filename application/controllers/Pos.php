@@ -65,6 +65,7 @@ class Pos extends CI_Controller {
 		if($kode==0) redirect(base_url."pos/kasir");
 
 		//muatan data
+		$data['isi']=$this->m_Kasir->get_isi_detail($kode);
 		$data['summary']=$this->m_Kasir->get_summary($kode);
 		$data['hal']="pos/print";
 		$data['nav']=$this->m_Navigasi->utama();

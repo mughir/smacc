@@ -78,13 +78,13 @@
 </div>
 
 
-<div id="editPesanan" class="modal fade" role="dialog">
+<div id="editPesanan" class="modal fade areaprint" role="dialog">
  	<div class="modal-dialog fjurnal">
     <!-- Modal content-->
     <div class="modal-content fjurnal">
       <div class="modal-header fjurnal">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Edit Pesanan</h4>
+        <h4 class="modal-title">Dokumen Pesanan</h4>
       </div>
 	  <form method="post" action="?tipe=tambah">
 		<div class="modal-body">
@@ -130,19 +130,11 @@
 					 		<input  class='subtotal' type="number" min=0 disabled value=0>
 					 	</td>
 					 </tr>
-					 <tr>
-					 	<td colspan="4">
-							<a href="#" class="addkeranjang btn btn-default">+</a> 
-					 	</td>
-					 </tr>
 				</tbody>
 		</table>
 		
       </div>
 	  <br>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Submit</button> <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-      </div>
 	  </form>
     </div>
 
@@ -200,7 +192,7 @@
 				break;
 			}
 			echo "<td>
-							<a href='#' data-id='$p->idpesan_beli' data-toggle='modal' data-target='#editPesanan' class='editButton btn btn-default glyphicon glyphicon-pencil'>
+							<a href='#' data-id='$p->idpesan_beli' data-toggle='modal' data-target='#editPesanan' class='editButton btn btn-default glyphicon glyphicon-eye-open'>
 							</a>
 							<a href='".base_url()."pembelian/pesanan/?tipe=delete&id=$p->idpesan_beli' onclick=\"return confirm('Anda yakin?')\" class='btn btn-default glyphicon glyphicon-trash'>
 							</a>
@@ -269,7 +261,7 @@ $(document).ready(function() {
 
 				$(".editdetail").append(akun);
 		      }) // each
-		      $(".editdetail").append("<tr><td colspan=4><a href=\"#\" class=\"addkeranjang btn btn-default\">+</a> </td></tr>");
+		     // $(".editdetail").append("<tr><td colspan=4><a href=\"#\" class=\"addkeranjang btn btn-default\">+</a> </td></tr>");
 			}
 		});//end ajax detail
 

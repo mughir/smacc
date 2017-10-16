@@ -1,4 +1,4 @@
-<div class="dokumen">
+<div class="dokumen areaprint">
 <h2 class="text-center">Laporan Pembelian</h2><br><br>
 <table class="table">
 	<thead>

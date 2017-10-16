@@ -1,8 +1,8 @@
 <div id="createPembayaran" class="modal fade" role="dialog">
- 	<div class="modal-dialog fjurnal">
+ 	<div class="modal-dialog">
     <!-- Modal content-->
-    <div class="modal-content fjurnal">
-      <div class="modal-header fjurnal">
+    <div class="modal-content">
+      <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Add Pembayaran</h4>
       </div>
@@ -30,13 +30,13 @@
 </div>
 
 
-<div id="editPembayaran" class="modal fade" role="dialog">
-  <div class="modal-dialog fjurnal">
+<div id="editPembayaran" class="modal fade areaprint" role="dialog">
+  <div class="modal-dialog">
     <!-- Modal content-->
-    <div class="modal-content fjurnal">
-      <div class="modal-header fjurnal">
+    <div class="modal-content">
+      <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Edit Pembayaran</h4>
+        <h4 class="modal-title">Dokumen Pembayaran</h4>
       </div>
 	  <form method="post" action="?tipe=update">	
 	  <div class="modal-body">
@@ -51,9 +51,6 @@
 		</table>
       </div>
 	  <br>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Submit</button> <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-      </div>
 	  </form>
     </div>
 
@@ -100,7 +97,7 @@
 				echo "<td>$b->via</td>";
 				echo "<td>$b->ket</td>";
 				echo "<td>";
-				//echo  "<a href='#' data-id='$b->idpembayaran' data-toggle='modal' data-target='#editPembayaran' class='editButton btn btn-default glyphicon glyphicon-pencil'></a>";
+				echo  "<a href='#' data-id='$b->idpembayaran' data-toggle='modal' data-target='#editPembayaran' class='editButton btn btn-default glyphicon glyphicon-eye-open'></a>";
 				echo "<a href='".base_url()."penjualan/pembayaran/?tipe=delete&id=$b->idpembayaran' onclick=\"return confirm('Anda yakin?')\" class='btn btn-default glyphicon glyphicon-trash'>
 							</a>
 					</td>";

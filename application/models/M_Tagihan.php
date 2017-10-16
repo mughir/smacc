@@ -95,6 +95,9 @@ class m_tagihan extends CI_Model {
 					);
 
 				$this->db->insert("isitagihan",$data);
+				
+				$this->load->model("M_Barang");
+				$this->M_Barang->update_barang($barang[$i],$jumlah[$i],$jumlah[$i]*$dbarang->hjualbarang);
 			}
 
 			return "berhasil";

@@ -9,15 +9,13 @@
       </div>
 	  <form method="post" action="<?php echo base_url() ?>masterdata/fungsi_proses/update">
 		<div class="modal-body">
-		<table class="form">
 			<input readonly required type="hidden" name="pt" value="">
 <input readonly required type="hidden" name="id" value="">
-		  <tr><td>Status Fungsi : </td><td><select name="status"><option value="1">Aktif</option><option value="0">Tidak Aktif</option></select></td></tr> 
-		</table>
+		  <tr><td>Status Fungsi : <input name="status" value=1  type="radio"> Aktif <input name="status" value=0 type="radio"> Tidak Aktif</td></tr> 
       </div>
 	  <br>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Submit</button> <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="submit" onclick="return('Anda yakin?')" class="btn btn-primary">Submit</button> <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
       </div>
 	  </form>
     </div>
@@ -83,7 +81,7 @@ $(document).ready(function() {
             // Populate the form fields with the data returned from server
             $('#edituser')
                 .find('[name="id"]').val(response.idfungsi).end()
-                .find('[name="status"]').val(response.sfungsi).end();
+                .find('[name="status"][value="'+response.sfungsi+'"]').attr('checked', 'checked').end();
 			}
 		});
 	});

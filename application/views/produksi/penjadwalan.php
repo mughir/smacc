@@ -1,39 +1,22 @@
-<div id="createRND" class="modal fade" role="dialog">
+
+
+<div id="createjadwal" class="modal fade" role="dialog">
  	<div class="modal-dialog fjurnal">
     <!-- Modal content-->
     <div class="modal-content fjurnal">
       <div class="modal-header fjurnal">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Add RND</h4>
+        <h4 class="modal-title">Add Perintah</h4>
       </div>
-	  <form method="post" action="<?php echo base_url() ?>transaksi/bspl_RND_entri_proses/tambah">
+	  <form method="post" action="?tipe=tambah">
 		<div class="modal-body">
-<table class="form"">
-	<thead>
-	<tr><td>Pemesan</td><td><input type="text"></td></tr>
-	<tr><td>Tanggal</td><td><input type="date"></td></tr>
-	<tr><td><br><br></td><td></td></tr>
-	  <tr><th>Produk</th><th>Jumlah</th><th>Harga</th><th>Subtotal</th></tr>
-	  </thead>
-	  <tbody >
-			 <tr> 
-			 	<td>
-			 		<input required type="text" list="produk" class="namaakun"  autocomplete="off" name="namaakun[]" placeholder="nama Produk">
-			 	</td>
-			 	<td>
-			 		<input  type="number" min=1 max=1000 value=1>
-			 	</td>
-			 	<td>
-			 		<input  type="number" min=0 disabled value=1>
-			 	</td>
-			 	<td>
-			 		<input  type="number" min=0 disabled value=1>
-			 	</td>
-			 </tr>
-			 <tr><td colspan=4><a href="#" class="addakun btn btn-default">+</a> </td></tr>
-		</tbody>
-</table>
-		
+			<table class="form"">
+				<thead>
+				<tr><td>No Perintah</td><td><input name="perintah" type="number"></td></tr>
+				<tr><td>Waktu</td><td><input name="waktu"  type="date"></td></tr>
+				<tr><td>Jumlah</td><td><input name="jumlah" type="number" min=0></td></tr>
+				<tr><td>Tahapan Operasi Berjalan</td><td><input name="operasi" type="text"></td></tr>
+			</table>
       </div>
 	  <br>
       <div class="modal-footer">
@@ -87,7 +70,7 @@
 </div>
 	<div class="row">
 		<div class="col-sm-3 col-xs-3">
-			<button style="font-size:14px;padding:5px 5px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#createRND">+ Add Operasi</button>
+			<button style="font-size:14px;padding:5px 5px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#createjadwal">+ Add Batch</button>
 		</div>
 	</div>
 
@@ -97,23 +80,29 @@
 <table class='table' id="ajaxtable">
 	<thead>
 		<tr>
-			<th>No Operasi</th>
-			<th>Waktu</th>
 			<th>No Batch</th>
-			<th>Barang</th>
+			<th>No Operasi</th>
+			<th>No Barang</th>
+			<th>Waktu</th>
 			<th>Jumlah</th>
+			<th>Tahap Operasi</th>
 			<th>Status</th>
 		</tr>
 	</thead>	
 	<tobdy>
-		<tr>
-			<th>2017080000001</th>
-			<th>2017-08-26</th>
-			<th>1</th>
-			<th>Tes</th>
-			<th>10</th>
-			<th>Not Finished</th>
-		</tr>
+<?php
+	foreach($jadwal as $p){
+		echo "<tr>";
+			echo "<td>$p->idjadwal</td>";
+			echo "<td>$p->idorder</td>";
+			echo "<td>$p->idbarang</td>";
+			echo "<td>$p->waktu</td>";
+			echo "<td>$p->jumlah</td>";
+			echo "<td>$p->namaoperasi</td>";
+			echo "<td>$p->status</td>";
+		echo "</tr>";
+	}
+?>
 	</tbody>
 </table>
 

@@ -125,5 +125,20 @@ class m_Barang extends CI_Model {
 			return "gagal";
 		}
 	}
+
+	public function update_barang($kode,$jumlah,$subtotal=0){
+		$dbarang=$this->db->where("idbarang",$kode)->get("barang");
+		$djumlah=$dbarang->jumlah;
+		$cbarang=$dbarang->cbarang;
+		$hbaru=$subtotal/$jumlah;
+
+		if($cbarang==0) $cbarang=$hbaru;
+		$subtotall=$djumlah*$cbarang;
+		$subtotalb=$subtotall+$subtotal;
+		$jumlahb=$jumlah+$djumlah;
+		$costb=$subtotalb/$jumlahb;
+
+		$this->db->set("jumlah",$jumlahb)->set("cbarang",$costb)->where("idbarang",$kode)->update("barang");
+	}
 }
 ?>

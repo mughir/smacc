@@ -92,10 +92,12 @@ class m_pengiriman extends CI_Model {
 						continue;
 					}
 
+					$tcost=$this->db->where("idbarang",$barang[$i])->get("barang")->row()->cbarang*$jumlah[$i];
 					$data=array(
 							"idpengiriman"=>$id,
 							"idbarang"=>$barang[$i],
-							"jumlah"=>$jumlah[$i]
+							"jumlah"=>$jumlah[$i],
+							"tcost"=>$tcost
 						);
 
 					$this->db->where("idbarang",$barang[$i])->set("jumlah","jumlah-".$jumlah[$i],false);
