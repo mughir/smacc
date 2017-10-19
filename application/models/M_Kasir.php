@@ -96,7 +96,7 @@ class m_Kasir extends CI_Model {
 					"jumlah"=>$jumlah[$i],
 					"subtotal"=>$jumlah[$i]*$dbarang->hbarangkasir,
 					"discount"=>$jumlah[$i]*$dbarang->disbarangkasir,
-					"cogs"->$dbarang->cbarang
+					"cogs"=>$dbarang->cbarang
 				);
 
 			$this->db->insert("keranjangpos",$data);
