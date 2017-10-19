@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class m_perintah extends CI_Model {	
+class m_operasi extends CI_Model {	
 	public function __construct()
 	{
 		parent::__construct();
@@ -9,44 +9,50 @@ class m_perintah extends CI_Model {
 	
 	public $nav;
 
-	public function get_perintah(){
+	public function get_operasi(){
 		$this->load->database();
-		return $this->db->get("perintah_prod")->result();
+		$this->db
+			->select("o.nokartu")
+			->select("o.idjadwal")
+			->select("o.waktu")
+			->select("o.namaoperasi")
+			->select("o.status")
+			->select("j.idorder")
+			->select("j.jumlah")
+			->select("idbarang");
+
+		return $this->db->from("operasiproduksi o")->join("penjadwalan j","o.idjadwal=j.idjadwal")->join("perintah_prod p","p.idorder=j.idorder")->get()->result();
 	}
 	
-	public function get_terjadwal($kode){
-		$this->load->database();
-		return $this->db->select_sum("jumlah")->where("idorder",$kode)->get("penjadwalan")->row()->jumlah;
-	}
-
-	public function get_finish($kode){
-		$this->load->database();	
-		return $this->db->select_sum("jumlah")->where("status",1)->where("idorder",$kode)->get("penjadwalan")->row()->jumlah;
-	}
-
-	public function tambah_perintah()
+	public function tambah_operasi()
     {
-			$barang=$this->input->post("barang");
-			$tanggal=$this->input->post("tanggal");
-			$jumlah=$this->input->post("jumlah");
-			$prioritas=$this->input->post("prioritas");
+			$batch=$this->input->post("batch");
+			$kartu=$this->input->post("kartu");
+			$waktu=$this->input->post("tanggal");
+			$operasi=$this->input->post("operasi");
+			$status=0;if($this->input->post("finish")) $status=1;
+		
 		
 			$this->load->database();
-			$this->load->model('m_Serbaguna','ms');		
-				$data=array(
-					"idbarang"=>$barang,
-					"tanggal"=>$tanggal,
-					"jumlah"=>$jumlah,
-					"prioritas"=>$prioritas,
-					"status"=>0
-				);
-				if($this->db->insert("perintah_prod",$data)){
-					return "berhasil";
-				}
-				else{
-					return "gagal";
-				}
-	}
+			$this->load->model('m_Serbaguna','ms');	
+			if($this->ms->cek_ada("operasiproduksi","nokartu",$kartu)) return "gagal";
+
+			$data=array(
+				"nokartu"=>$kartu,
+				"idjadwal"=>$batch,
+				"waktu"=>$waktu,
+				"namaoperasi"=>$operasi,
+				"status"=>$status
+			);
+			if($this->db->insert("operasiproduksi",$data)){
+				if($status==1) $this->db->set("status",1);
+				$this->db->set("namaoperasi",$operasi)->where("idjadwal",$batch)->update("penjadwalan");
+				return "berhasil";
+			}
+			else{
+				return "gagal";
+			}
+	}	
 	
 	public function edit_barang($kode)
     {
@@ -88,15 +94,15 @@ class m_perintah extends CI_Model {
 		}
 	}
 	
-	public function delete_perintah($kode)
+	public function delete_operasi($kode)
     {
 		//load data
 		$id=$kode;
 		
 		$this->load->database();
 		$this->load->model('m_Serbaguna','ms');
-		if($this->ms->cek_ada("perintah_prod","idorder",$id)==TRUE){
-			if($this->db->where("idorder",$id)->delete("perintah_prod")){
+		if($this->ms->cek_ada("operasiproduksi","nokartu",$id)==TRUE){
+			if($this->db->where("nokartu",$id)->delete("operasiproduksi")){
 				return "berhasil";
 			}
 		else{

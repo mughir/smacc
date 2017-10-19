@@ -1,5 +1,6 @@
-<div class="dokumen areaprint">
-<h2 class="text-center">Laporan Pembelian</h2><br><br>
+<div class="dokumen">
+<div class="isilaporan areaprint">
+<h2 class="text-center">Laporan COGM</h2><br><br>
 <table class="table">
 	<thead>
 		<tr>			
@@ -7,13 +8,18 @@
 				No
 			</th>
 			<th>
-				Uraian
+				Nama Produk
 			</th>			
 			<th>
-				Jumlah Dibeli
+				Biaya Material
+			<th>
+				Biaya Labor
 			</th>
 			<th>
-				Jumlah Subtotal
+				Biaya FOH
+			</th>
+			<th>
+				Subtotal Biaya
 			</th>
 		</tr>
 	</thead>
@@ -21,20 +27,25 @@
 		<?php
 			$no=0;
 			foreach($jumlah as $j){
+				$bersih=$j->cmaterial+$j->clabor+$j->cfoh;
 				$no++;
 				echo "<tr>";
 					echo "<td>$no</td>";
 					echo "<td>$j->nbarang</td>";
-					echo "<td>$j->tjumlah</td>";
-					echo "<td>$j->tsubtotal</td>";
+					echo "<td>$j->cmaterial</td>";
+					echo "<td>$j->clabor</td>";
+					echo "<td>$j->cfoh</td>";
+					echo "<td>".$bersih."</td>";
 				echo "</tr>";
 			}
 		?>
 	</tbody>
 </table>
+</div>
+<br><br>
 <a href="#" id="printnormal" class="btn btn-default">Print</a>
 <a href="#" id="printpdf" class="btn btn-default">Print PDF</a>
-<a href="<?=base_url()?>pembelian/laporan" class="btn btn-default">Kembali</a>
+<a href="<?=base_url()?>produksi/laporan" class="btn btn-default">Kembali</a>
 </div>
 <script src="<?php echo base_url(); ?>asset/js/html2canvas.min.js"></script>
 <script src="<?php echo base_url(); ?>asset/js/jspdf.min.js"></script>

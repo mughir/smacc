@@ -92,12 +92,14 @@ class m_Jurnal_manual extends CI_Model {
 			$nama=$this->input->post("nama");
 			$sumber=$this->input->post("sumber");
 			$ref=$this->input->post("ref");
+			$uraian=$this->input->post("uraian");
 			
 			$data=array(
 						'njurnalm'=>$nama,
 						'tjurnalm'=>$tanggal,
 						'sref'=>$sumber,
-						'kref'=>$ref
+						'kref'=>$ref,
+						"uraian"=>$uraian
 			);
 		
 			
@@ -168,6 +170,7 @@ class m_Jurnal_manual extends CI_Model {
 			$nama=$this->input->post("nama");
 			$sumber=$this->input->post("sumber");
 			$ref=$this->input->post("ref");
+			$uraian=$this->input->post("uraian");
 
 			//load data
 			$id=$this->input->post("id");
@@ -175,7 +178,8 @@ class m_Jurnal_manual extends CI_Model {
 						'njurnalm'=>$nama,
 						'tjurnalm'=>$tanggal,
 						'sref'=>$sumber,
-						'kref'=>$ref
+						'kref'=>$ref,
+						"uraian"=>$uraian
 			);
 		
 			$this->load->database();
@@ -272,7 +276,8 @@ class m_Jurnal_manual extends CI_Model {
 						'njurnal'=>$j->njurnalm,
 						'tjurnal'=>$j->tjurnalm,
 						'sref'=>$j->sref,
-						'kref'=>$j->kref
+						'kref'=>$j->kref,
+						'uraian'=>$j->uraian
 						);
 						
 					$this->db->insert('jurnal',$data);

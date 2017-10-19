@@ -79,6 +79,43 @@
 </div>
 
 
+<div id="createtransaksi" class="modal fade" role="dialog">
+  <div class="modal-dialog fjurnal">
+    <!-- Modal content-->
+    <div class="modal-content fjurnal">
+      <div class="modal-header fjurnal">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Dokumen Transaksi</h4>
+      </div>
+	  <form method="post" class="fojurnal"  action="<?php echo base_url() ?>akuntansi/jurnalmanual_proses/tambah">
+		<div class="modal-body ">
+		<table class="form">	  	  
+		<tr><td>No Dokumen</td><td><input type="text" name="ref" required placeholder="wajib" value="" ></td></tr>	
+		<tr><td>Nama Dokumen</td><td><input type="text" name="sumber" required placeholder="wajib" value=""></td></tr> 
+		<tr><td>Tanggal: </td><td colspan=2 ><input class="tgl" type="text" name="tanggal" value="<?php echo date('Y-m-d') ?>"></td><td></td></tr>
+   		<tr><td>Uraian</td><td><textarea name="uraian"></textarea></td></tr>	  
+   		<tr><td>Nama Jurnal</td><td><input type="text" name="nama" placeholder="wajib" value="" required></td></tr>	  
+		</table><br><br>
+		<table>
+		  <tr><td>Akun</td><td>Debit</td><td>Kredit</td></tr>
+				
+				 <tr> <td><input required type="text" list="akuns" class="namaakun"  autocomplete="off" name="namaakun[]" placeholder="Nama akun"></td><td><input class="akun debit" name="debit[]" type="text" value=0 placeholder="debit"></td><td><input value=0 name="kredit[]" class="akun kredit" type="text" placeholder="kredit"></td><td>
+		 		<a class='btn btn-default glyphicon glyphicon-remove-sign remove'></a>
+		 	</td></tr>
+<tr><td colspan=3><a href="#" class="addakun btn btn-default">+</a> </td></tr>
+		</table>
+      </div>
+	  <br>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Submit</button> <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+	  </form>
+    </div>
+
+  </div>
+</div>
+
+
 <datalist id="akuns">
 <?php foreach($coa as $c){
 	echo "<option value='$c->noakun'>$c->noakun - $c->nakun</option>";
@@ -92,8 +129,9 @@
 </div>
 
 	<div class="row">
-		<div class="col-sm-3 col-xs-3">
-			<button style="font-size:14px;padding:5px 5px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#createjournal">+ Add Journal</button>
+		<div class="col-sm-6 col-xs-6">
+			<button style="font-size:14px;padding:5px 5px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#createjournal">+ Tambah Jurnal</button>
+			<button style="font-size:14px;padding:5px 5px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#createtransaksi">+ Tambah Transaksi Lainnya</button>
 		</div>
 	</div>
 

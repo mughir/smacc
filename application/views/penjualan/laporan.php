@@ -50,6 +50,19 @@ if($this->session->flashdata('hasil')=="gagal"){
 						</select>
 					</td>
 				</tr>
+				<tr>
+					<td>
+						<select name="filter" style="width:150px;margin:0">
+								<option value=1>Tanpa Filter</option>
+								<option value=2>Segment 1</option>
+								<option value=3>Segment 2</option>
+								<option value=4>Segment 3</option>
+						</select>
+					</td>
+					<td>
+						<input type="text" name="isifilter" placeholder="">
+					</td>
+				</tr>
 				</table>
 				</br>
 				<div class="wrapper">

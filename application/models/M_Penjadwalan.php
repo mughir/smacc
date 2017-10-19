@@ -11,6 +11,14 @@ class m_penjadwalan extends CI_Model {
 
 	public function get_jadwal(){
 		$this->load->database();
+		$this->db
+			->select("j.idjadwal")
+			->select("j.waktu")
+			->select("j.namaoperasi")
+			->select("j.status")
+			->select("j.idorder")
+			->select("j.jumlah")
+			->select("idbarang");
 		return $this->db->from("penjadwalan j")->join("perintah_prod p","p.idorder=j.idorder")->get()->result();
 	}
 	

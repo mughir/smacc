@@ -88,14 +88,15 @@ class m_Kasir extends CI_Model {
 		for($i=0;$i<count($barang);$i++){
 			if($this->ms->cek_ada("barang","idbarang",$barang[$i])==FALSE) continue;
 
-			$dbarang=$this->db->where("idbarang",$barang[$i])->get("barangkasir")->row();
+			$dbarang=$this->db->where("idbarang",$barang[$i])->from("barangkasir k")->join("barang b","b.idbarang=k.idbarang")->row();
 
 			$data=array(
 					"idtranspos"=>$id,
 					"idbarang"=>$barang[$i],
 					"jumlah"=>$jumlah[$i],
 					"subtotal"=>$jumlah[$i]*$dbarang->hbarangkasir,
-					"discount"=>$jumlah[$i]*$dbarang->disbarangkasir
+					"discount"=>$jumlah[$i]*$dbarang->disbarangkasir,
+					"cogs"->$dbarang->cbarang
 				);
 
 			$this->db->insert("keranjangpos",$data);

@@ -213,7 +213,7 @@ class M_Navigasi extends CI_Model {
 
 								$this->nav.="<li><a href=\"".base_url()."akuntansi/prosesjurnal\" class=\"halonav\">Proses Jurnal</a></li>";
 
-								$this->nav.="<li><a href=\"".base_url()."akuntansi/jurnalmanual\" class=\"halonav\">Jurnal Manual</a></li>";
+								$this->nav.="<li><a href=\"".base_url()."akuntansi/jurnalmanual\" class=\"halonav\">Review Jurnal & Transaksi Lainnya</a></li>";
 
 								$this->nav.="<li><a href=\"".base_url()."akuntansi/bukubesar\" class=\"halonav\">Periksa Buku Besar</a></li>";
 

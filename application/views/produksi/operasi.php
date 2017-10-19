@@ -4,34 +4,18 @@
     <div class="modal-content fjurnal">
       <div class="modal-header fjurnal">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Add Operasi</h4>
+        <h4 class="modal-title">Moving Ticket</h4>
       </div>
-	  <form method="post" action="<?php echo base_url() ?>transaksi/bspl_Operasi_entri_proses/tambah">
+	  <form method="post" action="?tipe=tambah">
 		<div class="modal-body">
 <table class="form"">
 	<thead>
-	<tr><td>Pemesan</td><td><input type="text"></td></tr>
-	<tr><td>Tanggal</td><td><input type="date"></td></tr>
+	<tr><td>No Batch</td><td><input name="batch" type="number"></td></tr>
+	<tr><td>No Kartu</td><td><input name="kartu" type="number"></td></tr>
+	<tr><td>Tanggal</td><td><input name="tanggal" class="tgl" type="text"></td></tr>
+	<tr><td>Nama Operasi</td><td><input name="operasi" type="text"></td></tr>
+	<tr><td>Finish?</td><td><input name="finish" type="hidden"><input name="finish" type="checkbox"></td></tr>
 	<tr><td><br><br></td><td></td></tr>
-	  <tr><th>Produk</th><th>Jumlah</th><th>Harga</th><th>Subtotal</th></tr>
-	  </thead>
-	  <tbody >
-			 <tr> 
-			 	<td>
-			 		<input required type="text" list="produk" class="namaakun"  autocomplete="off" name="namaakun[]" placeholder="nama Produk">
-			 	</td>
-			 	<td>
-			 		<input  type="number" min=1 max=1000 value=1>
-			 	</td>
-			 	<td>
-			 		<input  type="number" min=0 disabled value=1>
-			 	</td>
-			 	<td>
-			 		<input  type="number" min=0 disabled value=1>
-			 	</td>
-			 </tr>
-			 <tr><td colspan=4><a href="#" class="addakun btn btn-default">+</a> </td></tr>
-		</tbody>
 </table>
 		
       </div>
@@ -45,67 +29,6 @@
   </div>
 </div>
 
-
-<div id="editOperasi" class="modal fade" role="dialog">
-  <div class="modal-dialog fjurnal">
-    <!-- Modal content-->
-    <div class="modal-content fjurnal">
-      <div class="modal-header fjurnal">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Edit Operasi</h4>
-      </div>
-	  <form method="post" action="<?php echo base_url() ?>transaksi/bspl_Operasi_entri_proses/update">
-		<div class="modal-body">
-		<table class="form">
-		  <tr><td><input readonly required type="hidden" name="id" value=""><input readonly required type="hidden" name="no" value="<?php echo $transaksi->TRANSAKSI_NO ?>">Jenis Operasi: </td><td colspan=2><select name="jenis"><option value=""></option><?php foreach($jenis_Operasi as $j){echo "<option value='$j->JENIS_Operasi_KODE'>$j->JENIS_Operasi_NAMA</option>";} ?></select></td></tr>
-		  <tr><td>Deskripsi: </td><td><input type="text" name="des"></td><td></td></tr>	
-		
- 		 <tr><td>Tipe Post: </td><td><select name="gen"><option value=0>Current</option><option value=1>Carry FW</option><option value=2>Current & Carry FW</option></select></td><td></td></tr>
-			</table>
-		<table id="editakunOperasi" class="form">
-			  <tr><td><br><br> </td><td></td><td><br><span class='akun'>Debit</span></td><td><br><span class='akun'>Kredit</span></td></tr>
-			 <tr> <td><input required type="text" list="akuns" class="namaakun"  autocomplete="off" name="namaakun[]" placeholder="Nama akun"></td><td><input  type="text" list="assets" class="assets"  autocomplete="off" name="namaasset[]" placeholder="Class asset"></td><td><input class="akun" name="debit[]" type="number" value=0 placeholder="debit"></td><td><input value=0 name="kredit[]" class="akun" type="number" placeholder="kredit"></td><td><input  type="text" list="bisnis" class="ba"  autocomplete="off" name="namabisnisj[]" placeholder="BACC"></td><td><input  type="text" list="bisnis" class=""  autocomplete="off" name="namabisnisb[]" placeholder="BATP"></td></tr>
-		 <tr> <td><input required type="text" list="akuns" class="namaakun"  autocomplete="off" name="namaakun[]" placeholder="Nama akun"></td><td><input  type="text" list="assets" class="assets"  autocomplete="off" name="namaasset[]" placeholder="Class asset"></td><td><input class="akun" name="debit[]" type="number" value=0 placeholder="debit"></td><td><input value=0 name="kredit[]" class="akun" type="number" placeholder="kredit"></td><td><input  type="text" list="bisnis" class="ba"  autocomplete="off" name="namabisnisj[]" placeholder="BACC"></td><td><input  type="text" list="bisnis" class=""  autocomplete="off" name="namabisnisb[]" placeholder="BATP"></td></tr>
-		 <tr> <td><input  type="text" list="akuns" class="namaakun"  autocomplete="off" name="namaakun[]" placeholder="Nama akun"></td><td><input  type="text" list="assets" class="assets"  autocomplete="off" name="namaasset[]" placeholder="Class asset"></td><td><input class="akun" name="debit[]" type="number" value=0 placeholder="debit"></td><td><input value=0 name="kredit[]" class="akun" type="number" placeholder="kredit"></td><td><input  type="text" list="bisnis" class="ba"  autocomplete="off" name="namabisnisj[]" placeholder="BACC"></td><td><input  type="text" list="bisnis" class=""  autocomplete="off" name="namabisnisb[]" placeholder="BATP"></td></tr>
-	 <tr> <td><input  type="text" list="akuns" class="namaakun"  autocomplete="off" name="namaakun[]" placeholder="Nama akun"></td><td><input  type="text" list="assets" class="assets"  autocomplete="off" name="namaasset[]" placeholder="Class asset"></td><td><input class="akun" name="debit[]" type="number" value=0 placeholder="debit"></td><td><input value=0 name="kredit[]" class="akun" type="number" placeholder="kredit"></td><td><input  type="text" list="bisnis" class="ba"  autocomplete="off" name="namabisnisj[]" placeholder="BACC"></td><td><input  type="text" list="bisnis" class=""  autocomplete="off" name="namabisnisb[]" placeholder="BATP"></td></tr>
-	 </table>
-      </div>
-	  <br>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Submit</button> <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-      </div>
-	  </form>
-    </div>
-
-  </div>
-</div>
-
-
-<div id="postOperasi" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Post Operasi</h4>
-      </div>
-	  <form method="post" action="<?php echo base_url() ?>transaksi/bspl_Operasi_entri_proses/post">
-		<div class="modal-body">
-		<table class="form"><td>
-			<input readonly required type="hidden" name="no" value="<?php echo $transaksi->TRANSAKSI_NO ?>">
-				  Periode: </td><td><select name="periode"><option value=""></option><?php foreach($periode as $j){echo "<option value='$j->PERIODE_KODE'>$j->PERIODE_NAMA</option>";} ?></select></td></tr>
-		  <tr><td>Tahun: </td><td><input type="text" name="tahun" value="<?php echo date('Y'); ?>"></td><td></td></tr>
-			</table>
-      </div>
-	  <br>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Submit</button> <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-      </div>
-	  </form>
-    </div>
-
-  </div>
-</div>
 
 <div class="dokumen">
 <div class="well ">
@@ -136,6 +59,22 @@
 		</tr>
 	</thead>	
 	<tobdy>
+		<?php
+			foreach($operasi as $o){
+				echo "
+					<tr>
+						<td>$o->idorder</td>
+						<td>$o->idjadwal</td>
+						<td>$o->nokartu</td>
+						<td>$o->idbarang</td>
+						<td>$o->waktu</td>
+						<td>$o->jumlah</td>
+						<td>$o->namaoperasi</td>
+						<td>$o->status</td>
+					</tr>
+				";
+			}
+		?>
 	</tbody>
 </table>
 
@@ -209,23 +148,5 @@ $(document).ready(function() {
 		});//end ajax detail
 
 	});//end edit Operasi
-	
-
-
-	//add akun dalam Operasi
-	$(document).on('click',".addakun",function() {
-	  var row = $("<tr>");
-
-	  row.append($("<td><input type='text' list='produk' class='namaakun' autocomplete='off' name='namaakun[]' placeholder='Nama Produk'></td>"))
-		 .append($("<td><input name='debit[]' type='number' value=1 min=1 max=1000></td>")) 
-		 .append($("<td><input name='debit[]' type='number' value=0  ></td>"))
-		 .append($("<td><input value=0 name='kredit[]' type='number' disabled></td>"))
-	 .append($("</tr>"));
-	 
-	  $(this).before(row);
-
-	  $("#daftar").scrollTop($("#daftar")[0].scrollHeight);
-	  return false;
-	})
 }); //end document
 </script>

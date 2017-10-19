@@ -55,6 +55,21 @@ class Produksi extends CI_Controller {
 		$this->load->view("tempelate/ghancool",$data);
 	}
 
+	public function ajax_rnd($id){
+		$this->load->model('m_Rnd');
+		echo json_encode($this->m_Rnd->get_detail($id));
+	}
+
+	public function ajax_rnd_material($id){
+		$this->load->model('m_Rnd');
+		echo json_encode($this->m_Rnd->get_detail_material($id));
+	}
+
+	public function ajax_rnd_operasi($id){
+		$this->load->model('m_Rnd');
+		echo json_encode($this->m_Rnd->get_detail_operasi($id));
+	}
+
 	public function perintah(){
 		//load model
 		$this->load->model('m_Navigasi');
@@ -120,10 +135,26 @@ class Produksi extends CI_Controller {
 	public function operasi(){
 		//load model
 		$this->load->model('m_Navigasi');
+		$this->load->model('m_Operasi');
 		
-		//code
+		//code		
+		if($this->input->get("tipe")){
+			$hasil="gagal";
+			$tipe=$this->input->get("tipe");
+			switch($tipe){
+				case "tambah":
+					$hasil=$this->m_Operasi->tambah_operasi();
+				break;
+				case "delete":
+					$hasil=$this->m_Operasi->delete_operasi($this->input->get("id"));
+				break;
+			}
+			$this->session->set_flashdata("hasil",$hasil);
+			redirect(base_url()."produksi/operasi");
+		}
 		
 		//muatan data
+		$data['operasi']=$this->m_Operasi->get_operasi();
 		$data['hal']="produksi/operasi";
 		$data['nav']=$this->m_Navigasi->utama();
 		
@@ -134,10 +165,28 @@ class Produksi extends CI_Controller {
 	public function pengambilan(){
 		//load model
 		$this->load->model('m_Navigasi');
+		$this->load->model('m_Rnd');
+		$this->load->model('m_Pengambilan');
 		
-		//code
+		//code		
+		if($this->input->get("tipe")){
+			$hasil="gagal";
+			$tipe=$this->input->get("tipe");
+			switch($tipe){
+				case "tambah":
+					$hasil=$this->m_Pengambilan->tambah_pengambilan();
+				break;
+				case "delete":
+					$hasil=$this->m_Pengambilan->delete_pengambilan($this->input->get("id"));
+				break;
+			}
+			$this->session->set_flashdata("hasil",$hasil);
+			redirect(base_url()."produksi/pengambilan");
+		}
 		
 		//muatan data
+		$data['req']=$this->m_Pengambilan->get_pengambilan();
+		$data['barang']=$this->m_Rnd->get_material();
 		$data['hal']="produksi/pengambilan";
 		$data['nav']=$this->m_Navigasi->utama();
 		
@@ -145,13 +194,32 @@ class Produksi extends CI_Controller {
 		$this->load->view("tempelate/ghancool",$data);
 	}
 
+	public function ajax_pengambilan($id){
+		$this->load->model('m_Pengambilan');
+		echo json_encode($this->m_Pengambilan->get_detail($id));
+	}
+
+	public function ajax_pengambilan_detail($id){
+		$this->load->model('m_Pengambilan');
+		echo json_encode($this->m_Pengambilan->get_detail_isi($id));
+	}
+
+
 	public function penyesuaian(){
 		//load model
 		$this->load->model('m_Navigasi');
+		$this->load->model("m_PenyesuaianProd","mp");
 		
-		//code
+		//code		
+		if($this->input->get("proses")=="penyesuaian"){
+			$hasil="gagal";
+			$hasil=$this->mp->sesuaikan();
+			$this->session->set_flashdata("hasil",$hasil);
+			redirect(base_url()."produksi/penyesuaian");
+		}
 		
 		//muatan data
+		$data['sesuai']=$this->mp->get_penyesuaian();
 		$data['hal']="produksi/penyesuaian";
 		$data['nav']=$this->m_Navigasi->utama();
 		
@@ -159,14 +227,26 @@ class Produksi extends CI_Controller {
 		$this->load->view("tempelate/ghancool",$data);
 	}
 
+	public function ajax_penyesuaian($id){
+		$this->load->model("m_PenyesuaianProd","mp");
+		echo json_encode(array("total"=>$this->mp->get_estimasi($id),"idbarang"=>$this->mp->get_detail($id)->idbarang));
+	}
+
+	public function ajax_penyesuaian_detail($id){
+		$this->load->model("m_PenyesuaianProd","mp");
+		echo json_encode($this->mp->get_detail_isi($id));
+	}
+
 	public function laporan(){
 		//load model
 		$this->load->model('m_Navigasi');
+		$this->load->model("m_Output_Produksi");
 		
 		//code
 		
 		//muatan data
-		$data['hal']="produksi/laporan";
+		$data["jumlah"]=($this->input->get("tipe")=="laporan") ? $this->m_Output_Produksi->jumlah() : "";
+		$data['hal']= ($this->input->get("tipe")=="laporan") ? "produksi/laporan_output" : "produksi/laporan";
 		$data['nav']=$this->m_Navigasi->utama();
 		
 		//load tempelate

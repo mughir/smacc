@@ -3,7 +3,7 @@
         <div class="col-md-offset-4 col-md-4">
 
             <div class="form-login">
-
+            <img style="float:left;width:45px" src="<?php echo base_url()."asset/img/logo.gif" ?>">
             <h4>Login System</h4><hr>
 
 			<form method="post">

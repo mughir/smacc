@@ -21,7 +21,7 @@
 
   .areaprint, .areaprint * {
     visibility: visible;
-	max-width:1000px;
+	max-width:960px;
   }
   .areaprint {
     position: fixed;
@@ -43,6 +43,14 @@
     border:none;
     background-image:none;
     box-shadow:none;
+  }
+
+  .nonprint{
+  	display:none;
+  }
+
+  .close{
+  	display:none;
   }
 }
 

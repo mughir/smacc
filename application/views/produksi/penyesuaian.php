@@ -1,26 +1,30 @@
-<div id="editPenyesuaian" class="modal fade" role="dialog">
+<div id="penyesuaian" class="modal fade" role="dialog">
   <div class="modal-dialog fjurnal">
     <!-- Modal content-->
     <div class="modal-content fjurnal">
       <div class="modal-header fjurnal">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Edit Penyesuaian</h4>
+        <h4 class="modal-title">Penyesuaian</h4>
       </div>
-	  <form method="post" action="<?php echo base_url() ?>transaksi/bspl_Penyesuaian_entri_proses/update">
+	  <form method="post" action="?proses=penyesuaian">
 		<div class="modal-body">
 		<table class="form">
-		  <tr><td><input readonly required type="hidden" name="id" value=""><input readonly required type="hidden" name="no" value="<?php echo $transaksi->TRANSAKSI_NO ?>">Jenis Penyesuaian: </td><td colspan=2><select name="jenis"><option value=""></option><?php foreach($jenis_Penyesuaian as $j){echo "<option value='$j->JENIS_Penyesuaian_KODE'>$j->JENIS_Penyesuaian_NAMA</option>";} ?></select></td></tr>
-		  <tr><td>Deskripsi: </td><td><input type="text" name="des"></td><td></td></tr>	
-		
- 		 <tr><td>Tipe Post: </td><td><select name="gen"><option value=0>Current</option><option value=1>Carry FW</option><option value=2>Current & Carry FW</option></select></td><td></td></tr>
-			</table>
-		<table id="editakunPenyesuaian" class="form">
-			  <tr><td><br><br> </td><td></td><td><br><span class='akun'>Debit</span></td><td><br><span class='akun'>Kredit</span></td></tr>
-			 <tr> <td><input required type="text" list="akuns" class="namaakun"  autocomplete="off" name="namaakun[]" placeholder="Nama akun"></td><td><input  type="text" list="assets" class="assets"  autocomplete="off" name="namaasset[]" placeholder="Class asset"></td><td><input class="akun" name="debit[]" type="number" value=0 placeholder="debit"></td><td><input value=0 name="kredit[]" class="akun" type="number" placeholder="kredit"></td><td><input  type="text" list="bisnis" class="ba"  autocomplete="off" name="namabisnisj[]" placeholder="BACC"></td><td><input  type="text" list="bisnis" class=""  autocomplete="off" name="namabisnisb[]" placeholder="BATP"></td></tr>
-		 <tr> <td><input required type="text" list="akuns" class="namaakun"  autocomplete="off" name="namaakun[]" placeholder="Nama akun"></td><td><input  type="text" list="assets" class="assets"  autocomplete="off" name="namaasset[]" placeholder="Class asset"></td><td><input class="akun" name="debit[]" type="number" value=0 placeholder="debit"></td><td><input value=0 name="kredit[]" class="akun" type="number" placeholder="kredit"></td><td><input  type="text" list="bisnis" class="ba"  autocomplete="off" name="namabisnisj[]" placeholder="BACC"></td><td><input  type="text" list="bisnis" class=""  autocomplete="off" name="namabisnisb[]" placeholder="BATP"></td></tr>
-		 <tr> <td><input  type="text" list="akuns" class="namaakun"  autocomplete="off" name="namaakun[]" placeholder="Nama akun"></td><td><input  type="text" list="assets" class="assets"  autocomplete="off" name="namaasset[]" placeholder="Class asset"></td><td><input class="akun" name="debit[]" type="number" value=0 placeholder="debit"></td><td><input value=0 name="kredit[]" class="akun" type="number" placeholder="kredit"></td><td><input  type="text" list="bisnis" class="ba"  autocomplete="off" name="namabisnisj[]" placeholder="BACC"></td><td><input  type="text" list="bisnis" class=""  autocomplete="off" name="namabisnisb[]" placeholder="BATP"></td></tr>
-	 <tr> <td><input  type="text" list="akuns" class="namaakun"  autocomplete="off" name="namaakun[]" placeholder="Nama akun"></td><td><input  type="text" list="assets" class="assets"  autocomplete="off" name="namaasset[]" placeholder="Class asset"></td><td><input class="akun" name="debit[]" type="number" value=0 placeholder="debit"></td><td><input value=0 name="kredit[]" class="akun" type="number" placeholder="kredit"></td><td><input  type="text" list="bisnis" class="ba"  autocomplete="off" name="namabisnisj[]" placeholder="BACC"></td><td><input  type="text" list="bisnis" class=""  autocomplete="off" name="namabisnisb[]" placeholder="BATP"></td></tr>
-	 </table>
+			  <tr><td>No Batch: </td><td><input type="text" readonly name="id"></td></tr>
+			  <tr><td>Produk: </td><td><input type="text" readonly name="barang"></td></tr>
+			  <tr><td>Biaya Material: </td><td><input type="number" name="material"></td></tr>	
+			  <tr><td>Biaya Labor: </td><td><input type="number" min=0 value=0 name="labor"></td></tr>	 
+			  <tr><td>Biaya FOH: </td><td><input type="number" min=0  value=0 name="foh"></td></tr>		
+		</table>
+		<br>
+		<hr>
+		<h3>Daftar Biaya Material</h3>
+		<table id="materialcost" class="form">
+			  <tr><th>Material</th><th>Jumlah</th><th>Total Cost</th></tr>
+			 <tr> 
+			 	<td><input required type="text" list="akuns" class="namaakun"  autocomplete="off" name="material[]" placeholder="Nama akun"></td>
+			 	<td><input  type="text" list="assets" class="assets"  autocomplete="off" name="namaasset[]" placeholder="Jumlah"></td>
+			 	<td><input class="akun" name="debit[]" type="number" value=0 placeholder="Total Cost"></td>
+		</table>
       </div>
 	  <br>
       <div class="modal-footer">
@@ -58,14 +62,33 @@
 	</thead>	
 	<tobdy>
 		<tr>
-			<th>2017080000001</th>
-			<th>2017-08-26</th>
-			<th>1</th>
-			<th>Tes</th>
-			<th>10</th>
-			<th>10000</th>
-			<th>10000</th>
-			<th>Belum Disesuaikan</th>
+<?php
+	$this->load->model("M_PenyesuaianProd","mp");
+	foreach($sesuai as $s){
+		echo "<tr>";
+			echo "<td>$s->idorder</td>";
+			echo "<td>$s->waktu</td>";
+			echo "<td>$s->idjadwal</td>";
+			echo "<td>$s->idbarang</td>";
+			echo "<td>$s->jumlah</td>";
+			echo "<td>".$this->mp->get_estimasi($s->idjadwal)."</td>";
+			if($s->status==1){
+					echo "<td>";
+						echo "<a class='btn btn-default sesuaikan' data-toggle='modal' data-target='#penyesuaian' data-id='$s->idjadwal'>Penyesuaian</a>";
+					echo "</td>";
+			}else{
+				echo "<td>Selesai</td>";
+			}
+			if($s->status==1){
+					echo "<td>";
+						echo "Belum Disesuaikan";
+					echo "</td>";
+			}else{
+				echo "<td>Selesai</td>";
+			}
+		echo "</tr>";
+	}
+?>
 		</tr>
 	</tbody>
 </table>
@@ -73,37 +96,35 @@
 <script>
 $(document).ready(function() {
 	//ediit Penyesuaian
-    $('.editButton').on('click', function() {
+    $('.sesuaikan').on('click', function() {
         // tarik record
         var id = $(this).attr('data-id');
 
         //ajax header
         $.ajax({
-            url: "<?php echo base_url(); ?>transaksi/bspl_Penyesuaian_entri_ajax/" + id,
+            url: "<?php echo base_url(); ?>produksi/ajax_penyesuaian/" + id,
             method: 'GET',
 			dataType: 'JSON',
 			success: function(response) {
             // Populate the form fields with the data returned from server
-            $('#editPenyesuaian')
-                .find('[name="id"]').val(response.Penyesuaian_TRANSAKSI_ID).end()
-                .find('[name="jenis"]').val(response.JENIS_Penyesuaian_KODE).end()
-                .find('[name="des"]').val(response.Penyesuaian_TRANSAKSI_DES).end()
-				.find('[name="gen"]').val(response.Penyesuaian_TRANSAKSI_GN).end();
+            $('#penyesuaian')
+                .find('[name="id"]').val(id).end()
+                .find('[name="barang"]').val(response.idbarang).end()
+                .find('[name="material"]').val(response.total).end()
 			}
 		});//end ajax header
 
-   		 //request pak adhi
-   		$("#editakunPenyesuaian").empty();
+   		$("#materialcost").empty();
 
    		var judul = $("<tr>");
-   		judul.append ($("<td><br></td><td><br></td><td><span class='akun'>Debit</span></td><td><span class='akun'>Kredit</span></td><td></td><td></td>"))
+   		judul.append ($("<th>Material</th><th>Jumlah</th><th>Total Cost</th>"))
    		judul.append ($("</tr>"))
 
-   		$("#editakunPenyesuaian").append(judul);
+   		$("#materialcost").append(judul);
 
         //ajax detail
         $.ajax({
-            url: "<?php echo base_url(); ?>transaksi/bspl_Penyesuaian_entri_detail_ajax/" + id,
+            url: "<?php echo base_url(); ?>produksi/ajax_penyesuaian_detail/" + id,
             method: 'GET',
 			dataType: 'JSON',
 			success: function(response) {
@@ -111,51 +132,21 @@ $(document).ready(function() {
             
 		      $.each(response, function(index, value){
 		      //alert(value);
-		      	var coa = value.COA_NO;
-		      	var aset = value.ASSET_ID;
-		      	var debit = value.Penyesuaian_TRANSAKSID_DEBIT;
-		      	var kredit = value.Penyesuaian_TRANSAKSID_KREDIT;
-		      	var bisnisj = value.BISNISAREA_ID_J;
-		      	var bisnisb = value.BISNISAREA_ID_B;
-
-		      	(!aset) ? aset="" : aset;
-		      	(!bisnisj) ? bisnisj="" : bisnisj;
-		      	(!bisnisb) ? bisnisb="" : bisnisb;
+		      	var material = value.idbarang;
+		      	var jumlah = value.jumlah;
+		      	var cost = value.cost;
 
 		      	  var akun = $("<tr>");
 
-				  akun.append($("<td><input value='"+coa+"' type='text' list='produk' class='namaakun' autocomplete='off' name='namaakun[]' placeholder='Nama akun'></td>"))
-					 .append($("<td><input value='"+aset+"' type='text' list='assets' class='namaasset' autocomplete='off' name='namaasset[]' placeholder='Class asset'></td>"))
-					 .append($("<td><input value='"+debit+"' class='akun' name='debit[]' type='number' value=0 placeholder='debit'></td>"))
-					 .append($("<td><input value='"+kredit+"' value=0 name='kredit[]' class='akun' type='number' placeholder='kredit'></td>"))
-					 .append($("<td><input value='"+bisnisj+"' type='text' list='bisnis' class='bisnis' autocomplete='off' name='namabisnisj[]' placeholder='BA CC'></td>"))
-					 .append($("<td><input value='"+bisnisb+"' type='text' list='bisnis' class='bisnis' autocomplete='off' name='namabisnisb[]' placeholder='BA TP'></td>"))
+				  akun.append($("<td><input value='"+material+"' type='text' disabled list='produk' class='namaakun' autocomplete='off' name='material[]' placeholder='Material'></td>"))
+					 .append($("<td><input value='"+jumlah+"' type='text' disabled class='namaasset' autocomplete='off' name='jumlah[]' placeholder='Jumlah'></td>"))
+					 .append($("<td><input value='"+cost+"' class='text' disabled name='debit[]' type='number' value=0 placeholder='Total Cost'></td>"))
 					 .append($("</tr>"));
 
-				$("#editakunPenyesuaian").append(akun);
+				$("#materialcost").append(akun);
 		      }) // each
-		      $("#editakunPenyesuaian").append("<tr><td colspan=6><a href=\"#\" class=\"addakun btn btn-default\">+</a> </td></tr>");
-			}
+		    }
 		});//end ajax detail
-
 	});//end edit Penyesuaian
-	
-
-
-	//add akun dalam Penyesuaian
-	$(document).on('click',".addakun",function() {
-	  var row = $("<tr>");
-
-	  row.append($("<td><input type='text' list='produk' class='namaakun' autocomplete='off' name='namaakun[]' placeholder='Nama Produk'></td>"))
-		 .append($("<td><input name='debit[]' type='number' value=1 min=1 max=1000></td>")) 
-		 .append($("<td><input name='debit[]' type='number' value=0  ></td>"))
-		 .append($("<td><input value=0 name='kredit[]' type='number' disabled></td>"))
-	 .append($("</tr>"));
-	 
-	  $(this).before(row);
-
-	  $("#daftar").scrollTop($("#daftar")[0].scrollHeight);
-	  return false;
-	})
 }); //end document
 </script>

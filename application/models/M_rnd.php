@@ -31,9 +31,29 @@ class m_rnd extends CI_Model {
 		$this->load->database();
 		$datauser=$this->db
 			->where("idbarang",$kode)
-			->get("barang")
+			->get("barangrnd")
 			;
 		return $datauser->row_array();
+	}
+
+	public function get_detail_material($kode=1)
+	{
+		$this->load->database();
+		$datauser=$this->db
+			->where("idbarang_rnd",$kode)
+			->get("matrnd")
+			;
+		return $datauser->result();
+	}
+
+	public function get_detail_operasi($kode=1)
+	{
+		$this->load->database();
+		$datauser=$this->db
+			->where("idbarang",$kode)
+			->get("listoperasirnd")
+			;
+		return $datauser->result();
 	}
 	
 	public function tambah_rnd()
@@ -41,7 +61,7 @@ class m_rnd extends CI_Model {
 			$id=$this->input->post("id");
 			$material=$this->input->post("namabarang");
 			$jumlah=$this->input->post("jumlah");
-			$operasi=$this->input->post("operasi");
+			$operasi=$this->input->post("namaoperasi");
 		
 			$this->load->database();
 			$this->load->model('m_Serbaguna','ms');
@@ -52,9 +72,9 @@ class m_rnd extends CI_Model {
 				);
 				if($this->db->insert("barangrnd",$data)){
 					//Input material
-					for($i=0;$i<count($barang);$i++){
+					for($i=0;$i<count($material);$i++){
 						$data=array(
-							"idbarang_rnd"=>$idbarang,
+							"idbarang_rnd"=>$id,
 							"idbarang_mat"=>$material[$i],
 							"jumlah"=>$jumlah[$i],
 						);
@@ -64,7 +84,7 @@ class m_rnd extends CI_Model {
 					//Input operasi
 					for($i=0;$i<count($operasi);$i++){
 						$data=array(
-							"idbarang"=>$idbarang,
+							"idbarang"=>$id,
 							"namaoperasi"=>$operasi[$i]
 						);
 						$this->db->insert("listoperasirnd",$data);
@@ -125,7 +145,7 @@ class m_rnd extends CI_Model {
 		$this->load->database();
 		$this->load->model('m_Serbaguna','ms');
 		if($this->ms->cek_ada("barangrnd","idbarang",$id)==TRUE){
-			$this->db->where("idbarang",$id)->delete("matrnd");
+			$this->db->where("idbarang_rnd",$id)->delete("matrnd");
 			$this->db->where("idbarang",$id)->delete("listoperasirnd");
 			if($this->db->where("idbarang",$id)->delete("barangrnd")){
 				return "berhasil";

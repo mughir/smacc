@@ -210,9 +210,8 @@
 				break;
 			}
 			echo "<td>";
-			echo "<a href='#' data-id='$p->idkwitansi' data-toggle='modal' data-target='#editKwitansi' class='editButton btn btn-default glyphicon glyphicon-eye-open></a>";
-			echo "<a href='".base_url()."penjualan/penagihan/?tipe=delete&id=$p->idkwitansi' onclick=\"return confirm('Anda yakin?')\" class='btn btn-default glyphicon glyphicon-trash'>
-							</a>
+			echo "<a href='#' data-id='$p->idkwitansi' data-toggle='modal' data-target='#editKwitansi' class='editButton btn btn-default glyphicon glyphicon-eye-open'></a>";
+			echo "<a href='".base_url()."penjualan/penagihan/?tipe=delete&id=$p->idkwitansi' onclick=\"return confirm('Anda yakin?')\" class='btn btn-default glyphicon glyphicon-trash'></a>
 				</td>";
 			echo "</tr>";
 		}

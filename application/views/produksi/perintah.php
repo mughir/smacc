@@ -56,18 +56,23 @@
 			<th>Waktu</th>
 			<th>Barang</th>
 			<th>Jumlah</th>
+			<th>Terjadwal</th>
+			<th>Finish</th>
 			<th>Prioritas</th>
 			<th>Status</th>
 		</tr>
 	</thead>	
 	<tobdy>
 <?php
+	$this->load->model("m_Perintah");
 	foreach($perintah as $p){
 		echo "<tr>";
 			echo "<td>$p->idorder</td>";
 			echo "<td>$p->tanggal</td>";
 			echo "<td>$p->idbarang</td>";
 			echo "<td>$p->jumlah</td>";
+			echo "<td>".$this->m_Perintah->get_terjadwal($p->idorder)."</td>";
+			echo "<td>".$this->m_Perintah->get_finish($p->idorder)."</td>";
 			echo "<td>$p->prioritas</td>";
 			echo "<td>$p->status</td>";
 		echo "</tr>";

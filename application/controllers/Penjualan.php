@@ -250,8 +250,7 @@ class Penjualan extends CI_Controller {
 		$this->load->model('m_Output_Penjualan');
 		
 		//code
-		
-		//muatan data
+
 		//muatan data
 		$data["jumlah"]=($this->input->get("tipe")=="laporan") ? $this->m_Output_Penjualan->jumlah() : "";
 		$data['hal']= ($this->input->get("tipe")=="laporan") ? "penjualan/laporan_output" : "penjualan/laporan";

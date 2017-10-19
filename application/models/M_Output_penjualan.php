@@ -8,8 +8,22 @@ class m_Output_penjualan extends CI_Model {
 		$dari=$this->input->post("dari")." 00:00:00";
 		$sampai=$this->input->post("sampai")." 23:59:59";
 		$order=$this->input->post("sampai");
+		$filter=$this->input->post("filter");
+		$isifilter=$this->input->post("isifilter");
 
 		if(!$dari || !$sampai || !$order) redirect(base_url("penjualan/laporan"));
+
+		switch($filter){
+			case 2:
+				$this->db->where("segment1",$isifilter);
+			break;
+			case 3:
+				$this->db->where("segment2",$isifilter);
+			break;
+			case 4:
+				$this->db->where("segment3",$isifilter);
+			break;
+		}
 
 		$this->db->where("tkwitansi <=",$sampai);
 		$this->db->where("tkwitansi >=",$dari);
