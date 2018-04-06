@@ -30,8 +30,10 @@ class m_rnd extends CI_Model {
 	{
 		$this->load->database();
 		$datauser=$this->db
-			->where("idbarang",$kode)
-			->get("barangrnd")
+			->where("r.idbarang",$kode)
+			->from("barangrnd r")
+			->join("barang b","b.idbarang=r.idbarang")
+			->get()
 			;
 		return $datauser->row_array();
 	}
@@ -40,8 +42,13 @@ class m_rnd extends CI_Model {
 	{
 		$this->load->database();
 		$datauser=$this->db
+			->select("idbarang_mat")
+			->select("nbarang")
+			->select("r.jumlah")
 			->where("idbarang_rnd",$kode)
-			->get("matrnd")
+			->from("matrnd r")
+			->join("barang b","b.idbarang=r.idbarang_mat")
+			->get()
 			;
 		return $datauser->result();
 	}
@@ -97,44 +104,44 @@ class m_rnd extends CI_Model {
 			}
 	}
 	
-	public function edit_barang($kode)
+	public function edit_rnd()
     {
-		//validasi
-        $this->load->library('form_validation');
-
-        $this->form_validation->set_rules('id', 'ID', 'trim|required|max_length[20]');
-        $this->form_validation->set_rules('nama', 'Nama barang', 'trim|required|max_length[40]');
-		
-		 if($this->form_validation->run() == FALSE){
-			return "gagal";
-		}
-		else{
-			
-			//load data			
 			$id=$this->input->post("id");
-			$data=array(
-				"katbarang"=>$this->input->post("kategori",true),
-				"nbarang"=>$this->input->post("nama",true),
-				"satbarang"=>$this->input->post("satuan",true),
-				"jumlah"=>$this->input->post("jumlah",true),
-				"cbarang"=>$this->input->post("biaya",true),
-				"hjualbarang"=>$this->input->post("harga",true),
-			);
+			$material=$this->input->post("namabarang");
+			$jumlah=$this->input->post("jumlah");
+			$operasi=$this->input->post("namaoperasi");
 		
 			$this->load->database();
-			$this->load->model('m_Serbaguna','ms');
-			if($this->ms->cek_ada("barang","idbarang",$id)==TRUE){
-				if($this->db->where("idbarang",$id)->update("barang",$data)){
+			$this->load->model('m_Serbaguna','ms');		
+				$data=array(
+					"srnd"=>1
+				);
+				if($this->db->where("idbarang",$id)->update("barangrnd",$data)){
+					//Input material
+					$this->db->where("idbarang_rnd",$id)->delete("matrnd");
+					for($i=0;$i<count($material);$i++){
+						$data=array(
+							"idbarang_rnd"=>$id,
+							"idbarang_mat"=>$material[$i],
+							"jumlah"=>$jumlah[$i],
+						);
+						$this->db->insert("matrnd",$data);
+					}
+
+					//Input operasi
+					$this->db->where("idbarang",$id)->delete("listoperasirnd");
+					for($i=0;$i<count($operasi);$i++){
+						$data=array(
+							"idbarang"=>$id,
+							"namaoperasi"=>$operasi[$i]
+						);
+						$this->db->insert("listoperasirnd",$data);
+					}
 					return "berhasil";
 				}
 				else{
 					return "gagal";
 				}
-			}
-			else{
-				return "gagal";
-			}
-		}
 	}
 	
 	public function delete_rnd($kode)

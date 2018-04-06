@@ -385,12 +385,14 @@ class Masterdata extends CI_Controller {
 
 		$this->load->model('m_Navigasi');
 		$this->load->model('m_User');
+		$this->load->model("m_Role");
 		
 
 		//code
 
 		//muatan data
 
+		$data["role"]=$this->m_Role->get_role();
 		$data["user"]=$this->m_User->get_user();
 
 		$data['hal']="masterfile/user";

@@ -19,9 +19,20 @@ class m_operasi extends CI_Model {
 			->select("o.status")
 			->select("j.idorder")
 			->select("j.jumlah")
-			->select("idbarang");
+			->select("p.idbarang")
+			->select("nbarang");
 
-		return $this->db->from("operasiproduksi o")->join("penjadwalan j","o.idjadwal=j.idjadwal")->join("perintah_prod p","p.idorder=j.idorder")->get()->result();
+		return $this->db->from("operasiproduksi o")
+		->join("penjadwalan j","o.idjadwal=j.idjadwal")
+		->join("perintah_prod p","p.idorder=j.idorder")
+		->join("barang b","b.idbarang=p.idbarang")
+		->get()->result();
+	}
+
+	public function get_detail($kode){
+		$this->load->database();
+		$dataop=$this->db->where("nokartu",$kode)->get("operasiproduksi")->row();
+		return $dataop;
 	}
 	
 	public function tambah_operasi()
@@ -47,6 +58,12 @@ class m_operasi extends CI_Model {
 			if($this->db->insert("operasiproduksi",$data)){
 				if($status==1) $this->db->set("status",1);
 				$this->db->set("namaoperasi",$operasi)->where("idjadwal",$batch)->update("penjadwalan");
+
+				$idorder=$this->db->where("idjadwal",$batch)->get("penjadwalan")->row()->idorder;
+				$order=$this->db->where("idorder",$idorder)->get("perintah_prod")->row();
+				$this->load->model("M_Perintah","mp");
+				$finish=$this->mp->get_finish($idorder);
+				if($finish >= $oder->jumlah) $this->db->set("status",2)->where("idorder",$idorder)->update("perintah_prod");
 				return "berhasil";
 			}
 			else{

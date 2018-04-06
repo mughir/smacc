@@ -1,18 +1,7 @@
-<datalist id="barang">
-<?php foreach($barang as $b){
-	echo "<option value='$b->idbarang'>$b->idbarang - $b->nbarang</option>";
-}
-?>
-</datalist>
+<datalist id="barang"><?php foreach($barang as $b){echo "<option value='$b->idbarang'>$b->idbarang - $b->nbarang</option>";}?></datalist>
+<datalist id="material"><?php foreach($material as $b){echo "<option value='$b->idbarang'>$b->idbarang - $b->nbarang</option>";}?></datalist>
 
-<datalist id="material">
-<?php foreach($material as $b){
-	echo "<option value='$b->idbarang'>$b->idbarang - $b->nbarang</option>";
-}
-?>
-</datalist>
-
-
+<!-- Semua modal diawal-->
 <div id="creaternd" class="modal fade" role="dialog">
  	<div class="modal-dialog fjurnal">
     <!-- Modal content-->
@@ -23,7 +12,7 @@
       </div>
 	  <form method="post" action="?tipe=tambah">
 		<div class="modal-body">
-	<table class="form"">		
+	<table class="form">		
 	<tr>
 			<td>ID Barang</td>
 			<td><input type="text" name="id" list="barang" autocomplete="off" required pattern="[a-zA-Z0-9]+"></td>
@@ -77,7 +66,6 @@
       </div>
 	  </form>
     </div>
-
   </div>
 </div>
 
@@ -90,16 +78,54 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Riset dan Pengembangan Produk</h4>
       </div>
-	  <form method="post" action="?tipe=tambah">
+		<div class="modal-body">
+	<table class="form">		
+	<tr>
+			<td>Barang :</td>
+			<td><span class="idbarang"></span></td>
+		</tr>			
+	 </table>
+	 <hr>
+	 <h4>Daftar Material</h4>
+		<table class='form detail isimaterial'>
+		</table>
+			 <hr>
+	 <h4>Daftar Operasi</h4>
+	<table class='form detail isioperasi'>
+	</table>
+      </div>
+	  <br>
+      <div class="modal-footer nonprint">
+        <a class="btn btn-primary" onclick="window.print()">Print</a> <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="editrnd" class="modal fade" role="dialog">
+ 	<div class="modal-dialog fjurnal">
+    <!-- Modal content-->
+    <div class="modal-content fjurnal">
+      <div class="modal-header fjurnal">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Riset dan Pengembangan Produk - Edit Data</h4>
+      </div>
+	  <form method="post" action="?tipe=edit">
 		<div class="modal-body">
 	<table class="form"">		
 	<tr>
 			<td>ID Barang</td>
-			<td><input type="text" name="id" list="barang" autocomplete="off" required pattern="[a-zA-Z0-9]+"></td>
+			<td><input readonly type="text" name="id" list="barang" autocomplete="off" required pattern="[a-zA-Z0-9]+"></td>
+	
+	</tr>
+	<tr>		<td>Status</td>
+			<td><select name="status"><option value="1">Aktif</option><option value="0">Tidak Aktif</option></select></td>
+		
 		</tr>			
 	 </table>
 	 <hr>
-	 <h3>Daftar Material</h3>
+	 <h4>Daftar Material</h4>
 		<table class='form detail isimaterial'>
 			 <tbody>
 					 <tr> 
@@ -121,7 +147,7 @@
 				</tbody>
 		</table>
 			 <hr>
-	 <h3>Daftar Operasi</h3>
+	 <h4>Daftar Operasi</h4>
 		<table class='form detail isioperasi'>
 			 <tbody>
 					 <tr> 
@@ -140,7 +166,10 @@
 				</tbody>
 		</table>
       </div>
-	  <br>
+	  <br>      
+	  <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Submit</button> <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
 	  </form>
     </div>
 
@@ -160,13 +189,9 @@
 
 
 <br><br>
-<?php if($this->session->flashdata('hasil')=="berhasil"){
-	echo "<div class=\"alert alert-success\"><strong>Sukses!</strong> Operasi berhasil.</div>";
-}
-?>
-<?php if($this->session->flashdata('hasil')=="gagal"){
-	echo "<div class=\"alert alert-danger\"><strong>Gagal!</strong> Terdapat kesalahan, operasi gagal.</div>";
-}
+<?php 
+if($this->session->flashdata('hasil')=="berhasil") echo "<div class=\"alert alert-success\"><strong>Sukses!</strong> Operasi berhasil.</div>";
+if($this->session->flashdata('hasil')=="gagal") echo "<div class=\"alert alert-danger\"><strong>Gagal!</strong> Terdapat kesalahan, operasi gagal.</div>";
 ?>
 
 <table class='table' id="ajaxtable">
@@ -183,7 +208,9 @@
 			echo "<td>$p->idbarang</td>";
 			echo "<td>$p->nbarang</td>";
 			echo "<td>
-							<a href='#' data-id='$p->idbarang' data-toggle='modal' data-target='#viewrnd' class='editButton btn btn-default glyphicon glyphicon-eye-open'>
+							<a href='#' data-id='$p->idbarang' data-toggle='modal' data-target='#viewrnd' class='viewbutton btn btn-default glyphicon glyphicon-eye-open'>
+							</a>
+							<a href='#' data-id='$p->idbarang' data-toggle='modal' data-target='#editrnd' class='editbutton btn btn-default glyphicon glyphicon-pencil'>
 							</a>
 							<a href='".base_url()."produksi/rnd/?tipe=delete&id=$p->idbarang' onclick=\"return confirm('Anda yakin?')\" class='btn btn-default glyphicon glyphicon-trash'>
 							</a>
@@ -197,8 +224,8 @@
 </div>
 <script>
 $(document).ready(function() {
-	//ediit rnd
-    $('.editButton').on('click', function() {
+	//view rnd
+	 $('.viewbutton').on('click', function() {
         // tarik record
         var id = $(this).attr('data-id');
 
@@ -210,7 +237,80 @@ $(document).ready(function() {
 			success: function(response) {
             // Populate the form fields with the data returned from server
             $('#viewrnd')
+                .find('.idbarang').html(response.idbarang+'-'+response.nbarang).end()
+			}
+		});//end ajax header
+
+   		 //request
+   		$(".isimaterial").empty();
+
+        //ajax detail
+        $.ajax({
+            url: "<?php echo base_url(); ?>produksi/ajax_rnd_material/" + id,
+            method: 'GET',
+			dataType: 'JSON',
+			success: function(response) {
+            // Populate the form fields with the data returned from server
+            
+		      $.each(response, function(index, value){
+		      //alert(value);
+		      	var material = value.idbarang_mat;
+		      	var nama = value.nbarang;
+		      	var jumlah = value.jumlah;
+
+		      	  var akun = $("<tr>");
+
+				  akun.append($("<td>"+material+" - "+nama+"</td>"))
+						 .append($("<td>"+jumlah+"</td>")) 
+					 .append($("</tr>"));
+
+				$(".isimaterial").append(akun);
+		      }) // each
+		 	}
+		});//end ajax detail
+
+	//operasi
+   		$(".isioperasi").empty();
+
+        //ajax detail
+        $.ajax({
+            url: "<?php echo base_url(); ?>produksi/ajax_rnd_operasi/" + id,
+            method: 'GET',
+			dataType: 'JSON',
+			success: function(response) {
+            // Populate the form fields with the data returned from server
+            
+		      $.each(response, function(index, value){
+		      //alert(value);
+		      	var operasi = value.namaoperasi;
+
+		      	  var akun = $("<tr>");
+
+				  akun.append($("<td>"+operasi+"</td>"))
+				 .append($("</tr>"));
+
+				$(".isioperasi").append(akun);
+		      }) // each
+		  }
+		});//end ajax detail
+
+	});//end material
+
+	//ediit rnd
+    $('.editbutton').on('click', function() {
+        // tarik record
+        var id = $(this).attr('data-id');
+
+        //ajax header
+        $.ajax({
+            url: "<?php echo base_url(); ?>produksi/ajax_rnd/" + id,
+            method: 'GET',
+			dataType: 'JSON',
+			success: function(response) {
+            // Populate the form fields with the data returned from server
+            $('#editrnd')
                 .find('[name="id"]').val(response.idbarang).end()
+                .find('[name="status"]').val(response.srnd).end()
 			}
 		});//end ajax header
 
@@ -234,11 +334,12 @@ $(document).ready(function() {
 
 				  akun.append($("<td><input type='text' value='"+material+"' list='barang' class='long changeble' autocomplete='off' name='namabarang[]' placeholder='Nama Material'></td>"))
 						 .append($("<td><input class='jumlah short changeble' value='"+jumlah+"' short' name='jumlah[]' type='number' value=1 min=1></td>")) 
+					 	.append($('<td><a href="#" class="glyphicon glyphicon-remove delete"></a></td>'))
 					 .append($("</tr>"));
 
 				$(".isimaterial").append(akun);
 		      }) // each
-		     // $(".isimaterial").append("<tr><td colspan=4><a href=\"#\" class=\"addkeranjang btn btn-default\">+</a> </td></tr>");
+		      $(".isimaterial").append("<tr><td colspan=2><a href=\"#\" class=\"addmaterial btn btn-default\">+</a> </td></tr>");
 			}
 		});//end ajax detail
 
@@ -259,12 +360,13 @@ $(document).ready(function() {
 
 		      	  var akun = $("<tr>");
 
-				  akun.append($("<td><input type='text' value='"+operasi+"' list='barang' class='long changeble' autocomplete='off' name='namabarang[]' placeholder='Nama Produk'></td>"))
+				  akun.append($("<td><input type='text' value='"+operasi+"'  class='long changeble' autocomplete='off' name='namaoperasi[]' placeholder='Nama Produk'></td>"))
+				 .append($('<td><a href="#" class="glyphicon glyphicon-remove delete"></a></td>'))
 				 .append($("</tr>"));
 
 				$(".isioperasi").append(akun);
 		      }) // each
-		     // $(".isioperasi").append("<tr><td colspan=4><a href=\"#\" class=\"addkeranjang btn btn-default\">+</a> </td></tr>");
+		      $(".isioperasi").append("<tr><td colspan=2><a href=\"#\" class=\"addoperation btn btn-default\">+</a> </td></tr>");
 			}
 		});//end ajax detail
 

@@ -88,7 +88,7 @@ class m_Kasir extends CI_Model {
 		for($i=0;$i<count($barang);$i++){
 			if($this->ms->cek_ada("barang","idbarang",$barang[$i])==FALSE) continue;
 
-			$dbarang=$this->db->where("idbarang",$barang[$i])->from("barangkasir k")->join("barang b","b.idbarang=k.idbarang")->row();
+			$dbarang=$this->db->where("b.idbarang",$barang[$i])->from("barangkasir k")->join("barang b","b.idbarang=k.idbarang")->get()->row();
 
 			$data=array(
 					"idtranspos"=>$id,

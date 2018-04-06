@@ -99,7 +99,6 @@
 			<th>Nama</th>
 			<th>Satuan</th>
 			<th>Jumlah</th>
-			<th>Biaya</th>
 			<th>Harga</th>
 		</tr>
 	</thead>
@@ -113,7 +112,6 @@
 						<td>$u->nbarang</td>
 						<td>$u->satbarang</td>
 						<td>$u->jumlah</td>
-						<td>$u->cbarang</td>
 						<td>$u->hjualbarang</td>
 						<td>
 							<a href='#' data-id='$u->idbarang' data-toggle='modal' data-target='#editbarang' class='editButton btn btn-default glyphicon glyphicon-pencil'>

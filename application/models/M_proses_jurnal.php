@@ -21,6 +21,7 @@ class m_proses_jurnal extends CI_Model {
 		$this->proses_penjualan($dari,$sampai);
 		$this->proses_pembelian($dari,$sampai);
 		$this->proses_gaji($dari,$sampai);
+		$this->proses_produksi($dari,$sampai);
 
 		return "berhasil";
 	}
@@ -365,6 +366,79 @@ class m_proses_jurnal extends CI_Model {
 				"noakun"=>10100,
 				"debit"=>0,
 				"kredit"=>$total
+			);
+
+			$this->db->insert("djurnalm",$data);
+		}
+	}
+
+	public function proses_produksi($dari,$sampai){
+		//barang jadi
+		$produksi=$this->db
+			->select("waktu")
+			->select("t.idjadwal")
+			->select("cmaterial")
+			->select("clabor")
+			->select("cfoh")
+			->from("penjadwalan t")
+			->where("status",2)
+			->where("t.waktu >=",$dari)
+			->where("t.waktu <=",$sampai)
+			->join("penyesuaianprod k","k.idjadwal=t.idjadwal")
+			->get()->result();
+
+		foreach($produksi as $p){
+			$nama="Jurnal Pengakuan Finish Goods";
+			$tanggal=$p->waktu;
+			$sref="Batch produksi";
+			$kref=$p->idjadwal;
+			$total=$p->cmaterial+$p->clabor+$p->cfoh;
+			$labor=$p->clabor;
+			$foh=$p->cfoh;
+
+			$data=array(
+				"njurnalm"=>$nama,
+				"tjurnalm"=>$tanggal,
+				"sref"=>$sref,
+				"kref"=>$kref
+			);
+
+			$this->db->insert("jurnalm",$data);
+			$id=$this->db->insert_id(); 
+
+			//Add fg
+			$data=array(
+				"kjurnalm"=>$id,
+				"noakun"=>10500,
+				"debit"=>$total,
+				"kredit"=>0
+			);
+
+			$this->db->insert("djurnalm",$data);
+	
+				$data=array(
+				"kjurnalm"=>$id,
+				"noakun"=>10500,
+				"debit"=>0,
+				"kredit"=>$p->cmaterial
+			);
+			$this->db->insert("djurnalm",$data);
+
+			$data=array(
+				"kjurnalm"=>$id,
+				"noakun"=>53000,
+				"debit"=>0,
+				"kredit"=>$p->clabor
+			);
+
+			$this->db->insert("djurnalm",$data);
+
+
+			$data=array(
+				"kjurnalm"=>$id,
+				"noakun"=>54000,
+				"debit"=>0,
+				"kredit"=>$p->cfoh
 			);
 
 			$this->db->insert("djurnalm",$data);

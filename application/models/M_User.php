@@ -47,6 +47,7 @@ class M_User extends CI_Model {
 				if($pr->num_rows()>0) $this->session->set_userdata('periode_sampai',$pr->row()->speriode);
 				$this->session->set_userdata('username',$su->row()->username);
 				$this->session->set_userdata('nama',$su->row()->nuser);
+				$this->session->set_userdata('role',$su->row()->idrole);
 				return true;
 			}
 			else{

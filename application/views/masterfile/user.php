@@ -108,7 +108,7 @@
 </div>
 
 
-
+<!--
 <div id="sidemenu">
 <ul class="nav">
 	<?php // echo $sidenav ?>
@@ -128,7 +128,7 @@
     	autoClose:false
     });
   </script>
-
+-->
 
 <script>
 $(document).ready(function() {

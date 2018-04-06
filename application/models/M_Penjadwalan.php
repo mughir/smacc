@@ -32,19 +32,22 @@ class m_penjadwalan extends CI_Model {
 		
 			$this->load->database();
 			$this->load->model('m_Serbaguna','ms');		
-				$data=array(
-					"idorder"=>$perintah,
-					"waktu"=>$waktu,
-					"jumlah"=>$jumlah,
-					"namaoperasi"=>$operasi,
-					"status"=>0
-				);
-				if($this->db->insert("penjadwalan",$data)){
-					return "berhasil";
-				}
-				else{
-					return "gagal";
-				}
+			if(!$this->ms->cek_ada("perintah_prod",array("idorder"=>$perintah,"status <"=>2))) return "gagal";
+
+			$data=array(
+				"idorder"=>$perintah,
+				"waktu"=>$waktu,
+				"jumlah"=>$jumlah,
+				"namaoperasi"=>$operasi,
+				"status"=>0
+			);
+			if($this->db->insert("penjadwalan",$data)){
+				$this->db->set("status",1)->where("idorder",$perintah)->update("perintah_prod");
+				return "berhasil";
+			}
+			else{
+				return "gagal";
+			}
 	}
 	
 	public function edit_barang($kode)

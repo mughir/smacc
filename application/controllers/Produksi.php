@@ -36,6 +36,9 @@ class Produksi extends CI_Controller {
 				case "tambah":
 					$hasil=$this->m_Rnd->tambah_rnd();
 				break;
+				case "edit":
+					$hasil=$this->m_Rnd->edit_rnd();
+				break;
 				case "delete":
 					$hasil=$this->m_Rnd->delete_rnd($this->input->get("id"));
 				break;
@@ -160,6 +163,11 @@ class Produksi extends CI_Controller {
 		
 		//load tempelate
 		$this->load->view("tempelate/ghancool",$data);
+	}
+
+	public function ajax_operasi($kode){
+		$this->load->model("M_Operasi");
+		echo json_encode($this->M_Operasi->get_detail($kode));
 	}
 
 	public function pengambilan(){

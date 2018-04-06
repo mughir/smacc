@@ -21,7 +21,7 @@ class m_perintah extends CI_Model {
 
 	public function get_finish($kode){
 		$this->load->database();	
-		return $this->db->select_sum("jumlah")->where("status",1)->where("idorder",$kode)->get("penjadwalan")->row()->jumlah;
+		return $this->db->select_sum("jumlah")->where("status >",1)->where("idorder",$kode)->get("penjadwalan")->row()->jumlah;
 	}
 
 	public function tambah_perintah()
