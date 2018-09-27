@@ -12,7 +12,14 @@ class m_pembayaran extends CI_Model {
 	public function get_pembayaran()
 	{
 		$this->load->database();
-		$this->db->order_by("idpembayaran","ASC");
+		$awal=$this->session->userdata("periode_dari");
+		$sampai=$this->session->userdata("periode_sampai");
+
+		$this->db
+			->where("tglbayar >=",$awal)
+			->where("tglbayar <=",$sampai)
+			->order_by("idpembayaran","ASC");
+
 		$datauser=$this->db->get("pembayaran")->result();
 		return $datauser;
 	}

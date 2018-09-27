@@ -1,7 +1,7 @@
     <div class="row">
         <div class="col-md-offset-3 col-md-6">
             <div class="form-login">
-            <h4>Laporan Penjualan</h4><hr>
+            <h4>Laporan Pembelian</h4><hr>
 			<form class='form' method="post" action="?tipe=laporan">
 <?php 
 if($this->session->flashdata('hasil')=="berhasil"){
@@ -17,7 +17,7 @@ if($this->session->flashdata('hasil')=="gagal"){
 						Dari
 					</td>
 					<td>
-						<input name="dari"  required  type="text" class="tgl" max="<?php echo $this->session->userdata("periode_sampai") ?>" min="<?php echo $this->session->userdata("periode_dari") ?>">
+						<input name="dari"  required  type="text" class="tglo" max="<?php echo $this->session->userdata("periode_sampai") ?>" min="<?php echo $this->session->userdata("periode_dari") ?>">
 					</td>
 				</tr>				
 				<tr>
@@ -25,7 +25,7 @@ if($this->session->flashdata('hasil')=="gagal"){
 						Hingga
 					</td>
 					<td>
-						<input name="sampai" required type="text" class="tgl" max="<?php echo $this->session->userdata("periode_sampai") ?>" min="<?php echo $this->session->userdata("periode_dari") ?>">
+						<input name="sampai" required type="text" class="tglo" max="<?php echo $this->session->userdata("periode_sampai") ?>" min="<?php echo $this->session->userdata("periode_dari") ?>">
 					</td>
 				</tr>
 				<tr>

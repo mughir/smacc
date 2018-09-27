@@ -10,7 +10,7 @@
  	<div class="modal-dialog fjurnal">
     <!-- Modal content-->
     <div class="modal-content fjurnal">
-      <div class="modal-header fjurnal">
+      <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Add Tagihan</h4>
       </div>
@@ -27,7 +27,7 @@
 		</tr>
 		<tr>
 			<td>Tanggal</td>
-			<td><input type="date" name="tanggal" required max="<?php echo $this->session->userdata("periode_sampai") ?>" min="<?php echo $this->session->userdata("periode_dari") ?>" value="<?php echo date('Y-m-d'); ?>"></td>
+			<td><input type="text" name="tanggal" required class="tgl"></td>
 		</tr>				
 		<tr>
 			<td>Beban</td>
@@ -42,7 +42,7 @@
 			 <tbody>
 					 <tr> 
 					 	<td>
-					 		<input required type="text" class='long changeble' list="barang" autocomplete="off" name="namabarang[]" placeholder="nama Produk" required>
+					 		<select required type="text" class='long changeble barang' list="barang" autocomplete="off" name="namabarang[]" placeholder="nama Produk" required></select>
 					 	</td>
 					 	<td>
 					 		<input  class='short jumlah changeble' type="number" min=1 max=1000 value=1 name='jumlah[]'>
@@ -162,6 +162,8 @@
 			<th>No Terima Barang</th>
 			<th>Tanggal</th>
 			<th>B. Pengiriman</th>
+			<th>Term</th>
+			<th>Status</th>
 			<th>Conf</th>
 		</tr>
 	</thead>	
@@ -171,7 +173,16 @@
 			echo "<td>$p->idtagihan</td>";
 			echo "<td>$p->idterimabarang</td>";
 			echo "<td>$p->tgltagihan</td>";
-			echo "<td>$p->biayapengiriman</td>";
+			echo "<td>$p->biayapengiriman</td>";			
+			echo $p->term=="fob_shipping_point" ? "<td>FOB Shipping Point</td>" : "<td>FOB Destination Point</td>";
+			switch($p->sttagihan){
+				case "0":
+					echo "<td>Belum Lunas</td>";
+				break;
+				case "1":
+					echo "<td>Sudah Lunas</td>";
+				break;
+			}
 			echo "<td>
 							<a href='#' data-id='$p->idtagihan' data-toggle='modal' data-target='#editKwitansi' class='editButton btn btn-default glyphicon glyphicon-eye-open'>
 							</a>
@@ -187,6 +198,24 @@
 </div>
 <script>
 $(document).ready(function() {
+	barang();
+	function barang(){
+		var data = [
+			<?php 
+				foreach($barang as $b)
+					{
+						echo "{";
+							echo "id:'$b->idbarang',";
+							echo "text:'$b->nbarang',";
+						echo "},";
+					}
+					?>
+				];
+	
+    $('.barang').select2({
+		  data: data
+		})
+	}
 	//ediit Pesanan
     $('.editButton').on('click', function() {
         // tarik record

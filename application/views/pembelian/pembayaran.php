@@ -11,7 +11,7 @@
 		<table class="form">
 			<thead>
 			<tr><td>ID</td><td><input type="text"  name="id" required pattern="[a-zA-Z0-9]+"></td></tr>
-			<tr><td>Tanggal</td><td><input type="date" name="tanggal"></td></tr>
+			<tr><td>Tanggal</td><td><input type="text" name="tanggal" class='tgl' required></td></tr>
 			<tr><td>No tagihan</td><td><input type="text" name="tagihan"></td></tr>
 			<tr><td>Jumlah Bayar</td><td><input type="number" name="bayar"></td></tr>
 			<tr><td>Via</td><td><input type="text" name="via"></td></tr>
@@ -111,6 +111,24 @@
 
 <script>
 $(document).ready(function() {
+	barang();
+	function barang(){
+		var data = [
+			<?php 
+				foreach($barang as $b)
+					{
+						echo "{";
+							echo "id:'$b->idbarang',";
+							echo "text:'$b->nbarang',";
+						echo "},";
+					}
+					?>
+				];
+	
+    $('.barang').select2({
+		  data: data
+		})
+	}
 	//ediit Pembayaran
     $('.editButton').on('click', function() {
         // tarik record

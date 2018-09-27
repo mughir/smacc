@@ -10,7 +10,7 @@
  	<div class="modal-dialog fjurnal">
     <!-- Modal content-->
     <div class="modal-content fjurnal">
-      <div class="modal-header fjurnal">
+      <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Add Pengajuan</h4>
       </div>
@@ -23,7 +23,7 @@
 		</tr>
 		<tr>
 			<td>Tanggal</td>
-			<td><input type="date" name="tanggal" required max="<?php echo $this->session->userdata("periode_sampai") ?>" min="<?php echo $this->session->userdata("periode_dari") ?>" value="<?php echo date('Y-m-d'); ?>"></td>
+			<td><input type="text" name="tanggal" class="tgl" required value="<?php echo date('Y-m-d'); ?>"></td>
 		</tr>	
 		<tr>
 			<td>Prioritas</td>
@@ -38,7 +38,8 @@
 			 <tbody>
 					 <tr> 
 					 	<td>
-					 		<input required type="text" class='long changeble' list="barang" autocomplete="off" name="namabarang[]" placeholder="nama Produk" required>
+					 		<select required class='long changeble barang' list="barang" autocomplete="off" name="namabarang[]" placeholder="nama Produk" required>
+					 		</select>
 					 	</td>
 					 	<td>
 					 		<input  class='short jumlah changeble' type="number" min=1 max=1000 value=1 name='jumlah[]'>
@@ -81,7 +82,7 @@
 		</tr>
 		<tr>
 			<td>Tanggal</td>
-			<td><input type="date" name="tanggal" required max="<?php echo $this->session->userdata("periode_sampai") ?>" min="<?php echo $this->session->userdata("periode_dari") ?>" value="<?php echo date('Y-m-d'); ?>"></td>
+			<td><input type="date" name="tanggal" class="tgl" required max="<?php echo $this->session->userdata("periode_sampai") ?>" min="<?php echo $this->session->userdata("periode_dari") ?>" value="<?php echo date('Y-m-d'); ?>"></td>
 		</tr>	
 		<tr>
 			<td>Prioritas</td>
@@ -95,7 +96,8 @@
 			 <tbody>
 					 <tr> 
 					 	<td>
-					 		<input required type="text" class='long' list="barang" autocomplete="off" name="namabarang[]" placeholder="nama Produk" required>
+					 		<select required class='long barang' list="barang" autocomplete="off" name="namabarang[]" placeholder="nama Produk" required>
+					 		</select>
 					 	</td>
 					 	<td>
 					 		<input  class='short jumlah' type="number" min=1 max=1000 value=1 name='jumlah[]'>
@@ -173,6 +175,25 @@
 </div>
 <script>
 $(document).ready(function() {
+	barang();
+	function barang(){
+		var data = [
+			<?php 
+				foreach($barang as $b)
+					{
+						echo "{";
+							echo "id:'$b->idbarang',";
+							echo "text:'$b->nbarang',";
+						echo "},";
+					}
+					?>
+				];
+	
+    $('.barang').select2({
+		  data: data
+		})
+	}
+
 	//ediit Pengajuan
     $('.editButton').on('click', function() {
         // tarik record
@@ -221,7 +242,8 @@ $(document).ready(function() {
 						 .append($("</tr>"));
 
 				$(".editdetail").append(akun);
-		      }) // each
+		      })
+		      barang(); // each
 		     // $(".editdetail").append("<tr><td colspan=4><a href=\"#\" class=\"addkeranjang btn btn-default\">+</a> </td></tr>");
 			}
 		});//end ajax detail
@@ -232,12 +254,13 @@ $(document).ready(function() {
 	$(document).on('click',".addkeranjang",function() {
 	  var row = $("<tr>");
 
-	  row.append($("<td><input type='text' list='barang' class='long changeble' autocomplete='off' name='namabarang[]' placeholder='Nama Produk'></td>"))
+	  row.append($("<td><select list='barang' class='long changeble barang' autocomplete='off' name='namabarang[]' placeholder='Nama Produk'></select></td>"))
 		 .append($("<td><input class='jumlah short changeble' name='jumlah[]' type='number' value=1 min=1></td>")) 
 
 	 .append($("</tr>"));
 	 
 	  $(this).parent().parent().before(row);
+	  barang();
 	  return false;
 	})
 }); //end document

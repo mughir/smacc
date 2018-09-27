@@ -11,12 +11,13 @@
 		<table class="form">
 		  <tr><td>ID: </td><td><input required type="text" name="id"></td></tr>
 		  <tr><td>Nama : </td><td><input required type="text" name="nama"></td></tr>
-		  <tr><td>Alamat : </td><td><input type="text" name="alamat"></td></tr>
-		  <tr><td>Telepon : </td><td><input type="text" name="telepon"></td></tr>
-		  <tr><td>Jabatan : </td><td><input type="text" name="jabatan"></td></tr>
-		  <tr><td>Status Nikah : </td><td><input type="number" min=0 max=1 name="nikah"></td></tr>
-		  <tr><td>Tanggungan : </td><td><input type="number" name="tanggungan" max=2></td></tr>
-		  <tr><td>Penambah/Pengurang : </td><td><input type="number" name="var"></td></tr>
+		  <tr><td>Alamat : </td><td><input type="text" required name="alamat"></td></tr>
+		  <tr><td>Telepon : </td><td><input type="text" required name="telepon"></td></tr>
+		  <tr><td>Jabatan : </td><td><input type="text" required name="jabatan"></td></tr>
+		  <tr><td>Status Nikah : </td><td><input type="number" required min=0 max=1 name="nikah"></td></tr>
+		  <tr><td>Tanggungan : </td><td><input type="number" required name="tanggungan" max=3></td></tr>
+		  <tr><td>Penggabungan gaji : </td><td><input type="number" name="gabung" max=1></td></tr>
+		  <tr><td>Penambah/Pengurang Penghasilan: </td><td><input type="number" name="var"></td></tr>
 		 </table>
       </div>
 	  <br>
@@ -42,11 +43,12 @@
 		<table class="form">
 		  <tr><td>ID: </td><td><input required type="text" name="id"></td></tr>
 		  <tr><td>Nama : </td><td><input required type="text" name="nama"></td></tr>
-		  <tr><td>Alamat : </td><td><input type="text" name="alamat"></td></tr>
-		  <tr><td>Telepon : </td><td><input type="text" name="telepon"></td></tr>
-		  <tr><td>Jabatan : </td><td><input type="text" name="jabatan"></td></tr>
-		  <tr><td>Status Nikah : </td><td><input type="number" min=0 max=1 name="nikah"></td></tr>
-		  <tr><td>Tanggungan : </td><td><input type="number" name="tanggungan" max=2></td></tr>
+		  <tr><td>Alamat : </td><td><input type="text" required name="alamat"></td></tr>
+		  <tr><td>Telepon : </td><td><input type="text" required name="telepon"></td></tr>
+		  <tr><td>Jabatan : </td><td><input type="text" required name="jabatan"></td></tr>
+		  <tr><td>Status Nikah : </td><td><input type="number" required min=0 max=1 name="nikah"></td></tr>
+		  <tr><td>Tanggungan : </td><td><input type="number" required name="tanggungan" max=3></td></tr>
+		  <tr><td>Penggabungan gaji : </td><td><input type="number" required name="gabung" max=1></td></tr>
 		  <tr><td>Penambah/Pengurang : </td><td><input type="number" name="var"></td></tr>
 		 </table>
       </div>
@@ -142,6 +144,7 @@ $(document).ready(function() {
                 .find('[name="jabatan"]').val(response.idjabatan).end()
                 .find('[name="nikah"]').val(response.stnikah).end()
                 .find('[name="tanggungan"]').val(response.tanggungan).end()
+                .find('[name="gabung"]').val(response.gabung).end()
                 .find('[name="var"]').val(response.vartambahan).end();
 			}
 		});

@@ -4,8 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class m_Kasir extends CI_Model {
 		public function get_barang(){
 			$this->load->database();
-			$this->db->order_by("idbarang","ASC");
-			$datauser=$this->db->get("barangkasir")->result();
+			$this->db->order_by("barangkasir.idbarang","ASC");
+			$datauser=$this->db->from("barangkasir")->join("barang","barang.idbarang=barangkasir.idbarang")->get()->result();
 			return $datauser;
 		}
 

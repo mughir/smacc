@@ -27,18 +27,18 @@
 		</tr>
 		<tr>
 			<td>Tanggal</td>
-			<td><input type="date" name="tanggal" required max="<?php echo $this->session->userdata("periode_sampai") ?>" min="<?php echo $this->session->userdata("periode_dari") ?>" value="<?php echo date('Y-m-d'); ?>"></td>
+			<td><input type="text" name="tanggal" class='tgl' required></td>
 		</tr>
 	 </table>
 	 <br><br>
-		<table class='detail'>
+		<table class='form detail'>
 			<thead>
 			  <tr><th>Produk</th><th>Jumlah</th></tr>
 			 </thead>
 			 <tbody>
 					 <tr> 
 					 	<td>
-					 		<input required type="text" class='long changeble' list="barang" autocomplete="off" name="namabarang[]" placeholder="nama Produk" required>
+					 		<select required type="text" class='long changeble barang' list="barang" autocomplete="off" name="namabarang[]" placeholder="nama Produk"></select>
 					 	</td>
 					 	<td>
 					 		<input  class='short jumlah changeble' type="number" min=1 max=1000 value=1 name='jumlah[]'>
@@ -151,6 +151,7 @@
 			<th>Vendor</th>
 			<th>Tanggal</th>
 			<th>Term</th>
+			<th>Status</th>
 			<th>Conf</th>
 		</tr>
 	</thead>	
@@ -160,8 +161,16 @@
 			echo "<td>$p->idterimabarang</td>";
 			echo "<td>$p->idpesan_beli</td>";
 			echo "<td>$p->idkontak - $p->nkontak</td>";
-			echo "<td>$p->tglterimabarang</td>";
-			echo "<td>$p->term</td>";
+			echo "<td>$p->tglterimabarang</td>";			
+			echo $p->term=="fob_shipping_point" ? "<td>FOB Shipping Point</td>" : "<td>FOB Destination Point</td>";
+			switch($p->stpesan){
+				case "0":
+					echo "<td>Belum Diproses</td>";
+				break;
+				case "1":
+					echo "<td>Sudah Diproses</td>";
+				break;
+			}
 			echo "<td>
 							<a href='#' data-id='$p->idterimabarang' data-toggle='modal' data-target='#editPenerimaan' class='editButton btn btn-default glyphicon glyphicon-eye-open'>
 							</a>
@@ -177,6 +186,24 @@
 </div>
 <script>
 $(document).ready(function() {
+	barang();
+	function barang(){
+		var data = [
+			<?php 
+				foreach($barang as $b)
+					{
+						echo "{";
+							echo "id:'$b->idbarang',";
+							echo "text:'$b->nbarang',";
+						echo "},";
+					}
+					?>
+				];
+	
+    $('.barang').select2({
+		  data: data
+		})
+	}
 	//ediit Pesanan
     $('.editButton').on('click', function() {
         // tarik record

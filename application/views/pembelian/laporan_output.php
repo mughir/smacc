@@ -1,6 +1,6 @@
 <div class="dokumen areaprint">
 <h2 class="text-center">Laporan Pembelian</h2><br><br>
-<table class="table">
+<table class="table isilaporan">
 	<thead>
 		<tr>			
 			<th>
@@ -52,7 +52,7 @@ $(document).ready(function() {
 			var html = $(".isilaporan").get(0);
 			var option = {
 							  margin:       1,
-							  filename:     "<?php echo "Laporan Penjualan [".substr(md5(date("Y-m-d H:i:s")),0,8); ?>].pdf",
+							  filename:     "<?php echo "Laporan Pembelian [".substr(md5(date("Y-m-d H:i:s")),0,8); ?>].pdf",
 							  image:        { type: 'jpeg', quality: 0.98 },
 							  html2canvas:  { dpi: 400, letterRendering: true },
 							  jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait'}

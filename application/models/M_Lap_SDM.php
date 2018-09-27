@@ -9,6 +9,7 @@ class m_Lap_SDM extends CI_Model {
 
 		$dgaji=$this->db
 			->select_sum("gaji","tgaji")
+			->select_sum("pajak","tpajak")
 			->select("idpegawai")
 			->group_by("idpegawai")
 			->where("tahun",$tahun)

@@ -31,7 +31,7 @@
 		</tr>
 		<tr>
 			<td>Tanggal</td>
-			<td><input type="date" name="tanggal" required max="<?php echo $this->session->userdata("periode_sampai") ?>" min="<?php echo $this->session->userdata("periode_dari") ?>" value="<?php echo date('Y-m-d'); ?>"></td>
+			<td><input type="date" name="tanggal" required class="tgl" value="<?php echo date('Y-m-d'); ?>"></td>
 		</tr>	
 		<tr>
 			<td>Term</td>
@@ -46,7 +46,8 @@
 			 <tbody>
 					 <tr> 
 					 	<td>
-					 		<input required type="text" class='long changeble' list="barang" autocomplete="off" name="namabarang[]" placeholder="nama Produk" required>
+					 		<select required type="text" class='long changeble barang' list="barang" autocomplete="off" name="namabarang[]" placeholder="nama Produk" required>
+					 		</select>
 					 	</td>
 					 	<td>
 					 		<input  class='short jumlah changeble' type="number" min=1 max=1000 value=1 name='jumlah[]'>
@@ -206,6 +207,24 @@
 </div>
 <script>
 $(document).ready(function() {
+	barang();
+	function barang(){
+		var data = [
+			<?php 
+				foreach($barang as $b)
+					{
+						echo "{";
+							echo "id:'$b->idbarang',";
+							echo "text:'$b->nbarang',";
+						echo "},";
+					}
+					?>
+				];
+	
+    $('.barang').select2({
+		  data: data
+		})
+	}
 	//ediit Pesanan
     $('.editButton').on('click', function() {
         // tarik record
@@ -260,6 +279,7 @@ $(document).ready(function() {
 					 .append($("</tr>"));
 
 				$(".editdetail").append(akun);
+				barang();
 		      }) // each
 		     // $(".editdetail").append("<tr><td colspan=4><a href=\"#\" class=\"addkeranjang btn btn-default\">+</a> </td></tr>");
 			}
@@ -308,6 +328,7 @@ $(document).ready(function() {
 	  $(this).parent().parent().before(row);
 
 	  $("#daftar").scrollTop($("#daftar")[0].scrollHeight);
+	  barang();
 	  return false;
 	})
 }); //end document

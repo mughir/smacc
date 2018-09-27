@@ -121,7 +121,7 @@ $(document).ready(function() {
         var id = $(this).attr('data-id');
 
         $.ajax({
-            url: "<?php echo base_url(); ?>masterdata/Jabatan_ajax/" + id,
+            url: "<?php echo base_url(); ?>sdm/jabatan_ajax/" + id,
             method: 'GET',
 			dataType: 'JSON',
 			success: function(response) {

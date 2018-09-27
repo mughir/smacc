@@ -1,12 +1,3 @@
-<datalist id="listbarang">
-<?php
-foreach($barang as $b){
-	echo "<option value='$b->idbarang'>$b->idbarang - $b->nbarang</option>";
-}
-?>
-</datalist>
-
-
 <div id="createProduk" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
@@ -18,7 +9,7 @@ foreach($barang as $b){
 	  <form method="post" action="<?php echo base_url() ?>pos/produk/?tipe=tambah">
 		<div class="modal-body">
 		<table class="form">
-		  <tr><td>ID Barang </td><td><input autocomplete="off" list='listbarang' required type="text" name="id"></td></tr>
+		  <tr><td>ID Barang </td><td><select autocomplete="off" required type="text" name="id"><option></option><?php foreach($barang as $b) echo "<option value='$b->idbarang'>$b->idbarang - $b->nbarang</option>"; ?></select></td></tr>
 		  <tr><td>Harga : </td><td><input type="number" name="harga" value=0 min=1></td></tr>
 		  <tr><td>Diskon : </td><td><input type="number" name="diskon" value=0></td></tr>  
 		 </table>

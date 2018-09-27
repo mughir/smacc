@@ -1,9 +1,4 @@
-<datalist id="produk">
-<?php foreach($barang as $b){echo 
-	"<option value='$b->idbarang'>$b->nabarang</option>";
-}
-?>
-</datalist>
+
 
 <br>
 <div class="dokumen" style="padding:10px 25px 10px 10px;position:relative;">
@@ -16,7 +11,10 @@
 	  <tbody >
 			 <tr> 
 			 	<td>
-			 		<input required type="text" list="produk" class="namabarang long changeble"  autocomplete="off" name="namabarang[]" placeholder="nama Produk">
+			 		<select required class="namabarang long changeble" autocomplete="off" name="namabarang[]" placeholder="nama Produk">
+			 			<option></option>
+			 			<?php foreach($barang as $b) echo "<option value='$b->idbarang'>$b->nbarang</option>"; ?>
+			 		</select>
 			 	</td>
 			 	<td>
 			 		<input  type="number" name="jumlah[]" class="jumlah changeble" min=1 max=1000 value=1>
@@ -44,7 +42,9 @@
 </form>
 </div>
 <script>
-$(document).ready(function() {    
+$(document).ready(function() {   	
+	var data = [<?php foreach($barang as $b){echo "{id:'$b->idbarang', text:'$b->nbarang'},";}?>];
+
 	$(document).on('click',".delete",function() {
 		$(this).parent().parent().empty();
 	});
@@ -91,17 +91,24 @@ $(document).ready(function() {
 	$(document).on('click',".addbarang",function() {
 	  var row = $("<tr>");
 
-	  row.append($("<td><input type='text' required list='produk' class='namabarang long changeble' autocomplete='off' name='namaakun[]' placeholder='Nama Produk'></td>"))
+	  row.append($("<td><select required list='produk' class='namabarang long changeble' autocomplete='off' name='namaakun[]' placeholder='Nama Produk'><option></option></select></td>"))
 		 .append($("<td><input type='number' class='jumlah changeble' name='jumlah[]' value=1 min=1 max=1000></td>")) 
 		 .append($("<td><input type='number' class='harga' value=0  disabled></td>"))
 		 .append($("<td><input value=0 class='subtotal' type='number' disabled></td>"))			 	
 		 .append($("<td><a href='#' class='glyphicon glyphicon-remove delete'></a></td>"))	
 		 .append($("</tr>"));
-	 
-	  $(this).parent().parent().before(row);
 
-	  $("#daftar").scrollTop($("#daftar")[0].scrollHeight);
-	  return false;
+
+		$(this).parent().parent().before(row);
+
+		$("#daftar").scrollTop($("#daftar")[0].scrollHeight);
+
+		$(".namabarang").select2({
+			placeholder: "Silahkan Pilih", 
+			data: data
+		});
+
+		return false;
 	});
 }); //end document
 </script>

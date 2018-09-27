@@ -100,7 +100,7 @@ class m_pengiriman extends CI_Model {
 							"tcost"=>$tcost
 						);
 
-					$this->db->where("idbarang",$barang[$i])->set("jumlah","jumlah-".$jumlah[$i],false);
+					//$this->db->where("idbarang",$barang[$i])->set("jumlah","jumlah-".$jumlah[$i],false);
 
 					$this->db->insert("isipengiriman",$data);
 				}

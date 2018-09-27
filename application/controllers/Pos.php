@@ -44,7 +44,7 @@ class Pos extends CI_Controller {
 			$tipe=$this->input->get("tipe");
 			$hasil= ($tipe=="submit") ? $this->m_Kasir->transaksi() : "gagal";
 			$this->session->set_flashdata("hasil",$hasil);
-			//redirect($this->agent->referrer());
+			redirect($this->agent->referrer());
 		}	
 	}
 

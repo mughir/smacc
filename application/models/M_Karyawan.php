@@ -49,6 +49,7 @@ class m_karyawan extends CI_Model {
 			"stnikah"=>$this->input->post("nikah",true),
 			"tanggungan"=>$this->input->post("tanggungan",true),
 			"vartambahan"=>$this->input->post("var",true),
+			"gabung"=>$this->input->post("gabung",true),
 			"stpegawai"=>1
 			);
 		
@@ -91,6 +92,7 @@ class m_karyawan extends CI_Model {
 				"idjabatan"=>$this->input->post("jabatan",true),
 				"stnikah"=>$this->input->post("nikah",true),
 				"tanggungan"=>$this->input->post("tanggungan",true),
+				"gabung"=>$this->input->post("gabung",true),
 				"vartambahan"=>$this->input->post("var",true)
 			);
 		

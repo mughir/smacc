@@ -5,6 +5,7 @@
 		<tr>
 			<th>Pegawai</th>
 			<th>Gaji</th>
+			<th>Pajak</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -14,6 +15,7 @@
 					<tr>
 						<td>$u->idpegawai</td>
 						<td>$u->tgaji</td>
+						<td>$u->tpajak</td>
 					</tr>
 					";
 			}
