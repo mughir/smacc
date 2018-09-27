@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 19, 2017 at 05:39 AM
+-- Generation Time: Sep 28, 2018 at 04:13 AM
 -- Server version: 10.1.22-MariaDB
 -- PHP Version: 7.1.4
 
@@ -68,7 +68,7 @@ INSERT INTO `barang` (`idbarang`, `katbarang`, `segment1`, `segment2`, `segment3
 ('B000001', 'Barang Dagang', '', '', '', 'Tes', 'kg', '5.00', '310000.00', '500000.00'),
 ('B000002', 'Barang Dagang', '', '', '', 'Barang dagang 2', 'kg', '0.00', '0.00', '75000.00'),
 ('B000003', 'Barang Dagang', '', '', '', 'Meja', 'unit', '0.00', '500000.00', '1500000.00'),
-('B000004', 'Barang Dagang', '', '', '', 'Komputer', 'unit', '0.00', '2000000.00', '4000000.00'),
+('B000004', 'Barang Dagang', '', '', '', 'Komputer', 'unit', '50.00', '4000000.00', '4000000.00'),
 ('B000005', 'Material', '', '', '', 'Material 1', 'unit', '0.00', '500000.00', '0.00');
 
 -- --------------------------------------------------------
@@ -88,7 +88,8 @@ CREATE TABLE `barangditerima` (
 --
 
 INSERT INTO `barangditerima` (`idbarang`, `idterimabarang`, `jumlah`) VALUES
-('B000001', 'T0000001', '1.00');
+('B000001', 'T0000001', '1.00'),
+('B000004', 'T0000000001', '50.00');
 
 -- --------------------------------------------------------
 
@@ -127,7 +128,8 @@ CREATE TABLE `barangpengajuan` (
 --
 
 INSERT INTO `barangpengajuan` (`idbarang`, `idpengajuan`, `jumlah`) VALUES
-('B000001', '1617357401894316', '1.00');
+('B000001', '1617357401894316', '1.00'),
+('B000003', 'PS000000001', '100.00');
 
 -- --------------------------------------------------------
 
@@ -166,7 +168,10 @@ CREATE TABLE `barispesanan` (
 
 INSERT INTO `barispesanan` (`idbarang`, `idpesanan`, `jumlah`, `subtotal`) VALUES
 ('B000001', 'P00001', '2.00', '100000.00'),
-('B000003', 'P00002', '1.00', '1500000.00');
+('B000002', 'S000000001', '5.00', '375000.00'),
+('B000002', 'S000000002', '1.00', '75000.00'),
+('B000003', 'P00002', '1.00', '1500000.00'),
+('B000003', 'S000000002', '1.00', '1500000.00');
 
 -- --------------------------------------------------------
 
@@ -308,6 +313,225 @@ CREATE TABLE `djurnalm` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `eksperimen_peserta`
+--
+
+CREATE TABLE `eksperimen_peserta` (
+  `peserta_id` bigint(20) NOT NULL,
+  `peserta_nav` int(11) NOT NULL,
+  `peserta_prev` int(11) NOT NULL,
+  `peserta_selesai` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `eksperimen_peserta`
+--
+
+INSERT INTO `eksperimen_peserta` (`peserta_id`, `peserta_nav`, `peserta_prev`, `peserta_selesai`) VALUES
+(1, 1, 0, 1),
+(2, 0, 1, 1),
+(3, 0, 0, 1),
+(4, 1, 0, 1),
+(5, 0, 1, 1),
+(6, 0, 1, 1),
+(7, 1, 0, 1),
+(8, 0, 0, 1),
+(9, 0, 0, 1),
+(10, 1, 1, 1),
+(11, 0, 1, 1),
+(12, 0, 1, 1),
+(13, 1, 1, 1),
+(14, 1, 0, 1),
+(15, 0, 0, 1),
+(16, 1, 0, 1),
+(17, 0, 0, 1),
+(18, 0, 0, 1),
+(19, 0, 0, 1),
+(20, 0, 0, 1),
+(21, 1, 1, 1),
+(22, 0, 0, 1),
+(23, 1, 1, 1),
+(24, 0, 1, 1),
+(25, 1, 0, 1),
+(26, 0, 1, 1),
+(27, 0, 1, 1),
+(28, 1, 1, 1),
+(29, 1, 0, 1),
+(30, 1, 1, 1),
+(31, 0, 0, 1),
+(32, 1, 0, 1),
+(33, 0, 1, 1),
+(34, 1, 1, 1),
+(35, 1, 1, 1),
+(36, 1, 0, 1),
+(37, 0, 1, 1),
+(38, 0, 0, 1),
+(39, 1, 0, 1),
+(40, 0, 0, 1),
+(41, 0, 0, 1),
+(42, 0, 1, 1),
+(43, 1, 1, 1),
+(44, 0, 0, 1),
+(45, 1, 1, 1),
+(46, 1, 1, 1),
+(47, 0, 0, 1),
+(48, 0, 1, 1),
+(49, 0, 1, 1),
+(50, 0, 0, 1),
+(51, 1, 0, 1),
+(52, 1, 0, 1),
+(53, 0, 0, 1),
+(54, 1, 1, 1),
+(55, 1, 0, 1),
+(56, 1, 1, 1),
+(57, 1, 0, 1),
+(58, 1, 0, 1),
+(59, 0, 0, 1),
+(60, 0, 1, 1),
+(61, 0, 0, 1),
+(62, 1, 1, 1),
+(63, 0, 1, 1),
+(64, 0, 1, 1),
+(65, 0, 0, 1),
+(66, 1, 1, 1),
+(67, 1, 0, 1),
+(68, 1, 0, 1),
+(69, 0, 1, 1),
+(70, 0, 0, 1),
+(71, 1, 1, 1),
+(72, 1, 1, 1),
+(73, 1, 0, 1),
+(74, 1, 0, 1),
+(75, 1, 0, 1),
+(76, 1, 0, 1),
+(77, 1, 0, 1),
+(78, 1, 1, 1),
+(79, 0, 1, 1),
+(80, 0, 0, 1),
+(81, 1, 1, 1),
+(82, 0, 1, 1),
+(83, 0, 1, 1),
+(84, 0, 1, 1),
+(85, 0, 0, 1),
+(86, 0, 1, 1),
+(87, 1, 0, 1),
+(88, 0, 0, 1),
+(89, 0, 1, 1),
+(90, 1, 1, 1),
+(91, 0, 0, 1),
+(92, 0, 1, 1),
+(93, 1, 1, 1),
+(94, 0, 1, 1),
+(95, 1, 1, 1),
+(96, 0, 0, 1),
+(97, 0, 1, 1),
+(98, 0, 1, 1),
+(99, 1, 1, 1),
+(100, 0, 1, 1),
+(101, 1, 0, 1),
+(102, 1, 1, 1),
+(103, 1, 1, 1),
+(104, 0, 0, 1),
+(105, 0, 1, 1),
+(106, 1, 0, 1),
+(107, 0, 1, 1),
+(108, 1, 1, 1),
+(109, 1, 1, 1),
+(110, 1, 0, 1),
+(111, 0, 1, 1),
+(112, 1, 1, 1),
+(113, 0, 0, 1),
+(114, 0, 0, 1),
+(115, 0, 1, 1),
+(116, 1, 0, 1),
+(117, 1, 0, 1),
+(118, 0, 0, 1),
+(119, 1, 1, 1),
+(120, 0, 1, 1),
+(121, 0, 0, 1),
+(122, 0, 0, 1),
+(123, 1, 0, 1),
+(124, 1, 1, 1),
+(125, 1, 0, 1),
+(126, 0, 0, 1),
+(127, 1, 0, 1),
+(128, 0, 1, 1),
+(129, 1, 0, 1),
+(130, 0, 1, 1),
+(131, 1, 1, 1),
+(132, 0, 0, 1),
+(133, 0, 0, 1),
+(134, 1, 0, 1),
+(135, 0, 0, 1),
+(136, 0, 0, 1),
+(137, 1, 1, 1),
+(138, 0, 1, 1),
+(139, 1, 1, 1),
+(140, 1, 0, 1),
+(141, 0, 0, 1),
+(142, 1, 0, 1),
+(143, 1, 0, 1),
+(144, 1, 0, 1),
+(145, 1, 0, 1),
+(146, 1, 1, 1),
+(147, 0, 1, 1),
+(148, 1, 1, 1),
+(149, 0, 1, 1),
+(150, 1, 1, 1),
+(151, 0, 0, 1),
+(152, 0, 1, 1),
+(153, 0, 0, 1),
+(154, 1, 0, 1),
+(155, 0, 0, 1),
+(156, 1, 1, 1),
+(157, 0, 1, 1),
+(158, 0, 0, 1),
+(159, 0, 1, 1),
+(160, 0, 0, 1),
+(161, 1, 1, 1),
+(162, 1, 1, 1),
+(163, 1, 1, 1),
+(164, 1, 0, 1),
+(165, 1, 0, 1),
+(166, 1, 0, 1),
+(167, 1, 0, 1),
+(168, 1, 0, 1),
+(169, 0, 0, 1),
+(170, 1, 0, 1),
+(171, 1, 1, 1),
+(172, 1, 0, 1),
+(173, 1, 1, 1),
+(174, 0, 0, 1),
+(175, 0, 1, 1),
+(176, 0, 1, 1),
+(177, 0, 0, 1),
+(178, 1, 1, 1),
+(179, 0, 0, 1),
+(180, 0, 0, 1),
+(181, 1, 1, 1),
+(182, 0, 1, 1),
+(183, 1, 1, 1),
+(184, 1, 1, 1),
+(185, 0, 1, 1),
+(186, 0, 0, 1),
+(187, 0, 0, 1),
+(188, 1, 0, 1),
+(189, 1, 0, 1),
+(190, 0, 0, 1),
+(191, 0, 1, 1),
+(192, 1, 1, 1),
+(193, 0, 1, 1),
+(194, 0, 0, 1),
+(195, 0, 1, 1),
+(196, 0, 0, 1),
+(197, 1, 1, 1),
+(198, 1, 1, 1),
+(199, 0, 1, 1),
+(200, 1, 1, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `fungsi`
 --
 
@@ -352,6 +576,20 @@ CREATE TABLE `fungsirole` (
   `idfungsi` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `fungsirole`
+--
+
+INSERT INTO `fungsirole` (`idrole`, `idfungsi`) VALUES
+(1, 10000),
+(1, 20000),
+(1, 30000),
+(1, 40000),
+(1, 50000),
+(1, 60000),
+(1, 70000),
+(7, 20000);
+
 -- --------------------------------------------------------
 
 --
@@ -364,15 +602,17 @@ CREATE TABLE `gaji` (
   `bulan` int(11) NOT NULL,
   `tanggal` date NOT NULL,
   `idpegawai` varchar(20) NOT NULL,
-  `gaji` decimal(20,2) NOT NULL
+  `gaji` decimal(20,2) NOT NULL,
+  `pajak` decimal(20,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `gaji`
 --
 
-INSERT INTO `gaji` (`idgaji`, `tahun`, `bulan`, `tanggal`, `idpegawai`, `gaji`) VALUES
-(4, 2017, 6, '2017-10-04', 'P000001', '3500000.00');
+INSERT INTO `gaji` (`idgaji`, `tahun`, `bulan`, `tanggal`, `idpegawai`, `gaji`, `pajak`) VALUES
+(4, 2017, 6, '2017-10-04', 'P000001', '3500000.00', '0.00'),
+(10, 2018, 1, '2018-09-28', 'P000001', '8500000.00', '143750.00');
 
 -- --------------------------------------------------------
 
@@ -434,7 +674,8 @@ CREATE TABLE `isipengiriman` (
 
 INSERT INTO `isipengiriman` (`idpengiriman`, `idbarang`, `jumlah`, `tcost`) VALUES
 ('D000001', 'B000001', '3.00', '0.00'),
-('D000002', 'B000003', '2.00', '0.00');
+('D000002', 'B000003', '2.00', '0.00'),
+('K0000000001', 'B000002', '2.00', '0.00');
 
 -- --------------------------------------------------------
 
@@ -454,7 +695,8 @@ CREATE TABLE `isipesan_beli` (
 --
 
 INSERT INTO `isipesan_beli` (`idbarang`, `idpesan_beli`, `jumlah`, `subtotal`) VALUES
-('B000002', '1617357401894316', '1.00', '75000.00');
+('B000002', '1617357401894316', '1.00', '75000.00'),
+('B000004', 'P0000000001', '50.00', '200000000.00');
 
 -- --------------------------------------------------------
 
@@ -474,6 +716,7 @@ CREATE TABLE `isitagihan` (
 --
 
 INSERT INTO `isitagihan` (`idtagihan`, `idbarang`, `jumlah`, `subtotal`) VALUES
+('PI000000001', 'B000004', '50.00', '200000000.00'),
 ('TG000001', 'B000001', '1.00', '50000.00');
 
 -- --------------------------------------------------------
@@ -495,7 +738,7 @@ CREATE TABLE `jabatan` (
 --
 
 INSERT INTO `jabatan` (`idjabatan`, `njabatan`, `gapok`, `tunjangan`, `periode`) VALUES
-('KRY01', 'Karyawan', '3000000.00', '500000.00', 'bulan');
+('KRY01', 'Karyawan', '8000000.00', '500000.00', 'bulan');
 
 -- --------------------------------------------------------
 
@@ -601,7 +844,8 @@ INSERT INTO `keranjangpos` (`idkeranjangpos`, `idtranspos`, `idbarang`, `jumlah`
 (2, 3, 'B000001', '1.00', '120000.00', '0.00', '0.00', '0.00'),
 (3, 4, 'B000001', '1.00', '120000.00', '0.00', '0.00', '0.00'),
 (4, 5, 'B000001', '3.00', '360000.00', '0.00', '0.00', '0.00'),
-(5, 6, 'B000001', '1.00', '120000.00', '0.00', '0.00', '0.00');
+(5, 6, 'B000001', '1.00', '120000.00', '0.00', '0.00', '0.00'),
+(6, 7, 'B000001', '1.00', '120000.00', '0.00', '0.00', '310000.00');
 
 -- --------------------------------------------------------
 
@@ -746,6 +990,7 @@ CREATE TABLE `pegawai` (
   `idjabatan` varchar(20) NOT NULL,
   `stnikah` int(11) NOT NULL,
   `tanggungan` int(11) NOT NULL,
+  `gabung` int(11) NOT NULL,
   `vartambahan` decimal(20,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -753,8 +998,8 @@ CREATE TABLE `pegawai` (
 -- Dumping data for table `pegawai`
 --
 
-INSERT INTO `pegawai` (`idpegawai`, `npegawai`, `alpegawai`, `telpegawai`, `stpegawai`, `idjabatan`, `stnikah`, `tanggungan`, `vartambahan`) VALUES
-('P000001', 'Budi', 'Bandung', '12345', 1, 'KRY01', 1, 0, '0.00');
+INSERT INTO `pegawai` (`idpegawai`, `npegawai`, `alpegawai`, `telpegawai`, `stpegawai`, `idjabatan`, `stnikah`, `tanggungan`, `gabung`, `vartambahan`) VALUES
+('P000001', 'Budi', 'Bandung', '12345', 1, 'KRY01', 1, 0, 0, '0.00');
 
 -- --------------------------------------------------------
 
@@ -770,14 +1015,6 @@ CREATE TABLE `pembayaran` (
   `ket` text,
   `idkwitansi` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `pembayaran`
---
-
-INSERT INTO `pembayaran` (`idpembayaran`, `tglbayar`, `jmbayar`, `via`, `ket`, `idkwitansi`) VALUES
-('B00001', '2017-08-28', '50000.00', 'Bank', 'a/n Budi', 'K00001'),
-('B00002', '2017-09-20', '1500000.00', 'Cash', '', 'K00002');
 
 -- --------------------------------------------------------
 
@@ -820,7 +1057,8 @@ CREATE TABLE `pengajuan` (
 --
 
 INSERT INTO `pengajuan` (`idpengajuan`, `tpengajuan`, `prioritas`, `username`, `stpengajuan`) VALUES
-('1617357401894316', '2017-08-28', '1', 'admin', 0);
+('1617357401894316', '2017-08-28', '1', 'admin', 0),
+('PS000000001', '2018-09-17', '1', 'admin', 0);
 
 -- --------------------------------------------------------
 
@@ -844,7 +1082,8 @@ CREATE TABLE `pengiriman` (
 
 INSERT INTO `pengiriman` (`idpengiriman`, `tpengiriman`, `bpengiriman`, `idpesanan`, `termpengiriman`, `idkontak`, `stpengiriman`) VALUES
 ('D000001', '2017-08-27', '0.00', NULL, 'fob_shipping_point', 'V000002', 0),
-('D000002', '2017-09-20', '0.00', 'P00002', 'fob_shipping_point', 'V000002', 1);
+('D000002', '2017-09-20', '0.00', 'P00002', 'fob_shipping_point', 'V000002', 1),
+('K0000000001', '2018-09-28', '0.00', 'S000000001', 'fob_shipping_point', 'V000002', 0);
 
 -- --------------------------------------------------------
 
@@ -935,8 +1174,8 @@ CREATE TABLE `periode` (
 --
 
 INSERT INTO `periode` (`kperiode`, `nperiode`, `dperiode`, `speriode`, `status`) VALUES
-('FY0001', 'Full year 2017-2018', '2017-01-01', '2017-12-31', 1),
-('FY0002', 'Full year 2018-2019', '2018-01-01', '2018-12-31', 0);
+('FY0001', 'Full year 2017-2018', '2017-01-01', '2017-12-31', 0),
+('FY0002', 'Full year 2018-2019', '2018-01-01', '2018-12-31', 1);
 
 -- --------------------------------------------------------
 
@@ -959,7 +1198,9 @@ CREATE TABLE `pesanan` (
 
 INSERT INTO `pesanan` (`idpesanan`, `tpesanan`, `idkontak`, `stpesanan`, `dp`, `termpengiriman`) VALUES
 ('P00001', '2017-08-23', 'V000002', 0, '0.00', 'fob_shipping_point'),
-('P00002', '2017-09-20', 'V000002', 1, '0.00', 'fob_shipping_point');
+('P00002', '2017-09-20', 'V000002', 1, '0.00', 'fob_shipping_point'),
+('S000000001', '2018-09-17', 'V000002', 1, '0.00', 'fob_shipping_point'),
+('S000000002', '2018-09-28', 'V000002', 0, '0.00', 'fob_shipping_point');
 
 -- --------------------------------------------------------
 
@@ -981,7 +1222,8 @@ CREATE TABLE `pesan_beli` (
 --
 
 INSERT INTO `pesan_beli` (`idpesan_beli`, `tglpesan`, `idkontak`, `stpesan`, `idpengajuan`, `term`) VALUES
-('1617357401894316', '2017-08-29', 'V000001', 0, NULL, 'fob_shipping_point');
+('1617357401894316', '2017-08-29', 'V000001', 0, NULL, 'fob_shipping_point'),
+('P0000000001', '2018-09-17', 'V000001', 0, 'PS000000001', 'fob_shipping_point');
 
 -- --------------------------------------------------------
 
@@ -1000,7 +1242,7 @@ CREATE TABLE `role` (
 
 INSERT INTO `role` (`idrole`, `nrole`) VALUES
 (1, 'admin'),
-(2, 'kasir');
+(7, 'kasir');
 
 -- --------------------------------------------------------
 
@@ -1012,15 +1254,18 @@ CREATE TABLE `tagihan` (
   `idtagihan` varchar(20) NOT NULL,
   `tgltagihan` date NOT NULL,
   `idterimabarang` varchar(20) NOT NULL,
-  `biayapengiriman` decimal(20,2) NOT NULL DEFAULT '0.00'
+  `term` varchar(40) NOT NULL,
+  `biayapengiriman` decimal(20,2) NOT NULL DEFAULT '0.00',
+  `sttagihan` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tagihan`
 --
 
-INSERT INTO `tagihan` (`idtagihan`, `tgltagihan`, `idterimabarang`, `biayapengiriman`) VALUES
-('TG000001', '2017-08-29', 'T0000001', '0.00');
+INSERT INTO `tagihan` (`idtagihan`, `tgltagihan`, `idterimabarang`, `term`, `biayapengiriman`, `sttagihan`) VALUES
+('PI000000001', '2018-09-17', 'T0000000001', 'fob_shipping_point', '0.00', 0),
+('TG000001', '2017-08-29', 'T0000001', '', '0.00', 0);
 
 -- --------------------------------------------------------
 
@@ -1039,6 +1284,7 @@ CREATE TABLE `terimabarang` (
 --
 
 INSERT INTO `terimabarang` (`idterimabarang`, `tglterimabarang`, `idpesan_beli`) VALUES
+('T0000000001', '2018-09-17', 'P0000000001'),
 ('T0000001', '2017-08-29', '1617357401894316');
 
 -- --------------------------------------------------------
@@ -1064,7 +1310,8 @@ INSERT INTO `transpos` (`idtranspos`, `wtranspos`, `stranspos`, `username`, `idk
 (3, '2017-08-27 06:18:35', 1, 'admin', 3),
 (4, '2017-09-19 04:45:29', 1, 'admin', 3),
 (5, '2017-09-19 04:47:00', 1, 'admin', 3),
-(6, '2017-10-16 03:32:46', 1, 'admin', 3);
+(6, '2017-10-16 03:32:46', 1, 'admin', 3),
+(7, '2018-09-28 00:06:28', 1, 'admin', 3);
 
 -- --------------------------------------------------------
 
@@ -1085,7 +1332,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`username`, `password`, `nuser`, `suser`, `idrole`) VALUES
-('admin', 'c3284d0f94606de1fd2af172aba15bf3', 'Muhammad Ghany Irsya', 1, 1);
+('admin', 'c3284d0f94606de1fd2af172aba15bf3', 'Administrator', 1, 1),
+('kasir', '59b8f19e2e140a1f7829b116219b6497', 'kasir', 1, 7);
 
 --
 -- Indexes for dumped tables
@@ -1167,6 +1415,12 @@ ALTER TABLE `djurnal`
 ALTER TABLE `djurnalm`
   ADD PRIMARY KEY (`kdjurnalm`),
   ADD KEY `djurnalm_ibfk_1` (`kjurnalm`);
+
+--
+-- Indexes for table `eksperimen_peserta`
+--
+ALTER TABLE `eksperimen_peserta`
+  ADD PRIMARY KEY (`peserta_id`);
 
 --
 -- Indexes for table `fungsi`
@@ -1429,7 +1683,12 @@ ALTER TABLE `djurnal`
 -- AUTO_INCREMENT for table `djurnalm`
 --
 ALTER TABLE `djurnalm`
-  MODIFY `kdjurnalm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `kdjurnalm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `eksperimen_peserta`
+--
+ALTER TABLE `eksperimen_peserta`
+  MODIFY `peserta_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=201;
 --
 -- AUTO_INCREMENT for table `fungsi`
 --
@@ -1439,7 +1698,7 @@ ALTER TABLE `fungsi`
 -- AUTO_INCREMENT for table `gaji`
 --
 ALTER TABLE `gaji`
-  MODIFY `idgaji` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idgaji` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `jurnal`
 --
@@ -1449,7 +1708,7 @@ ALTER TABLE `jurnal`
 -- AUTO_INCREMENT for table `jurnalm`
 --
 ALTER TABLE `jurnalm`
-  MODIFY `kjurnalm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `kjurnalm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `kasir`
 --
@@ -1459,7 +1718,7 @@ ALTER TABLE `kasir`
 -- AUTO_INCREMENT for table `keranjangpos`
 --
 ALTER TABLE `keranjangpos`
-  MODIFY `idkeranjangpos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idkeranjangpos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `log`
 --
@@ -1479,12 +1738,12 @@ ALTER TABLE `perintah_prod`
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
-  MODIFY `idrole` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idrole` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `transpos`
 --
 ALTER TABLE `transpos`
-  MODIFY `idtranspos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idtranspos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- Constraints for dumped tables
 --
