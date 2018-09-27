@@ -1,16 +1,8 @@
-<datalist id="barang">
-<?php foreach($barang as $b){
-	echo "<option value='$b->idbarang'>$b->idbarang - $b->nbarang</option>";
-}
-?>
-</datalist>
-
-
 <div id="createPengiriman" class="modal fade" role="dialog">
  	<div class="modal-dialog fjurnal">
     <!-- Modal content-->
     <div class="modal-content fjurnal">
-      <div class="modal-header fjurnal">
+      <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Add Pengiriman</h4>
       </div>
@@ -23,11 +15,11 @@
 		</tr>		
 		<tr>
 			<td>ID Pesanan</td>
-			<td><input type="text" name="pesanan" pattern="[a-zA-Z0-9]+"> <!-- <button class="btn btn-default get-pesanan">Get</button></td> -->
+			<td><input type="text" name="pesanan" required pattern="[a-zA-Z0-9]+"> <!-- <button class="btn btn-default get-pesanan">Get</button></td> -->
 		</tr>
 		<tr>
 			<td>Pemesan</td>
-			<td><select name="pemesan" required><option value="" diabled>Silahkan Pilih</option><?php foreach($pembeli as $p){echo "<option value=\"$p->idkontak\">$p->nkontak</option>";} ?></select></td>
+			<td><select name="pemesan" required><option value="" disabled>Silahkan Pilih</option><?php foreach($pembeli as $p){echo "<option value=\"$p->idkontak\">$p->nkontak</option>";} ?></select></td>
 		</tr>
 		<tr>
 			<td>Tanggal</td>
@@ -43,14 +35,22 @@
 		</tr>
 	 </table>
 	 <br><br>
-		<table class='detail'>
+
+<div class="table-responsive">
+		<table class='form detail'>
 			<thead>
 			  <tr><th>Produk</th><th>Jumlah</th></tr>
 			 </thead>
 			 <tbody>
 					 <tr> 
 					 	<td>
-					 		<input required type="text" class='long changeble' list="barang" autocomplete="off" name="namabarang[]" placeholder="nama Produk" required>
+					 		<select required class='long changeble namabarang' list="barang" autocomplete="off" name="namabarang[]" placeholder="nama Produk" required>
+					 				<option></option>
+					 				<?php foreach($barang as $b){
+	echo "<option value='$b->idbarang'>$b->idbarang - $b->nbarang</option>";
+}
+?>
+					 		</select>
 					 	</td>
 					 	<td>
 					 		<input  class='short jumlah changeble' type="number" min=1 max=1000 value=1 name='jumlah[]'>
@@ -63,7 +63,7 @@
 					 </tr>
 				</tbody>
 		</table>
-		
+		</div>
       </div>
 	  <br>
       <div class="modal-footer">
@@ -80,7 +80,7 @@
  	<div class="modal-dialog fjurnal">
     <!-- Modal content-->
     <div class="modal-content fjurnal">
-      <div class="modal-header fjurnal">
+      <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Dokumen Pengiriman</h4>
       </div>
@@ -117,6 +117,7 @@
 		</tr>
 	 </table>
 	 <br><br>
+<div class="table-responsive">
 		<table class='form detail editdetail'>
 			<thead>
 			  <tr><th>Produk</th><th>Jumlah</th></tr>
@@ -132,12 +133,11 @@
 					 </tr>
 				</tbody>
 		</table>
-		
+		</div>
       </div>
 	  <br>
 	  </form>
     </div>
-
   </div>
 </div>
 
@@ -154,15 +154,9 @@
 
 
 <br><br>
-<?php if($this->session->flashdata('hasil')=="berhasil"){
-	echo "<div class=\"alert alert-success\"><strong>Sukses!</strong> Operasi berhasil.</div>";
-}
-?>
-<?php if($this->session->flashdata('hasil')=="gagal"){
-	echo "<div class=\"alert alert-danger\"><strong>Gagal!</strong> Terdapat kesalahan, operasi gagal.</div>";
-}
-?>
+<?=$this->M_Pesan->hasil() ?>
 
+<div class="table-responsive">
 <table class='table' id="ajaxtable">
 	<thead>
 		<tr>
@@ -175,7 +169,7 @@
 			<th>Conf</th>
 		</tr>
 	</thead>	
-	<tobdy>
+	<tbody>
 		<?php foreach($pengiriman as $p){
 			echo "<tr>";
 			echo "<td>$p->idpengiriman</td>";
@@ -201,10 +195,15 @@
 	?>
 	</tbody>
 </table>
-
+</div>
 </div>
 <script>
 $(document).ready(function() {
+	var data = [<?php foreach($barang as $b){echo "{id:'$b->idbarang', text:'$b->nbarang'},";}?>];
+
+	$(document).on('click',".delete",function() {
+		$(this).parent().parent().empty();
+	});
 	//ediit Pesanan
     $('.editButton').on('click', function() {
         // tarik record
@@ -251,10 +250,14 @@ $(document).ready(function() {
 
 		      	  var akun = $("<tr>");
 
-				  akun.append($("<td><input type='text' value='"+produk+"' list='barang' class='long changeble' autocomplete='off' name='namabarang[]' placeholder='Nama Produk'></td>"))
+				  akun.append($("<td><select value='"+produk+"' list='barang' class='long changeble' autocomplete='off' name='namabarang[]' placeholder='Nama Produk'><option></option></select></td>"))
 						 .append($("<td><input class='jumlah short changeble' value='"+jumlah+"' short' name='jumlah[]' type='number' value=1 min=1></td>")) 
 			 .append($("</tr>"));
-
+				akun.find('select').select2({
+					placeholder: "Silahkan Pilih", 
+					data: data,
+					containerCssClass: 'long changeble namabarang',
+				}).val(produk).trigger("change");
 				$(".editdetail").append(akun);
 		      }) // each
 		     // $(".editdetail").append("<tr><td colspan=4><a href=\"#\" class=\"addkeranjang btn btn-default\">+</a> </td></tr>");
@@ -269,10 +272,15 @@ $(document).ready(function() {
 
 	  row.append($("<td><input type='text' list='barang' class='long changeble' autocomplete='off' name='namabarang[]' placeholder='Nama Produk'></td>"))
 		 .append($("<td><input class='jumlah short changeble' name='jumlah[]' type='number' value=1 min=1></td>")) 
+
+		 .append($("<td><a href='#' class='glyphicon glyphicon-remove delete'></a></td>"))	
 	 .append($("</tr>"));
 	 
 	  $(this).parent().parent().before(row);
-
+		$(".namabarang").select2({
+		placeholder: "Silahkan Pilih", 
+		data: data
+		});
 	  $("#daftar").scrollTop($("#daftar")[0].scrollHeight);
 	  return false;
 	})

@@ -201,7 +201,8 @@ $(document).ready(function() {
 				];
 	
     $('.barang').select2({
-		  data: data
+		  data: data,
+		  placeholder: 'Silahkan Pilih'
 		})
 	}
 	//ediit Pesanan
@@ -263,14 +264,20 @@ $(document).ready(function() {
 	$(document).on('click',".addkeranjang",function() {
 	  var row = $("<tr>");
 
-	  row.append($("<td><input type='text' list='barang' class='long changeble' autocomplete='off' name='namabarang[]' placeholder='Nama Produk'></td>"))
+	  row.append($("<td><select list='barang' class='long changeble barang' autocomplete='off' name='namabarang[]' placeholder='Nama Produk'><option></option></select></td>"))
 		 .append($("<td><input class='jumlah short changeble' name='jumlah[]' type='number' value=1 min=1></td>")) 
+	 
+		 .append($("<td><a href='#' class='glyphicon glyphicon-remove delete'></a></td>"))	
 	 .append($("</tr>"));
 	 
 	  $(this).parent().parent().before(row);
-
+	  barang();
 	  $("#daftar").scrollTop($("#daftar")[0].scrollHeight);
 	  return false;
 	})
+
+		$(document).on('click',".delete",function() {
+		$(this).parent().parent().empty();
+	});
 }); //end document
 </script>

@@ -66,7 +66,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     			</ul>
   		</div>
 	</nav>
-	<nav id="nafix" class="navbar navbar-inverse navbar-static-top navbar-lower" data-spy="affix" data-offset-top="69">
+	<nav id="nafix" class="navbar navbar-inverse navbar-static-top navbar-lower" data-spy="affix" data-offset-top="10">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
 	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false"> <span class="sr-only">Toggle navigation</span>

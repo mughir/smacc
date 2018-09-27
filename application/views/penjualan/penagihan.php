@@ -1,16 +1,8 @@
-<datalist id="barang">
-<?php foreach($barang as $b){
-	echo "<option value='$b->idbarang'>$b->idbarang - $b->nbarang</option>";
-}
-?>
-</datalist>
-
-
 <div id="createKwitansi" class="modal fade" role="dialog">
  	<div class="modal-dialog fjurnal">
     <!-- Modal content-->
     <div class="modal-content fjurnal">
-      <div class="modal-header fjurnal">
+      <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Add Kwitansi</h4>
       </div>
@@ -47,6 +39,7 @@
 		</tr>
 	 </table>
 	 <br><br>
+<div class="table-responsive">
 		<table class='form detail'>
 			<thead>
 			  <tr><th>Produk</th><th>Jumlah</th><th>Harga</th><th>Subtotal</th></tr>
@@ -54,7 +47,13 @@
 			 <tbody>
 					 <tr> 
 					 	<td>
-					 		<input required type="text" class='long changeble' list="barang" autocomplete="off" name="namabarang[]" placeholder="nama Produk" required>
+					 		<select required class='long changeble namabarang' list="barang" autocomplete="off" name="namabarang[]" placeholder="nama Produk">
+					 			<option></option>
+					 			<?php foreach($barang as $b){
+									echo "<option value='$b->idbarang'>$b->idbarang - $b->nbarang</option>";
+								}
+								?>
+					 		</select>
 					 	</td>
 					 	<td>
 					 		<input  class='short jumlah changeble' type="number" min=1 max=1000 value=1 name='jumlah[]'>
@@ -73,7 +72,7 @@
 					 </tr>
 				</tbody>
 		</table>
-		
+		</div>
       </div>
 	  <br>
       <div class="modal-footer">
@@ -90,7 +89,7 @@
  	<div class="modal-dialog fjurnal">
     <!-- Modal content-->
     <div class="modal-content fjurnal">
-      <div class="modal-header fjurnal">
+      <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Kwitansi</h4>
       </div>
@@ -127,6 +126,7 @@
 		</tr>
 	 </table>
 	 <br><br>
+<div class="table-responsive">
 		<table class='form detail editdetail'>
 			<thead>
 			  <tr><th>Produk</th><th>Jumlah</th><th>Harga</th><th>Subtotal</th></tr>
@@ -148,7 +148,7 @@
 					 </tr>
 				</tbody>
 		</table>
-		
+		</div>
       </div>
 	  <br>
 	  </form>
@@ -179,6 +179,7 @@
 }
 ?>
 
+<div class="table-responsive">
 <table class='table' id="ajaxtable">
 	<thead>
 		<tr>
@@ -192,7 +193,7 @@
 			<th>Conf</th>
 		</tr>
 	</thead>	
-	<tobdy>
+	<tbody>
 		<?php foreach($kwitansi as $p){
 			echo "<tr>";
 			echo "<td>$p->idkwitansi</td>";
@@ -218,10 +219,15 @@
 	?>
 	</tbody>
 </table>
-
+</div>
 </div>
 <script>
 $(document).ready(function() {
+	var data = [<?php foreach($barang as $b){echo "{id:'$b->idbarang', text:'$b->nbarang'},";}?>];
+
+	$(document).on('click',".delete",function() {
+		$(this).parent().parent().empty();
+	});
 	//ediit Pesanan
     $('.editButton').on('click', function() {
         // tarik record
@@ -275,7 +281,11 @@ $(document).ready(function() {
 						 .append($("<td><input class='harga' value='"+harga+"' type='number' value=0 disabled></td>"))
 						 .append($("<td><input class='subtotal' value='"+subtotal+"' value=0 type='number' disabled></td>"))
 					 .append($("</tr>"));
-
+				akun.find('select').select2({
+									placeholder: "Silahkan Pilih", 
+									data: data,
+									containerCssClass: 'long changeble namabarang',
+								}).val(produk).trigger("change");
 				$(".editdetail").append(akun);
 		      }) // each
 		     // $(".editdetail").append("<tr><td colspan=4><a href=\"#\" class=\"addkeranjang btn btn-default\">+</a> </td></tr>");
@@ -316,14 +326,18 @@ $(document).ready(function() {
 	$(document).on('click',".addkeranjang",function() {
 	  var row = $("<tr>");
 
-	  row.append($("<td><input type='text' list='barang' class='long changeble' autocomplete='off' name='namabarang[]' placeholder='Nama Produk'></td>"))
+	  row.append($("<td><select list='barang' class='long changeble namabarang' autocomplete='off' name='namabarang[]' placeholder='Nama Produk'><option></option></select></td>"))
 		 .append($("<td><input class='jumlah short changeble' name='jumlah[]' type='number' value=1 min=1></td>")) 
 		 .append($("<td><input class='harga' type='number' value=0 disabled></td>"))
 		 .append($("<td><input class='subtotal' value=0 type='number' disabled></td>"))
+		 .append($("<td><a href='#' class='glyphicon glyphicon-remove delete'></a></td>"))	
 	 .append($("</tr>"));
 	 
 	  $(this).parent().parent().before(row);
-
+		$(".namabarang").select2({
+		placeholder: "Silahkan Pilih", 
+		data: data
+		});
 	  $("#daftar").scrollTop($("#daftar")[0].scrollHeight);
 	  return false;
 	})

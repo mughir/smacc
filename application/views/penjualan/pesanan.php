@@ -8,8 +8,9 @@
       </div>
 	  <form method="post" action="?tipe=tambah">
 		<div class="modal-body">
+
 	<table class="form"">		
-	<tr>
+		<tr>
 			<td>ID</td>
 			<td><input type="text" name="id" required pattern="[a-zA-Z0-9]+"></td>
 		</tr>
@@ -31,6 +32,8 @@
 		</tr>
 	 </table>
 	 <br><br>
+
+<div class="table-responsive">
 		<table class='form detail'>
 			<thead>
 			  <tr><th>Produk</th><th>Jumlah</th><th>Harga</th><th>Subtotal</th></tr>
@@ -38,7 +41,7 @@
 			 <tbody>
 					 <tr> 
 					 	<td>
-					 		<select required class='long changeble' list="barang" autocomplete="off" name="namabarang[]" placeholder="nama Produk" required>
+					 		<select required class='long changeble namabarang' list="barang" autocomplete="off" name="namabarang[]" placeholder="nama Produk" required>
 					 			<option></option>
 								<?php foreach($barang as $b){
 									echo "<option value='$b->idbarang'>$b->idbarang - $b->nbarang</option>";
@@ -63,7 +66,7 @@
 					 </tr>
 				</tbody>
 		</table>
-		
+		</div>
       </div>
 	  <br>
       <div class="modal-footer">
@@ -109,6 +112,7 @@
 		</tr>
 	 </table>
 	 <br><br>
+<div class="table-responsive">
 		<table class='form detail editdetail'>
 			<thead>
 			  <tr><th>Produk</th><th>Jumlah</th><th>Harga</th><th>Subtotal</th></tr>
@@ -130,7 +134,7 @@
 					 </tr>
 				</tbody>
 		</table>
-		
+		</div>
       </div>
 	  <br>
 	  </form>
@@ -160,7 +164,7 @@
 	echo "<div class=\"alert alert-danger\"><strong>Gagal!</strong> Terdapat kesalahan, operasi gagal.</div>";
 }
 ?>
-
+<div class="table-responsive">
 <table class='table' id="ajaxtable">
 	<thead>
 		<tr>
@@ -173,7 +177,7 @@
 			<th>Conf</th>
 		</tr>
 	</thead>	
-	<tobdy>
+	<tbody>
 		<?php foreach($pesanan as $p){
 			echo "<tr>";
 			echo "<td>$p->idpesanan</td>";
@@ -198,7 +202,7 @@
 	?>
 	</tbody>
 </table>
-
+</div>
 </div>
 <script>
 $(document).ready(function() {	
@@ -307,7 +311,8 @@ $(document).ready(function() {
 	  row.append($("<td><select class='long changeble namabarang' autocomplete='off' name='namabarang[]' placeholder='Nama Produk'><option></option></select></td>"))
 		 .append($("<td><input class='jumlah short changeble' name='jumlah[]' type='number' value=1 min=1></td>")) 
 		 .append($("<td><input class='harga' type='number' value=0 disabled></td>"))
-		 .append($("<td><input class='subtotal' value=0 type='number' disabled></td>")).append($("<td><a href='#' class='glyphicon glyphicon-remove delete'></a></td>"))	
+		 .append($("<td><input class='subtotal' value=0 type='number' disabled></td>"))
+		 .append($("<td><a href='#' class='glyphicon glyphicon-remove delete'></a></td>"))	
 	 .append($("</tr>"));
 	 
 	  $(this).parent().parent().before(row);

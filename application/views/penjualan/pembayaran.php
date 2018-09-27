@@ -59,7 +59,6 @@
 
 
 
-
 <div class="dokumen">
 
 	<div class="well ">
@@ -74,6 +73,7 @@
 	</div>
 	<br><br>
 
+<div class="table-responsive">
 <table class='table' id="ajaxtable">
 	<thead>
 		<tr>
@@ -107,7 +107,7 @@
 	</tbody>
 </table>
 </div>
-
+</div>
 <script>
 $(document).ready(function() {
 	//ediit Pembayaran
@@ -143,6 +143,7 @@ $(document).ready(function() {
 		 .append($("<td><input name='debit[]' type='number' value=1 min=1 max=1000></td>")) 
 		 .append($("<td><input name='debit[]' type='number' value=0  ></td>"))
 		 .append($("<td><input value=0 name='kredit[]' type='number' disabled></td>"))
+		 .append($("<td><a href='#' class='glyphicon glyphicon-remove delete'></a></td>"))	
 	 .append($("</tr>"));
 	 
 	  $(this).before(row);

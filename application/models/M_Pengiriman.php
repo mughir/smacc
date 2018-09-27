@@ -57,10 +57,10 @@ class m_pengiriman extends CI_Model {
 				if(empty($pesanan)){
 					$pesanan=null;
 				} else {
-					if($this->ms->cek_ada("pesanan","idpesanan",$pesanan)==FALSE) return "gagal";
+					if($this->ms->cek_ada("pesanan","idpesanan",$pesanan)==FALSE) return ["gagal","idpesanan tidak ditemukan"];
 				}
 
-				if($this->ms->cek_ada("pengiriman","idpengiriman",$id)==TRUE) return "gagal";
+				if($this->ms->cek_ada("pengiriman","idpengiriman",$id)==TRUE) return ["gagal","idpengiriman telah dipakai"];
 
 				$cek=0;
 				for($i=0;$i<count($barang);$i++){
@@ -68,7 +68,7 @@ class m_pengiriman extends CI_Model {
 					$cek++;
 				}
 
-				if($cek==0) return "gagal";
+				if($cek==0) return ["gagal","pengiriman belum diisi barang"];
 
 				$data=array(
 					"idpengiriman"=>$id,
@@ -100,7 +100,7 @@ class m_pengiriman extends CI_Model {
 							"tcost"=>$tcost
 						);
 
-					//$this->db->where("idbarang",$barang[$i])->set("jumlah","jumlah-".$jumlah[$i],false);
+					$this->db->where("idbarang",$barang[$i])->set("jumlah","jumlah-".$jumlah[$i],false);
 
 					$this->db->insert("isipengiriman",$data);
 				}

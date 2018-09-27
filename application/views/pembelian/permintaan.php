@@ -257,11 +257,16 @@ $(document).ready(function() {
 	  row.append($("<td><select list='barang' class='long changeble barang' autocomplete='off' name='namabarang[]' placeholder='Nama Produk'></select></td>"))
 		 .append($("<td><input class='jumlah short changeble' name='jumlah[]' type='number' value=1 min=1></td>")) 
 
+		 .append($("<td><a href='#' class='glyphicon glyphicon-remove delete'></a></td>"))	
 	 .append($("</tr>"));
 	 
 	  $(this).parent().parent().before(row);
 	  barang();
 	  return false;
 	})
+
+		$(document).on('click',".delete",function() {
+		$(this).parent().parent().empty();
+	});
 }); //end document
 </script>
