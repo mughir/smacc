@@ -1,17 +1,16 @@
 ###################
-SMACC
+SMACUP
 ###################
-Proyek Opensource PUPT Unpad ![alt text](http://www.smacc.id/asset/img/logo.gif)
+Proyek Opensource PUPT Unpad
 ###################
 
-SMACC - Small and Medium Enterprise Accounting Software merupakan aplikasi sistem informasi open source yang didesain untuk kalangan UKMM.
+SMACUP - Small and Medium Enterprise Accounting Software Universitas Padjadjaran merupakan aplikasi sistem informasi open source yang didesain untuk kalangan UKMM.
 Dari segi teknologi aplikasi ini menggunakan:
 
 Data: Mysql
 Proses: PHP Framework Codeigniter
 Tampilan: Bootstrap 
 
-live sample: www.smacc.id
 
 ###################
 Instalasi
@@ -26,7 +25,8 @@ user/pass: admin/admin
 ###################
 Changelog
 ###################
-9/19 - Update modul akuntansi
+2017-09-19 - Update modul akuntansi
+2018-09-28 - Replace Input datalist menjadi select2
 
 ###################
 Kontak
